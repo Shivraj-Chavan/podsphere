@@ -1,0 +1,399 @@
+/* :root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap'); */
+
+@import "tailwindcss";
+
+body {
+  font-family: 'Poppins' !important;
+}
+
+
+@keyframes half-orbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(60deg);
+  }
+  75% {
+    transform: rotate(-60deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-half-orbit {
+  animation: half-orbit 6s linear infinite;
+}
+.font-fredoka{
+  font-family: "[Poppins]";
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+.hero-heading{
+  font-family: "Poppins";
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-continuous {
+  animation: spin 10s linear infinite;
+}
+
+
+
+/* colorful strips HOMEPAGE */
+@keyframes leftMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes rightMove {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-left {
+  animation: leftMove 20s linear infinite;
+}
+
+.animate-right {
+  animation: rightMove 20s linear infinite;
+}
+
+.animate-leftSlow {
+  animation: leftMove 20s linear infinite;
+}
+
+
+
+/* .rotating-bg{
+  animation: rotateBackground 40s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotateBackground {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+
+.counter-rotate{
+  animation: counterRotate 10s linear infinite;
+
+  transition: transform 0.5s ease !important;
+}
+div:hover > .counter-rotate {
+  transform: scale(0.62) !important;
+
+}
+
+@keyframes counterRotate {
+  from {
+    transform: scale(0.6) rotate(0deg);
+  }
+  to {
+    transform: scale(0.6)  rotate(-360deg);
+  }
+}
+
+
+/*CONTACT US PAGE BOY  */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.float {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* about us yellow circle */
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-slow {
+  animation: rotate360 12s linear infinite;
+}
+
+
+@keyframes floaty {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.floaty {
+  animation: floaty 5s ease-in-out infinite;
+} 
+
+
+
+/* QUOTE ICONS */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) translateX(6px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-floatSlow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+
+
+/* Book a free demo btn */
+.demo-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 32px;
+  border-radius: 9999px;
+  color: #1f2937;
+  font-weight: 600;
+  cursor: pointer;
+  border: 3px;
+}
+
+.demo-btn::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 9999px;
+
+  background: linear-gradient(
+    90deg,
+    #4df5f5,
+    #9c7ef8,
+    #ed50a1,
+    #9473f6,
+    #6193f8
+  );
+ 
+  background-size: 200% 200%;
+  animation: borderMove 4s linear infinite;
+}
+
+/* LIGHT BUTTON BACKGROUND */
+.demo-btn::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 9999px;
+
+  background: linear-gradient(
+    135deg,
+    #f4f4f3,
+    #f5f0ff
+  );
+
+  z-index: 1;
+}
+
+/* TEXT */
+.btn-text {
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 25px;
+  overflow: hidden;
+}
+
+.btn-text span {
+  display: block;
+  transition: transform 0.1s ease;
+}
+
+/* HOVER TEXT ANIMATION */
+.demo-btn:hover .btn-text span:first-child {
+  transform: translateY(-100%);
+}
+
+.demo-btn:hover .btn-text span:last-child {
+  transform: translateY(-100%);
+}
+
+/* BORDER ANIMATION */
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Navbar animated Book A free Demo btn */
+.animated-border {
+  position: relative;
+  border-radius: 9999px;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+
+  background: linear-gradient(
+    90deg,
+    #5df0f0,
+    #a78bfa,
+    #f472b6,
+    #a78bfa,
+    #7aa7ff
+  );
+
+  background-size: 300% 300%;
+  animation: borderFlow 6s linear infinite;
+
+  padding: 2px; /* border thickness */
+
+  /* remove center */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* remove background layer */
+.animated-border::after {
+  display: none;
+}
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+.emboss-card {
+  box-shadow:
+    -4px -4px 8px rgba(255,255,255,0.9),
+    4px 4px 10px rgba(0,0,0,0.12);
+}
