@@ -310,6 +310,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import { LogIn, User, UserCircle } from "lucide-react";
+import SignInModal from "./signinPopup";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -317,6 +318,8 @@ const Navbar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [role, setRole] = useState(null);
 
   const isHome = location.pathname === "/";
 
@@ -375,7 +378,6 @@ const Navbar = () => {
           {menuOpen ? <HiX /> : <HiMenu />}
         </button>
 
-        {/* Logo — centered on mobile via absolute, normal flow on desktop */}
         <Link
           to="/"
           className="flex items-center lg:static absolute left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto"
@@ -468,10 +470,25 @@ const Navbar = () => {
                     sub: "Track & support",
                     color: "#8b5cf6",
                   },
+                  {
+                    emoji: "🏡",
+                    label: "Teacher Login",
+                    sub: "Track & support",
+                    color: "#8b5cf6",
+                  },
                 ].map(({ emoji, label, sub, color }) => (
                   <div
                     key={label}
-                    onClick={() => setOpenSignup(false)}
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                    
+                      setRole(label);
+                      setShowSignIn(true);
+                    
+                      setTimeout(() => {
+                        setOpenSignup(false);
+                      }, 50); 
+                    }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.background = "#fafafa")
                     }
@@ -565,13 +582,22 @@ const Navbar = () => {
                 I'm signing up as…
               </div>
               {[
-                { emoji: "🎓", label: "Signup", sub: "", color: "#f97316", path: "/signup/student" },
-                { emoji: "🏡", label: "Parent Login", sub: "Track & support", color: "#8b5cf6", path: "/signup/parent" },
-              ].map(({ emoji, label, sub, color, path }) => (
+                { emoji: "🎓", label: "Signup", sub: "", color: "#f97316" },
+                { emoji: "🏡", label: "Parent Login", sub: "Track & support", color: "#8b5cf6"},
+                {
+                  emoji: "🏡",
+                  label: "Teacher Login",
+                  sub: "Track & support",
+                  color: "#8b5cf6",
+                },
+              ].map(({ emoji, label, sub, color }) => (
                 <Link
                   key={label}
-                  to={path}
-                  onClick={() => setOpenSignup(false)}
+                  onClick={() => {
+                    setOpenSignup(false);
+                    setRole(label);   
+                    setShowSignIn(true);
+                  }}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -667,6 +693,16 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      <SignInModal
+  isOpen={showSignIn}
+  onClose={() => setShowSignIn(false)}
+  role={role}
+  onSignIn={(data) => {
+    console.log("Login data:", data);
+    setShowSignIn(false);
+  }}
+/>
     </>
   );
 };

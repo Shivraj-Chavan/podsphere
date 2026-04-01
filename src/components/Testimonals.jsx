@@ -99,14 +99,40 @@ image:"/profile/female3.png"
       <div className="relative max-w-6xl mx-auto">
 
         {/* Left Arrow */}
-        <div className="swiper-button-prev-custom hidden md:flex items-center justify-center absolute -left-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
+        {/* <div className="swiper-button-prev-custom hidden md:flex items-center justify-center absolute -left-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
           <FaChevronLeft />
-        </div>
+        </div> */}
+
+<div className="
+  swiper-button-prev-custom
+  flex md:flex
+  items-center justify-center 
+  absolute left-2 md:-left-14 
+  top-1/2 -translate-y-1/2 z-10 
+  bg-white p-2 md:p-3 
+  rounded-full shadow-lg 
+  cursor-pointer hover:bg-pink-100
+">
+  <FaChevronLeft className="text-sm md:text-base" />
+</div>
 
         {/* Right Arrow */}
-        <div className="swiper-button-next-custom hidden md:flex items-center justify-center absolute -right-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
+        {/* <div className="swiper-button-next-custom hidden md:flex items-center justify-center absolute -right-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
           <FaChevronRight />
-        </div>
+        </div> */}
+
+<div className="
+  swiper-button-next-custom
+  flex md:flex
+  items-center justify-center 
+  absolute right-2 md:-right-14 
+  top-1/2 -translate-y-1/2 z-10 
+  bg-white p-2 md:p-3 
+  rounded-full shadow-lg 
+  cursor-pointer hover:bg-pink-100
+">
+  <FaChevronRight className="text-sm md:text-base" />
+</div>
 
         <Swiper
           modules={[Navigation]}
@@ -195,7 +221,7 @@ image:"/profile/female3.png"
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-center gap-6 mt-12 flex-wrap">
+      {/* <div className="flex justify-center gap-6 mt-12 flex-wrap">
 
         <button className="flex items-center cursor-pointer gap-2 bg-orange-500 text-white px-6 py-3 rounded-full font-medium hover:bg-orange-400">
           <FaBookmark /> View All Reviews
@@ -204,6 +230,34 @@ image:"/profile/female3.png"
         <button className="flex items-center cursor-pointer gap-2 bg-indigo-500 text-white px-6 py-3 rounded-full font-medium hover:bg-indigo-400">
           <FaEdit /> Write a Review
         </button>
+
+      </div> */}
+
+      <div className="flex justify-center gap-3 sm:gap-6 mt-12">
+
+      <button className="
+        flex items-center justify-center gap-2 
+        bg-orange-500 text-white 
+        px-4 sm:px-6 py-3 sm:py-3 
+        rounded-full font-medium 
+        text-sm sm:text-base
+        hover:bg-orange-400
+        w-1/2 sm:w-auto cursor-pointer
+      ">
+        <FaBookmark /> View All
+      </button>
+
+      <button className="
+        flex items-center justify-center gap-2 
+        bg-indigo-500 text-white 
+        px-4 sm:px-6 py-3 sm:py-3 
+        rounded-full font-medium 
+        text-sm sm:text-base
+        hover:bg-indigo-400
+        w-1/2 sm:w-auto cursor-pointer
+      ">
+        <FaEdit /> Write a Review
+      </button>
 
       </div>
 

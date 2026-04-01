@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from "react";
+import SignInModal from "../components/signinPopup";
 
 
 const worksheets = [
@@ -87,11 +91,21 @@ const worksheets = [
   },
 ];
 
+
 export default function FreeMaterials() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleDownloadClick = (e) => {
+    e.preventDefault(); // stop direct download
+    setShowModal(true);
+  };
+
+  const handleSignIn = () => {
+    console.log("Redirect to login...");
+  };
+
   return (
     <>
-      
-
       <section className="bg-white py-30">
         <div className="max-w-7xl mx-auto px-6 space-y-15">
 
@@ -137,11 +151,19 @@ export default function FreeMaterials() {
       {/* Button pushed to bottom */}
       <a
         href={item.file}
+        onClick={handleDownloadClick}
         download
         className="mt-auto text-sm font-semibold text-pink-600 hover:underline hover:scale-105 hover:text-pink-500"
       >
         Download →
       </a>
+
+      {/* MODAL */}
+      <SignInModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSignIn={handleSignIn}
+      />
 
     </div>
   ))}

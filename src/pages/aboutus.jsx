@@ -987,7 +987,7 @@ import { FaBookOpen, FaChalkboardTeacher, FaSmile, FaUserFriends, FaUsers } from
 import { useNavigate } from "react-router-dom";
 
 export default function Aboutus () {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [isSolutions, setIsSolutions] = useState(false);
   const [isSolution, setIsSolution] = useState(false);
@@ -1077,185 +1077,168 @@ export default function Aboutus () {
 
   return (
     <>
+    {/* (1) Yellow section */}
     <section className="relative w-full">
-      
-      {/* Background Image */}
-      <div className="w-full h-[500px] md:h-[800px] overflow-hidden rounded-b-4xl -mt-30">
-      <img
-        src="about1.jpeg"
-        alt="Kids Reading"
-        className="w-full h-[500px] md:h-[800px] object-cover object-[top_-100px] rounded-b-4xl"
-      />
-      </div>
 
-      {/* Text Content */}
-      <div className="absolute top-140 left-30 transform -translate-y-1/2 text-white max-w-md">
-        <h2 className="text-4xl md:text-7xl font-bold leading-tight">
-          About <br /> PodSphere
-        </h2>
+  {/* Background Image */}
+  <div className="w-full h-[350px] sm:h-[450px] md:h-[800px] overflow-hidden rounded-b-4xl -mt-10 md:-mt-30">
+  <img
+    src="about1.jpeg"
+    alt="Kids Reading"
+    className=" w-full h-full object-cover rounded-b-4xl  
+      /* Mobile */
+      object-left
+       
+      /* Desktop */
+      md:object-[top_-100px]
+    "
+  />
+</div>
 
-        <p className="mt-4 text-sm md:text-lg">
-          To make every child proudly say :
-          <br />
-          <span className="font-semibold">“I CAN READ!”</span>
-        </p>
+  {/* Text Content */}
+  <div className="
+    absolute 
 
-        {/* <button className="mt-6 bg-white text-black px-6 py-2 rounded-full shadow-md hover:scale-105 transition">
-          Book a Free Demo
-        </button> */}
+    top-60 left-4 
+    -translate-y-1/2 
 
-        <button
-          onClick={() => setOpen(true)}
-          className={`relative cursor-pointer px-6 py-3 mt-6 rounded-full text-sm overflow-hidden 
-          border border-gray-400 animated-border bg-white text-black shadow-md 
-           duration-300 hover:scale-105 transition
-         `}
-        >
-          <span className="relative z-10">Book a Free Demo</span>
-        </button>
-      </div>
+    md:top-140 md:left-30 md:translate-x-0 md:-translate-y-1/2 
 
-           {/* Popup */}
-           {open && (
-        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 ">
-
-          {/* Modal */}
-          <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl w-[420px] p-8 relative">
-
-            {/* Close Button */}
-            <button
-              onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 text-gray-700 text-xl cursor-pointer"
-            >
-              ✕
-            </button>
-
-            <h2 className="text-2xl font-bold mb-6 text-center">
-              Book a Free Demo
-            </h2>
-
-            <form className="space-y-4">
-
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
-
-              <input
-                type="text"
-                placeholder="Child Name"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
-
-              <input
-                type="number"
-                placeholder="Age of the Child (Years)"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
-
-              <input
-                type="tel"
-                placeholder="Phone / WhatsApp Number"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
-
-              <input
-                type="email"
-                placeholder="Email ID"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
-
-              <input
-                type="text"
-                placeholder="Country"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
-
-              <button
-                type="submit"
-                className="w-full mt-4 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer"
-              >
-                Submit
-              </button>
-
-            </form>
-          </div>
-        </div>
-      )}
-
-    </section>
-
-<section className="relative bg-white py-20 overflow-hidden">
-      
-{/* Background Curve */}
-<img
-  src="/curvelines/Loop-08.png"
-  alt="curve"
-  className="absolute -right-50 top-1 w-[800px] pointer-events-none"
-/>
-{/* <video
-  src="/video/loop4.webm"
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="absolute top-[50%] left-[300%] w-[400px] opacity-80 pointer-events-none"
-  style={{
-    position: "absolute",
-    top: "0.2px",
-    left: "890px",
-    width: "1000px",
-    height: "auto",
-    transform: "scale(1.5)",
-    transformOrigin: "center"
-  }}
-/> */}
-
-<div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center gap-12">
-
-  {/* Left Content */}
-  <div>
-    <h2 className="text-4xl font-bold text-gray-900 mb-4">
-      From Sounds to Stories
+    text-white 
+    text-left 
+    max-w-xs sm:max-w-md
+  ">
+    <h2 className="text-2xl sm:text-3xl md:text-7xl font-bold leading-tight">
+      About <br /> PodSphere
     </h2>
 
-    <p className="text-gray-600 mb-4 leading-relaxed">
-      At PodSphere, we believe that reading is the doorway to a child's
-      imagination, confidence, and lifelong learning. Our vision is to
-      inspire children to proudly say “I can read!” by building strong
-      phonics foundations that make language joyful, meaningful, and
-      accessible.
+    <p className="mt-3 text-xs sm:text-sm md:text-lg">
+      To make every child proudly say :
+      <br />
+      <span className="font-semibold">“I CAN READ!”</span>
     </p>
 
-    <p className="text-gray-600 mb-4 leading-relaxed">
-      Through thoughtfully designed, story-driven phonics experiences,
-      we transform early reading into an adventure. Our programs combine
-      playful learning, structured phonics instruction, and interactive
-      tools to spark curiosity and nurture confidence.
-    </p>
-
-    <p className="text-gray-600 mb-6 leading-relaxed">
-      PodSphere was founded with a commitment to making early literacy
-      engaging, effective, and accessible for children everywhere.
-    </p>
-
-    <button onClick={() => navigate("/phonicsPods")} className="font-bold text-black border-b-2 border-black hover:opacity-70 transition">
-    Explore our Pods
+    <button
+      onClick={() => setOpen(true)}
+      className="relative cursor-pointer px-5 py-2 sm:px-6 sm:py-3 mt-4 sm:mt-6 
+      rounded-full text-xs sm:text-sm overflow-hidden 
+      border border-gray-400 bg-white text-black shadow-md 
+      hover:scale-105 transition"
+    >
+      <span className="relative z-10">Book a Free Demo</span>
     </button>
   </div>
 
-  {/* Right Image */}
-  <div className="relative flex justify-center">
-    <img
-      src="/about3.jpeg"
-      alt="girl reading"
-      className="rounded-3xl shadow-xl relative z-10 w-[520px]"
-    />
-  </div>
+  {/* Popup (unchanged) */}
+  {open && (
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 px-4">
 
-</div>
+      <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl w-full max-w-md p-6 sm:p-8 relative">
+
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 text-gray-700 text-xl cursor-pointer"
+        >
+          ✕
+        </button>
+
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">
+          Book a Free Demo
+        </h2>
+
+        <form className="space-y-3 sm:space-y-4">
+
+          <input type="text" placeholder="Your Name" className="w-full p-3 rounded-xl bg-white/80 outline-none" />
+          <input type="text" placeholder="Child Name" className="w-full p-3 rounded-xl bg-white/80 outline-none" />
+          <input type="number" placeholder="Age of the Child (Years)" className="w-full p-3 rounded-xl bg-white/80 outline-none" />
+          <input type="tel" placeholder="Phone / WhatsApp Number" className="w-full p-3 rounded-xl bg-white/80 outline-none" />
+          <input type="email" placeholder="Email ID" className="w-full p-3 rounded-xl bg-white/80 outline-none" />
+          <input type="text" placeholder="Country" className="w-full p-3 rounded-xl bg-white/80 outline-none" />
+
+          <button
+            type="submit"
+            className="w-full mt-4 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer"
+          >
+            Submit
+          </button>
+
+        </form>
+      </div>
+    </div>
+  )}
+
+  </section>
+
+{/* (2) sound to stories section */}
+<section className="relative bg-white py-12 md:py-20 overflow-hidden">
+      
+  {/* Background Curve */}
+  <img
+  src="/curvelines/Loop-08.png"
+  alt="curve"
+  className="
+    absolute 
+    right-[-90px] sm:right-[-150px] md:-right-50 
+    top-[92%] sm:top-[55%] md:top-1 
+    -translate-y-1/2 md:translate-y-0
+    w-[600px] sm:w-[500px] md:w-[800px] 
+    opacity-90 md:opacity-100 z-0
+    pointer-events-none
+  "
+/>
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 items-center gap-8 md:gap-12">
+
+    {/* Left Content */}
+    <div className="text-left">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+        From Sounds to Stories
+      </h2>
+
+      <p className="text-sm sm:text-base text-gray-600 mb-3 md:mb-4 leading-relaxed">
+        At PodSphere, we believe that reading is the doorway to a child's
+        imagination, confidence, and lifelong learning. Our vision is to
+        inspire children to proudly say “I can read!” by building strong
+        phonics foundations that make language joyful, meaningful, and
+        accessible.
+      </p>
+
+      <p className="text-sm sm:text-base text-gray-600 mb-3 md:mb-4 leading-relaxed">
+        Through thoughtfully designed, story-driven phonics experiences,
+        we transform early reading into an adventure. Our programs combine
+        playful learning, structured phonics instruction, and interactive
+        tools to spark curiosity and nurture confidence.
+      </p>
+
+      <p className="text-sm sm:text-base text-gray-600 mb-5 md:mb-6 leading-relaxed">
+        PodSphere was founded with a commitment to making early literacy
+        engaging, effective, and accessible for children everywhere.
+      </p>
+
+      <button
+        onClick={() => navigate("/phonicsPods")}
+        className="font-bold text-black border-b-2 border-black hover:opacity-70 transition text-sm sm:text-base"
+      >
+        Explore our Pods
+      </button>
+    </div>
+
+    {/* Right Image */}
+    <div className="relative flex justify-center md:justify-center">
+      <img
+        src="/about3.jpeg"
+        alt="girl reading"
+        className="
+          rounded-3xl shadow-xl relative z-10 
+          w-full max-w-[420px] sm:max-w-[420px] md:w-[520px]
+        "
+      />
+    </div>
+
+  </div>
 </section>
+
+{/* (3) Why choose us section */}
 
 <section className="relative bg-red-900 text-white py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -1335,7 +1318,7 @@ export default function Aboutus () {
     </section>
 
 
-
+{/* (4) challenge and solutions section */}
 <section className="relative w-full py-20 px-6 bg-gray-200 overflw-hidden">
 
   {/* IMAGE RIGHT SIDE */}
@@ -1365,7 +1348,7 @@ export default function Aboutus () {
       >
           
         <div
-          className={`w-5 h-5 bg-white rounded-full shadow-md transform transition ${
+          className={`w-5 h-5  bg-white rounded-full shadow-md transform transition ${
             isSolutions ? "translate-x-7" : ""
           }`}
         />
@@ -1386,7 +1369,7 @@ export default function Aboutus () {
     </div>
 
     {/* LIST */}
-    <div className="space-y-4 max-w-5xl ml-25">
+    <div className="space-y-4 max-w-5xl ">
 
     {items.map((item, i) => {
   const isSolution = toggleState[i];
@@ -1398,27 +1381,44 @@ export default function Aboutus () {
     >
       {/* TOGGLE PILL */}
       <div
-        onClick={() =>
-          setToggleState((prev) => ({
-            ...prev,
-            [i]: !prev[i],
-          }))
-        }
-        className={`relative flex items-center w-[99px] my-2 ml-2 h-[45px] rounded-full px-2 cursor-pointer transition ${
-          isSolution ? "bg-lime-400" : "bg-red-500"
-        }`}
-      >
-        <span className={`text-white text-lg font-bold z-10 absolute ${isSolution ? " " : "right-3"}`}>
-          {isSolution ? "✓" : "✕"}
-        </span>
+  onClick={() =>
+    setToggleState((prev) => ({
+      ...prev,
+      [i]: !prev[i],
+    }))
+  }
+  className={`
+    relative flex items-center 
+    w-[55px] sm:w-[99px]
+    h-[28px] sm:h-[45px]
+    my-2 ml-2 rounded-full px-1
+    cursor-pointer transition
+    ${isSolution ? "bg-lime-400 justify-end" : "bg-red-500 justify-start"}
+  `}
+>
 
-        {/* SLIDING CIRCLE */}
-        <div
-          className={`absolute w-[32px] h-[32px] bg-white rounded-full shadow-md transition-transform duration-300 ${
-            isSolution ? "translate-x-[50px]" : "translate-x-[0px]"
-          }`}
-        ></div>
-      </div>
+  {/* DESKTOP ICON (outside only) */}
+  <span
+    className={`
+      hidden sm:block
+      text-white text-lg font-bold absolute
+      ${isSolution ? "left-3" : "right-3"}
+    `}
+  >
+    {isSolution ? "✓" : "✕"}
+  </span>
+
+ {/* CIRCLE */}
+<div className="w-[18px] h-[18px] sm:w-[32px] sm:h-[32px] bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-300">
+  
+  {/* ICON → only mobile */}
+  <span className="sm:hidden text-[10px] font-bold text-black">
+    {isSolution ? "✓" : "✕"}
+  </span>
+
+</div>
+   
+</div>
 
       {/* TEXT */}
       <div className="py-1">

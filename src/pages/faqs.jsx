@@ -330,100 +330,51 @@ const faqs = [
   },
 ];
 
-// Floating icon component with individual bounce delay
-const FloatingIcon = ({ src, className, style, delay = 0 }) => (
-  <motion.img
-    src={src}
-    className={className}
-    style={style}
-    animate={{ y: [0, -14, 0] }}
-    transition={{
-      duration: 2.8,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay,
-    }}
-  />
-);
-
 export default function Faqs() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="relative bg-white py-24 overflow-hidden">
+    <section className="relative bg-white py-24 md:py-24 overflow-hidden">
 
       {/* ───────── BACKGROUND CURVY VIDEO LINES ───────── */}
 
-     {/* LEFT CURLY */}
-  <video
-    src="/video/loop7.webm"
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="absolute -left-75 top-1/3 -translate-y-1/2 w-[900px] opacity-90 pointer-events-none z-0"
-  />
-
-  {/* RIGHT CURLY */}
-  <video
-    src="/video/loop6.webm"
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="absolute -right-72 top-4/5 -translate-y-1/2 w-[900px] opacity-90 rotate-[90deg] pointer-events-none z-0 scale-x-[-1]"
-  />
-
-      {/* ───────── FLOATING ICONS — LEFT COLUMN ───────── */}
-      {/* <FloatingIcon
-        src="/icons/book.png"
-        style={{ position: "absolute", left: "28px", top: "160px", width: "80px", zIndex: 2 }}
-        delay={0}
-      />
-      <FloatingIcon
-        src="/icons/pencil.png"
-        style={{ position: "absolute", left: "200px", top: "42%", width: "80px", zIndex: 2 }}
-        delay={0.6}
-      />
-      <FloatingIcon
-        src="/icons/cube.png"
-        style={{ position: "absolute", left: "-10px", top: "68%", width: "80px", zIndex: 2 }}
-        delay={1.1}
+      {/* LEFT CURLY — hidden on mobile to avoid clutter */}
+      <video
+        src="/video/loop7.webm"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="hidden md:block absolute -left-75 top-1/3 -translate-y-1/2 w-[900px] opacity-90 pointer-events-none z-0"
       />
 
-      <FloatingIcon
-        src="/icons/painter.png"
-        style={{ position: "absolute", right: "28px", top: "180px", width: "80px", zIndex: 2 }}
-        delay={0.3}
+      {/* RIGHT CURLY — hidden on mobile */}
+      <video
+        src="/video/loop6.webm"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="hidden md:block absolute -right-72 top-4/5 -translate-y-1/2 w-[900px] opacity-90 rotate-[90deg] pointer-events-none z-0 scale-x-[-1]"
       />
-      <FloatingIcon
-        src="/icons/bucket.png"
-        style={{ position: "absolute", right: "204px", top: "44%", width: "80px", zIndex: 2 }}
-        delay={0.9}
-      />
-      <FloatingIcon
-        src="/icons/paint.png"
-        style={{ position: "absolute", right: "26px", top: "70%", width: "80px", zIndex: 2 }}
-        delay={1.4}
-      /> */}
 
       {/* ───────── CONTENT ───────── */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3">
             FREQUENTLY ASKED QUESTIONS
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900">
             We're Here to Help
           </h2>
-          <p className="mt-4 text-gray-600 max-w-xl mx-auto">
+          <p className="mt-3 md:mt-4 text-sm sm:text-base text-gray-600 max-w-xl mx-auto">
             Everything you need to know about our phonics programs and online classes.
           </p>
         </motion.div>
@@ -433,23 +384,24 @@ export default function Faqs() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-[32px] p-6 md:p-10 shadow-sm space-y-4 z-2 relative"
+          className="bg-white rounded-[24px] md:rounded-[32px] p-4 sm:p-6 md:p-10 shadow-sm space-y-3 md:space-y-4 relative z-10"
         >
           {faqs.map((item, i) => (
             <motion.div
               key={i}
               layout
-              className="rounded-2xl bg-[#FAFAFF] px-6 py-5 cursor-pointer"
+              className="rounded-xl md:rounded-2xl bg-[#FAFAFF] px-4 sm:px-6 py-4 sm:py-5 cursor-pointer"
               onClick={() => setOpen(open === i ? null : i)}
             >
-              <div className="flex justify-between items-center">
-                <h4 className="font-semibold text-gray-900 pr-4">{item.q}</h4>
+              <div className="flex justify-between items-start gap-3">
+                <h4 className="font-semibold text-sm sm:text-base text-gray-900 leading-snug">
+                  {item.q}
+                </h4>
                 <motion.span
                   animate={{ rotate: open === i ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
-                  className="text-xl text-pink-500 flex-shrink-0"
+                  className="text-xl text-pink-500 flex-shrink-0 mt-0.5 leading-none"
                 >
-                
                   {open === i ? "−" : "+"}
                 </motion.span>
               </div>
@@ -461,7 +413,7 @@ export default function Faqs() {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.35, ease: "easeInOut" }}
-                    className="mt-4 text-gray-600 leading-relaxed overflow-hidden"
+                    className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed overflow-hidden"
                   >
                     {item.a}
                   </motion.p>

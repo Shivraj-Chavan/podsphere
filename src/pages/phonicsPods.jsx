@@ -174,43 +174,59 @@ const nextRef = useRef(null)
 
        {/* Background Shapes */}
       {/* RIGHT  */}
+ 
+      {/* <video
+        src="/video/loop2.webm"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-[60%] left-[80%] w-[400px] opacity-100 pointer-events-none"
+        style={{
+          position: "absolute",
+          top: "700px",
+          left: "1050px",
+          width: "700px",
+          height: "auto",
+          zIndex: "1",
+        }}
+      /> */}
 
-       
 <video
   src="/video/loop2.webm"
   autoPlay
   loop
   muted
   playsInline
-  className="absolute top-[60%] left-[80%] w-[400px] opacity-100 pointer-events-none"
-  style={{
-    position: "absolute",
-    top: "750px",
-    left: "1050px",
-    width: "700px",
-    height: "auto",
-    zIndex: "1",
-  }}
+  className="
+    absolute pointer-events-none opacity-100 z-0
+    
+    /* Mobile */
+    bottom-[-50px] right-[-120px] w-[950px]
+    
+    /* Desktop */
+    sm:top-[700px] sm:left-[1050px] sm:w-[700px]
+  "
 />
 
     {/* LEFT */}
     <video
-  src="/video/loop3.webm"
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="absolute bottom-[50%] left-[0%] w-[400px] opacity-100 pointer-events-none"
-  style={{
-    position: "absolute",
-    top: "25px",
-    left: "-210px",
-    width: "700px",
-    height: "auto",
-    transform: "scale(1.5)",
-    transformOrigin: "center"
-  }}
-/>
+      src="/video/loop3.webm"
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="absolute pointer-events-none opacity-100"
+      style={{
+        position: "absolute",
+        top: "20px",     
+        left: "-150px",    
+        width: "700px",  
+        height: "auto",
+        transform: "scale(1.6)",
+        transformOrigin: "center"
+      }}
+    />
 
       <div className="max-w-8xl mx-auto px-6">
 
@@ -355,7 +371,7 @@ const nextRef = useRef(null)
 
         return (
           <SwiperSlide key={i}>
-            <div className="rounded-b-[30px] h-[490px] overflow-hidden bg-white shadow-md hover:shadow-xl transition relative">
+            <div className="rounded-b-[30px] h-[535px] xl:h-[490px] overflow-hidden bg-white shadow-md hover:shadow-xl transition relative">
 
               {/* Top Content */}
               <div className="p-6">
@@ -363,7 +379,7 @@ const nextRef = useRef(null)
                   {item.title}
                 </h4>
 
-                <p className="text-gray-600 text-md leading-relaxed">
+                <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -386,74 +402,55 @@ const nextRef = useRef(null)
   </div>
 </section>
 
-{/* <div className="max-w-4xl mx-auto text-center">
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    className="mt-15 bg-white rounded-[32px] p-7 flex flex-col md:flex-row items-center justify-center gap-6 border border-pink-200"
-  >
-    
-    <Bot className="text-pink-500 w-12 h-12 flex-shrink-0" />
 
-    <div className="text-center md:text-left">
-      <h3 className="text-2xl font-bold text-gray-900">
-        Meet Poppi 🤖
-      </h3>
+<section className="bg-white py-10 md:py-14">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-      <p className="text-gray-600 mt-2 max-w-lg">
-        Our phonics AI buddy helps parents with questions, shares
-        word-of-the-day, and encourages kids with phonics sounds & rules.
-      </p>
-    </div>
-
-  </motion.div>
-
-</div> */}
-
-<section className="bg-white py-14">
-      <div className="max-w-7xl mx-auto px-6">
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-[#FFF0F4] rounded-[36px] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10"
-        >
-          {/* Left */}
-          <div className="flex-1">
-            <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3">
-              SMART LEARNING BUDDY
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-              Introducing <span className="text-pink-500">Poppi 🤖</span>
-            </h2>
-            <p className="mt-4 text-gray-600 max-w-lg">
-              Poppi is Podsphere’s friendly AI companion that supports parents,
-              encourages kids, and assists educators all focused on phonics learning.
-            </p>
-
-            <ul className="mt-6 space-y-3">
-              {features.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <li key={i} className="flex items-center gap-3 text-gray-700">
-                    <Icon className="text-pink-500" size={18} />
-                    {item.text}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Right */}
-          <div className="w-32 h-32 rounded-full bg-pink-500 text-white flex items-center justify-center text-4xl shadow-lg">
-            🤖
-          </div>
-        </motion.div>
-
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="bg-[#FFF0F4] rounded-[24px] md:rounded-[36px] p-6 sm:p-8 md:p-14 flex flex-col md:flex-row items-center gap-8 md:gap-10"
+    >
+      {/* Robot Avatar — shown on top for mobile */}
+      <div className="flex md:hidden w-20 h-20 rounded-full bg-pink-500 text-white items-center justify-center text-3xl shadow-lg shrink-0">
+        🤖
       </div>
-    </section>
+
+      {/* Left — Text Content */}
+      <div className="flex-1 text-center md:text-left">
+        <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3">
+          SMART LEARNING BUDDY
+        </p>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900">
+          Introducing <span className="text-pink-500">Poppi 🤖</span>
+        </h2>
+        <p className="mt-3 md:mt-4 text-sm sm:text-base text-gray-600 max-w-lg mx-auto md:mx-0">
+          Poppi is Podsphere's friendly AI companion that supports parents,
+          encourages kids, and assists educators all focused on phonics learning.
+        </p>
+
+        <ul className="mt-5 md:mt-6 space-y-3 inline-flex flex-col items-start text-left">
+          {features.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <li key={i} className="flex items-center gap-3 text-sm sm:text-base text-gray-700">
+                <Icon className="text-pink-500 shrink-0" size={18} />
+                {item.text}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      {/* Right — shown on desktop only */}
+      <div className="hidden md:flex w-32 h-32 rounded-full bg-pink-500 text-white items-center justify-center text-4xl shadow-lg shrink-0">
+        🤖
+      </div>
+    </motion.div>
+
+  </div>
+</section>
 </>
   );
 }

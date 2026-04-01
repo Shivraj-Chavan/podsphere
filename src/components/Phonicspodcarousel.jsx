@@ -269,36 +269,35 @@ export default function Pods() {
   loop
   muted
   playsInline
-  className="absolute pointer-events-none"
-  style={{
-    position: "absolute",
-    top: "320px",
-    right: "-220px",
-    width: "700px",
-    zIndex: "0",
-    transform: "rotate(-25deg)",
-    opacity: "0.95"
-  }}
+  className="
+    absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
+    
+    /* Mobile */
+    w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
+    
+    /* Desktop (unchanged) */
+    sm:w-[700px] sm:top-[320px] sm:bottom-auto sm:right-[-220px] sm:scale-100
+  "
 />
 
-    {/* LEFT */}
-    <video
-      src="/video/loop3.webm"
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="absolute bottom-[50%] left-[0%] w-[400px] opacity-80 pointer-events-none"
-      style={{
-        position: "absolute",
-        top: "-50px",
-        left: "-150px",
-        width: "650px",
-        height: "auto",
-        transform: "scale(1.5)",
-        transformOrigin: "center"
-      }}
-    />
+  
+{/* LEFT */}
+<video
+  src="/video/loop3.webm"
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="
+   hidden sm:block  absolute pointer-events-none opacity-90 rotate-[-5deg]
+    
+ /* Mobile */
+ w-[850px] top-[-2px] left-[-120px] scale-[1.3]
+    
+    /* Desktop */
+  sm:w-[650px] sm:top-[-50px] sm:left-[-150px] sm:scale-[1.5]
+  "
+/>
 
       {/* Heading */}
       <h2 className="text-center text-5xl font-bold mb-15">
