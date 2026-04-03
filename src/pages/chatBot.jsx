@@ -239,7 +239,411 @@ function speakText(text, friendName) {
 }
 
 /* ── CHAT ─────────────────────────────────────────────────── */
-function ChatView({ userName, userEmoji ,goHome }) {
+// function ChatView({ userName, userEmoji ,goHome }) {
+//   const [sel,      setSel]      = useState(FRIENDS[0]);
+//   const [msgs,     setMsgs]     = useState({
+//     1:[{id:1,from:"them",text:"Hey! Wanna play a game? 🎮",time:"2:30 PM"},{id:2,from:"me",text:"Yes yes yes! 🎉",time:"2:31 PM"},{id:3,from:"them",text:"Let's do guessing animals! 🐾",time:"2:31 PM"}],
+//     2:[{id:1,from:"them",text:"Did you see the rainbow? 🌈",time:"1:00 PM"}],
+//     3:[{id:1,from:"them",text:"I love stars! ⭐⭐⭐",time:"12:00 PM"}],
+//     4:[{id:1,from:"them",text:"Bamboo is yummy 😋",time:"10:00 AM"}],
+//     5:[{id:1,from:"them",text:"Goodnight friend! 🌙",time:"9:00 PM"}],
+//   });
+//   const [input,    setInput]    = useState("");
+//   const [typing,   setTyping]   = useState(false);
+//   const [rec,      setRec]      = useState(false);
+//   const [speaking, setSpeaking] = useState(false); 
+//   const [voiceOn,  setVoiceOn]  = useState(true); 
+//   const endRef                  = useRef(null);
+ 
+//   // load voices (Chrome needs this event)
+//   useEffect(() => {
+//     window.speechSynthesis?.getVoices();
+//     window.speechSynthesis?.addEventListener?.("voiceschanged", () => window.speechSynthesis.getVoices());
+//   }, []);
+ 
+//   useEffect(()=>{ endRef.current?.scrollIntoView({behavior:"smooth"}); },[msgs,sel]);
+ 
+//   const speakMsg = (text, id) => {
+//     if (!voiceOn) return;
+//     setSpeaking(id);
+//     const utt = (() => {
+//       const clean = text.replace(/[\u{1F300}-\u{1FAFF}]/gu,"").trim();
+//       const u = new SpeechSynthesisUtterance(clean);
+//       u.rate = 0.92; u.pitch = 1.45; u.volume = 1;
+//       const voices = window.speechSynthesis.getVoices();
+//       const v = voices.find(v=>/female|girl|zira|samantha|victoria|karen|moira|tessa/i.test(v.name))
+//              || voices.find(v=>v.lang.startsWith("en")) || voices[0];
+//       if (v) u.voice = v;
+//       u.onend = () => setSpeaking(null);
+//       u.onerror = () => setSpeaking(null);
+//       return u;
+//     })();
+//     window.speechSynthesis.cancel();
+//     window.speechSynthesis.speak(utt);
+//   };
+ 
+//   // const send = () => {
+//   //   if(!input.trim()) return;
+//   //   const time = new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+//   //   setMsgs(p=>({...p,[sel.id]:[...(p[sel.id]||[]),{id:Date.now(),from:"me",text:input,time}]}));
+//   //   setInput(""); setTyping(true);
+//   //   setTimeout(()=>{
+//   //     const replyText = CANNED[Math.floor(Math.random()*CANNED.length)];
+//   //     const replyId   = Date.now()+1;
+//   //     setMsgs(p=>({...p,[sel.id]:[...(p[sel.id]||[]),{id:replyId,from:"them",text:replyText,time}]}));
+//   //     setTyping(false);
+//   //     // auto-speak the reply
+//   //     if (voiceOn) {
+//   //       setTimeout(() => speakMsg(replyText, replyId), 150);
+//   //     }
+//   //   },1000+Math.random()*700);
+//   // };
+ 
+
+//   // const send = async () => {
+//   //   if (!input.trim()) return;
+  
+//   //   const time = new Date().toLocaleTimeString([], {
+//   //     hour: "2-digit",
+//   //     minute: "2-digit",
+//   //   });
+  
+//   //   const userWord = input.trim();
+  
+//   //   // 👉 Add user message
+//   //   setMsgs((p) => ({
+//   //     ...p,
+//   //     [sel.id]: [
+//   //       ...(p[sel.id] || []),
+//   //       {
+//   //         id: Date.now(),
+//   //         from: "me",
+//   //         text: userWord,
+//   //         time,
+//   //       },
+//   //     ],
+//   //   }));
+  
+//   //   setInput("");
+//   //   setTyping(true);
+  
+//   //   try {
+//   //     // 🔥 DIRECT CALL (your pattern)
+//   //     const data = await apiPost(ENDPOINT.getPhonics(), { word: userWord });
+//   //     console.log("data",data)
+  
+//   //     const replyText = data?.phonics || "Try again 🤔";
+//   //     const replyId = Date.now() + 1;
+  
+//   //     // 👉 Add bot reply
+//   //     setMsgs((p) => ({
+//   //       ...p,
+//   //       [sel.id]: [
+//   //         ...(p[sel.id] || []),
+//   //         {
+//   //           id: replyId,
+//   //           from: "them",
+//   //           text: replyText,
+//   //           time,
+//   //         },
+//   //       ],
+//   //     }));
+  
+//   //     setTyping(false);
+  
+//   //     // 🔊 speak
+//   //     if (voiceOn) {
+//   //       setTimeout(() => speakMsg(replyText, replyId), 150);
+//   //     }
+  
+//   //   } catch (err) {
+//   //     console.error("Phonics API Error:", err);
+//   //     setTyping(false);
+  
+//   //     setMsgs((p) => ({
+//   //       ...p,
+//   //       [sel.id]: [
+//   //         ...(p[sel.id] || []),
+//   //         {
+//   //           id: Date.now() + 2,
+//   //           from: "them",
+//   //           text: "Oops! Something went wrong 😅",
+//   //           time,
+//   //         },
+//   //       ],
+//   //     }));
+//   //   }
+//   // };
+
+//   const send = async () => {
+//     if (!input.trim()) return;
+  
+//     const time = new Date().toLocaleTimeString([], {
+//       hour: "2-digit",
+//       minute: "2-digit",
+//     });
+  
+//     const userWord = input.trim();
+  
+//     // Add user message
+//     setMsgs((p) => ({
+//       ...p,
+//       [sel.id]: [
+//         ...(p[sel.id] || []),
+//         {
+//           id: Date.now(),
+//           from: "me",
+//           text: userWord,
+//           time,
+//         },
+//       ],
+//     }));
+  
+//     setInput("");
+//     setTyping(true);
+  
+//     try {
+//       // API CALL
+//       const data = await apiPost(
+//         ENDPOINT.getPhonics(),
+//         { word: userWord }
+//       );
+  
+//       console.log("API RESPONSE:", data);
+
+//       // if (replyText === "N/A") replyText = userWord;
+//       // if (audioUrl) new Audio(audioUrl).play();
+  
+//       let replyText = data?.phonics;
+//       let audioUrl = data?.audio;
+  
+//       // fallback if phonics missing
+//       if (!replyText || replyText === "N/A") {
+//         replyText = userWord;
+//       }
+  
+//       const replyId = Date.now() + 1;
+  
+//       setMsgs((p) => ({
+//         ...p,
+//         [sel.id]: [
+//           ...(p[sel.id] || []),
+//           {
+//             id: replyId,
+//             from: "them",
+//             text: replyText,
+//             time,
+//           },
+//         ],
+//       }));
+  
+//       setTyping(false);
+  
+//       // AUDIO PRIORITY
+//       if (voiceOn) {
+//         if (audioUrl) {
+//           //  use real pronunciation audio
+//           const audio = new Audio(audioUrl);
+//           audio.play();
+//         } else {
+//           //  fallback to speech synthesis
+//           setTimeout(() => speakMsg(replyText, replyId), 150);
+//         }
+//       }
+  
+//     } catch (err) {
+//       console.error("Phonics API Error:", err);
+  
+//       setTyping(false);
+  
+//       // fallback response
+//       const fallbackText = userWord;
+  
+//       setMsgs((p) => ({
+//         ...p,
+//         [sel.id]: [
+//           ...(p[sel.id] || []),
+//           {
+//             id: Date.now() + 2,
+//             from: "them",
+//             text: fallbackText,
+//             time,
+//           },
+//         ],
+//       }));
+  
+//       if (voiceOn) {
+//         speakMsg(fallbackText);
+//       }
+//     }
+//   };
+
+//   const curMsgs = msgs[sel.id]||[];
+ 
+//   return (
+//     <div style={{ flex:1,display:"flex",minWidth:0,height:"100%" , marginTop:"100px" }}>
+//       {/* Friends list */}
+//       <div style={{ width:"270px",minWidth:"270px",background:"white",borderRight:"2px solid #FFE8DC",display:"flex",flexDirection:"column" }}>
+//         <div style={{ padding:"16px 14px 12px",borderBottom:"2px solid #FFE8DC",fontFamily:"'Baloo 2',cursive",fontWeight:800,fontSize:"15px",color:"#3D2C2C",display:"flex",alignItems:"center",gap:"7px" }}>
+//           💬 <span>Friends</span>
+//         </div>
+
+//         <button
+//   onClick={goHome}
+//   style={{
+//     position: "fixed",
+//     bottom: "90px",
+//     right: "20px",
+//     display: "flex",
+//     alignItems: "center",
+//     gap: "8px",
+//     padding: "10px 16px",
+//     borderRadius: "50px",
+//     background: "linear-gradient(135deg,#FF6B6B,#FF8E53)",
+//     color: "white",  
+//     border: "none",
+//     fontWeight: "700",
+//     cursor: "pointer",
+//     boxShadow: "0 6px 20px rgba(255,107,107,.4)",
+//     zIndex: 1000
+//   }}
+// >
+//   <FcHome size={19}/> Home
+// </button>
+//         <div style={{ flex:1,overflowY:"auto",padding:"6px" }}>
+//           {FRIENDS.map((f,i)=>(
+//             <div key={f.id} className="fi" onClick={()=>setSel(f)}
+//               style={{
+//                 padding:"10px 11px",borderRadius:"14px",margin:"2px 0",
+//                 display:"flex",alignItems:"center",gap:"10px",
+//                 background:sel.id===f.id?"rgba(255,107,107,.12)":"transparent",
+//                 borderLeft:sel.id===f.id?`4px solid ${f.color}`:"4px solid transparent",
+//                 animation:`slideIn .4s ease ${i*.07}s both`,
+//               }}>
+//               <div style={{ width:"42px",height:"42px",borderRadius:"50%",background:`${f.color}22`,border:`2.5px solid ${f.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"21px",flexShrink:0 }}>{f.emoji}</div>
+//               <div style={{ flex:1,minWidth:0 }}>
+//                 <div style={{ display:"flex",justifyContent:"space-between" }}>
+//                   <span style={{ fontFamily:"'Nunito',sans-serif",fontWeight:800,color:"#3D2C2C",fontSize:"13px" }}>{f.name}</span>
+//                   <span style={{ fontSize:"10px",color:"#B09090" }}>{f.time}</span>
+//                 </div>
+//                 <div style={{ fontSize:"11px",color:"#B09090",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{f.lastMsg}</div>
+//               </div>
+//               {f.unread>0&&<div style={{ background:"#FF6B6B",color:"white",borderRadius:"50%",width:"19px",height:"19px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px",fontWeight:800,flexShrink:0 }}>{f.unread}</div>}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+ 
+//       {/* Messages pane */}
+//       <div style={{ flex:1,display:"flex",flexDirection:"column",minWidth:0 }}>
+//         {/* Header */}
+//         <div style={{ padding:"13px 18px",background:"white",borderBottom:"2px solid #FFE8DC",display:"flex",alignItems:"center",gap:"11px",boxShadow:"0 3px 12px rgba(255,107,107,.06)" }}>
+//           <div style={{ width:"42px",height:"42px",borderRadius:"50%",background:`${sel.color}22`,border:`2.5px solid ${sel.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"22px" }}>{sel.emoji}</div>
+//           <div style={{ flex:1 }}>
+//             <div style={{ fontFamily:"'Baloo 2',cursive",fontWeight:800,color:"#1A2E1A",fontSize:"16px" }}>{sel.name}</div>
+//             <div style={{ fontSize:"12px",color:"#6BCB77",fontWeight:700 }}>{typing?"✍️ typing…":"● Online & Happy!"}</div>
+//           </div>
+//           <button className="ab"
+//             onClick={()=>{ setVoiceOn(v=>!v); window.speechSynthesis?.cancel(); setSpeaking(null); }}
+//             style={{
+//               background: voiceOn?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFF5F0",
+//               border:`2px solid ${voiceOn?"#FF6B6B":"#FFE0D0"}`,
+//               borderRadius:"11px",width:"42px",height:"36px",cursor:"pointer",
+//               fontSize:"17px",display:"flex",alignItems:"center",justifyContent:"center",
+//               transition:"all .25s",flexShrink:0,
+//               boxShadow: voiceOn?"0 3px 12px rgba(255,107,107,.35)":"none",
+//             }}
+//           >{voiceOn?"🔊":"🔇"}</button>
+//           {["🎮","🎵","😊"].map((e,i)=>(
+//             <button key={i} className="ab" style={{ background:"#FFF5F0",border:"2px solid #FFE0D0",borderRadius:"11px",width:"36px",height:"36px",cursor:"pointer",fontSize:"17px",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .2s" }}>{e}</button>
+//           ))}
+//         </div>
+ 
+//         {/* Bubbles */}
+//         <div style={{ flex:1,overflowY:"auto",padding:"18px",display:"flex",flexDirection:"column",gap:"9px",background:"linear-gradient(180deg,#FFF8F2,#FFF3E8)" }}>
+//           <div style={{ textAlign:"center",marginBottom:"6px" }}>
+//             <span style={{ background:"rgba(255,150,150,.13)",borderRadius:"20px",padding:"4px 14px",fontSize:"11px",color:"#B09090",fontWeight:700,fontFamily:"'Nunito',sans-serif" }}>Today 🌞</span>
+//           </div>
+//           {curMsgs.map((m,i)=>{
+//             const me   = m.from==="me";
+//             const isSpk = speaking===m.id;
+//             return(
+//               <div key={m.id} style={{ display:"flex",justifyContent:me?"flex-end":"flex-start",alignItems:"flex-end",gap:"7px",animation:"msgPop .35s cubic-bezier(.34,1.56,.64,1) both",animationDelay:`${i*.03}s` }}>
+//                 {!me&&<div style={{ width:"32px",height:"32px",borderRadius:"50%",background:`${sel.color}22`,border:`2px solid ${sel.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",flexShrink:0 }}>{sel.emoji}</div>}
+ 
+//                 <div style={{ maxWidth:"62%",display:"flex",flexDirection:"column",gap:"4px",alignItems:me?"flex-end":"flex-start" }}>
+//                   <div style={{ padding:"10px 14px",borderRadius:me?"20px 20px 5px 20px":"20px 20px 20px 5px",background:me?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"white",color:me?"white":"#3D2C2C",fontSize:"14px",fontWeight:600,fontFamily:"'Nunito',sans-serif",boxShadow:me?"0 4px 14px rgba(255,107,107,.28)":"0 3px 10px rgba(0,0,0,.07)",border:me?"none":"2px solid #FFE8DC",lineHeight:1.55 }}>
+//                     <div>{m.text}</div>
+//                     <div style={{ fontSize:"10px",opacity:.6,marginTop:"3px",textAlign:"right" }}>{m.time}{me?" ✓✓":""}</div>
+//                   </div>
+ 
+//                   {/* Voice replay button — only on friend messages */}
+//                   {!me&&(
+//                     <button
+//                       onClick={()=>speakMsg(m.text, m.id)}
+//                       style={{
+//                         display:"flex",alignItems:"center",gap:"5px",
+//                         background: isSpk?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFF5F0",
+//                         border:`1.5px solid ${isSpk?"#FF6B6B":"#FFD0C0"}`,
+//                         borderRadius:"50px",padding:"3px 10px 3px 7px",
+//                         cursor:"pointer",transition:"all .22s",
+//                         boxShadow: isSpk?"0 2px 10px rgba(255,107,107,.35)":"none",
+//                       }}
+//                     >
+//                       {/* Animated sound bars when speaking */}
+//                       {isSpk ? (
+//                         <span style={{ display:"flex",alignItems:"flex-end",gap:"2px",height:"14px" }}>
+//                           {[1,1.6,1,1.4,1].map((h,j)=>(
+//                             <span key={j} style={{
+//                               width:"3px",borderRadius:"3px",background:"white",
+//                               height:`${h*6}px`,
+//                               animation:`bounce .6s ease-in-out ${j*.1}s infinite`,
+//                               display:"inline-block",
+//                             }}/>
+//                           ))}
+//                         </span>
+//                       ) : (
+//                         <span style={{ fontSize:"12px" }}>🔊</span>
+//                       )}
+//                       <span style={{ fontSize:"11px",fontFamily:"'Nunito',sans-serif",fontWeight:700,color:isSpk?"white":"#8A7070" }}>
+//                         {isSpk?"Speaking…":"Hear it"}
+//                       </span>
+//                     </button>
+//                   )}
+//                 </div>
+ 
+//                 {me&&<div style={{ width:"32px",height:"32px",borderRadius:"50%",background:"linear-gradient(135deg,#FF6B6B,#FFD93D)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",flexShrink:0 }}>{userEmoji}</div>}
+//               </div>
+//             );
+//           })}
+//           {typing&&(
+//             <div style={{ display:"flex",alignItems:"flex-end",gap:"7px" }}>
+//               <div style={{ width:"32px",height:"32px",borderRadius:"50%",background:`${sel.color}22`,border:`2px solid ${sel.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px" }}>{sel.emoji}</div>
+//               <div style={{ padding:"11px 16px",background:"white",borderRadius:"20px 20px 20px 5px",border:"2px solid #FFE8DC",boxShadow:"0 3px 10px rgba(0,0,0,.06)",display:"flex",gap:"5px",alignItems:"center" }}>
+//                 {[0,1,2].map(j=><div key={j} style={{ width:"7px",height:"7px",background:"#FF6B6B",borderRadius:"50%",animation:`bounce 1s ease-in-out ${j*.2}s infinite` }}/>)}
+//               </div>
+//             </div>
+//           )}
+//           <div ref={endRef}/>
+//         </div>
+ 
+//         {/* Input bar */}
+//         <div style={{ padding:"11px 16px",background:"white",borderTop:"2px solid #FFE8DC",display:"flex",alignItems:"flex-end",gap:"9px",boxShadow:"0 -3px 12px rgba(255,107,107,.05)" }}>
+//           <button className="ab" style={{ width:"42px",height:"42px",borderRadius:"12px",background:"#FFF5F0",border:"2px solid #FFD0B0",fontSize:"19px",cursor:"pointer",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",transition:"all .2s" }}>😊</button>
+//           <button className="ab" onClick={()=>setRec(r=>!r)} style={{ width:"42px",height:"42px",borderRadius:"12px",background:rec?"linear-gradient(135deg,#FF6B6B,#FF4444)":"#FFF5F0",border:`2px solid ${rec?"#FF6B6B":"#FFD0B0"}`,fontSize:"19px",cursor:"pointer",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",transition:"all .25s",animation:rec?"pulse 1s ease-in-out infinite":"none" }}>{rec?"⏹️":"🎤"}</button>
+//           <textarea value={input} onChange={e=>setInput(e.target.value)} placeholder={`Message ${sel.name}… 💬`} rows={1}
+//             onKeyDown={e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();} }}
+//             style={{ flex:1,padding:"10px 14px",borderRadius:"15px",border:"2px solid #FFD0B0",fontSize:"14px",fontFamily:"'Nunito',sans-serif",fontWeight:600,color:"#3D2C2C",background:"#FFF8F0",outline:"none",resize:"none",lineHeight:1.5,transition:"border-color .2s" }}
+//             onFocus={e=>e.target.style.borderColor="#FF6B6B"} onBlur={e=>e.target.style.borderColor="#FFD0B0"}
+//           />
+//           <button className="sbtn" onClick={send} style={{ width:"42px",height:"42px",borderRadius:"12px",background:input.trim()?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFD0B0",border:"none",cursor:input.trim()?"pointer":"default",fontSize:"19px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all .25s",boxShadow:input.trim()?"0 4px 14px rgba(255,107,107,.35)":"none" }}>🚀</button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+function ChatView({ userName, userEmoji, goHome }) {
   const [sel,      setSel]      = useState(FRIENDS[0]);
   const [msgs,     setMsgs]     = useState({
     1:[{id:1,from:"them",text:"Hey! Wanna play a game? 🎮",time:"2:30 PM"},{id:2,from:"me",text:"Yes yes yes! 🎉",time:"2:31 PM"},{id:3,from:"them",text:"Let's do guessing animals! 🐾",time:"2:31 PM"}],
@@ -251,28 +655,28 @@ function ChatView({ userName, userEmoji ,goHome }) {
   const [input,    setInput]    = useState("");
   const [typing,   setTyping]   = useState(false);
   const [rec,      setRec]      = useState(false);
-  const [speaking, setSpeaking] = useState(false); 
-  const [voiceOn,  setVoiceOn]  = useState(true); 
+  const [speaking, setSpeaking] = useState(false);
+  const [voiceOn,  setVoiceOn]  = useState(true);
+  const [showList, setShowList] = useState(false); // mobile sidebar toggle
   const endRef                  = useRef(null);
- 
-  // load voices (Chrome needs this event)
+
   useEffect(() => {
     window.speechSynthesis?.getVoices();
     window.speechSynthesis?.addEventListener?.("voiceschanged", () => window.speechSynthesis.getVoices());
   }, []);
- 
-  useEffect(()=>{ endRef.current?.scrollIntoView({behavior:"smooth"}); },[msgs,sel]);
- 
+
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs, sel]);
+
   const speakMsg = (text, id) => {
     if (!voiceOn) return;
     setSpeaking(id);
     const utt = (() => {
-      const clean = text.replace(/[\u{1F300}-\u{1FAFF}]/gu,"").trim();
+      const clean = text.replace(/[\u{1F300}-\u{1FAFF}]/gu, "").trim();
       const u = new SpeechSynthesisUtterance(clean);
       u.rate = 0.92; u.pitch = 1.45; u.volume = 1;
       const voices = window.speechSynthesis.getVoices();
-      const v = voices.find(v=>/female|girl|zira|samantha|victoria|karen|moira|tessa/i.test(v.name))
-             || voices.find(v=>v.lang.startsWith("en")) || voices[0];
+      const v = voices.find(v => /female|girl|zira|samantha|victoria|karen|moira|tessa/i.test(v.name))
+             || voices.find(v => v.lang.startsWith("en")) || voices[0];
       if (v) u.voice = v;
       u.onend = () => setSpeaking(null);
       u.onerror = () => setSpeaking(null);
@@ -281,364 +685,211 @@ function ChatView({ userName, userEmoji ,goHome }) {
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utt);
   };
- 
-  // const send = () => {
-  //   if(!input.trim()) return;
-  //   const time = new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
-  //   setMsgs(p=>({...p,[sel.id]:[...(p[sel.id]||[]),{id:Date.now(),from:"me",text:input,time}]}));
-  //   setInput(""); setTyping(true);
-  //   setTimeout(()=>{
-  //     const replyText = CANNED[Math.floor(Math.random()*CANNED.length)];
-  //     const replyId   = Date.now()+1;
-  //     setMsgs(p=>({...p,[sel.id]:[...(p[sel.id]||[]),{id:replyId,from:"them",text:replyText,time}]}));
-  //     setTyping(false);
-  //     // auto-speak the reply
-  //     if (voiceOn) {
-  //       setTimeout(() => speakMsg(replyText, replyId), 150);
-  //     }
-  //   },1000+Math.random()*700);
-  // };
- 
-
-  // const send = async () => {
-  //   if (!input.trim()) return;
-  
-  //   const time = new Date().toLocaleTimeString([], {
-  //     hour: "2-digit",
-  //     minute: "2-digit",
-  //   });
-  
-  //   const userWord = input.trim();
-  
-  //   // 👉 Add user message
-  //   setMsgs((p) => ({
-  //     ...p,
-  //     [sel.id]: [
-  //       ...(p[sel.id] || []),
-  //       {
-  //         id: Date.now(),
-  //         from: "me",
-  //         text: userWord,
-  //         time,
-  //       },
-  //     ],
-  //   }));
-  
-  //   setInput("");
-  //   setTyping(true);
-  
-  //   try {
-  //     // 🔥 DIRECT CALL (your pattern)
-  //     const data = await apiPost(ENDPOINT.getPhonics(), { word: userWord });
-  //     console.log("data",data)
-  
-  //     const replyText = data?.phonics || "Try again 🤔";
-  //     const replyId = Date.now() + 1;
-  
-  //     // 👉 Add bot reply
-  //     setMsgs((p) => ({
-  //       ...p,
-  //       [sel.id]: [
-  //         ...(p[sel.id] || []),
-  //         {
-  //           id: replyId,
-  //           from: "them",
-  //           text: replyText,
-  //           time,
-  //         },
-  //       ],
-  //     }));
-  
-  //     setTyping(false);
-  
-  //     // 🔊 speak
-  //     if (voiceOn) {
-  //       setTimeout(() => speakMsg(replyText, replyId), 150);
-  //     }
-  
-  //   } catch (err) {
-  //     console.error("Phonics API Error:", err);
-  //     setTyping(false);
-  
-  //     setMsgs((p) => ({
-  //       ...p,
-  //       [sel.id]: [
-  //         ...(p[sel.id] || []),
-  //         {
-  //           id: Date.now() + 2,
-  //           from: "them",
-  //           text: "Oops! Something went wrong 😅",
-  //           time,
-  //         },
-  //       ],
-  //     }));
-  //   }
-  // };
 
   const send = async () => {
     if (!input.trim()) return;
-  
-    const time = new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  
+    const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     const userWord = input.trim();
-  
-    // Add user message
-    setMsgs((p) => ({
-      ...p,
-      [sel.id]: [
-        ...(p[sel.id] || []),
-        {
-          id: Date.now(),
-          from: "me",
-          text: userWord,
-          time,
-        },
-      ],
-    }));
-  
+    setMsgs((p) => ({ ...p, [sel.id]: [...(p[sel.id] || []), { id: Date.now(), from: "me", text: userWord, time }] }));
     setInput("");
     setTyping(true);
-  
     try {
-      // API CALL
-      const data = await apiPost(
-        ENDPOINT.getPhonics(),
-        { word: userWord }
-      );
-  
-      console.log("API RESPONSE:", data);
-
-      // if (replyText === "N/A") replyText = userWord;
-      // if (audioUrl) new Audio(audioUrl).play();
-  
+      const data = await apiPost(ENDPOINT.getPhonics(), { word: userWord });
       let replyText = data?.phonics;
       let audioUrl = data?.audio;
-  
-      // fallback if phonics missing
-      if (!replyText || replyText === "N/A") {
-        replyText = userWord;
-      }
-  
+      if (!replyText || replyText === "N/A") replyText = userWord;
       const replyId = Date.now() + 1;
-  
-      setMsgs((p) => ({
-        ...p,
-        [sel.id]: [
-          ...(p[sel.id] || []),
-          {
-            id: replyId,
-            from: "them",
-            text: replyText,
-            time,
-          },
-        ],
-      }));
-  
+      setMsgs((p) => ({ ...p, [sel.id]: [...(p[sel.id] || []), { id: replyId, from: "them", text: replyText, time }] }));
       setTyping(false);
-  
-      // AUDIO PRIORITY
       if (voiceOn) {
-        if (audioUrl) {
-          //  use real pronunciation audio
-          const audio = new Audio(audioUrl);
-          audio.play();
-        } else {
-          //  fallback to speech synthesis
-          setTimeout(() => speakMsg(replyText, replyId), 150);
-        }
+        if (audioUrl) { new Audio(audioUrl).play(); }
+        else { setTimeout(() => speakMsg(replyText, replyId), 150); }
       }
-  
     } catch (err) {
       console.error("Phonics API Error:", err);
-  
       setTyping(false);
-  
-      // fallback response
       const fallbackText = userWord;
-  
-      setMsgs((p) => ({
-        ...p,
-        [sel.id]: [
-          ...(p[sel.id] || []),
-          {
-            id: Date.now() + 2,
-            from: "them",
-            text: fallbackText,
-            time,
-          },
-        ],
-      }));
-  
-      if (voiceOn) {
-        speakMsg(fallbackText);
-      }
+      setMsgs((p) => ({ ...p, [sel.id]: [...(p[sel.id] || []), { id: Date.now() + 2, from: "them", text: fallbackText, time }] }));
+      if (voiceOn) speakMsg(fallbackText);
     }
   };
 
-  const curMsgs = msgs[sel.id]||[];
- 
+  const curMsgs = msgs[sel.id] || [];
+
   return (
-    <div style={{ flex:1,display:"flex",minWidth:0,height:"100%" , marginTop:"100px" }}>
-      {/* Friends list */}
-      <div style={{ width:"270px",minWidth:"270px",background:"white",borderRight:"2px solid #FFE8DC",display:"flex",flexDirection:"column" }}>
-        <div style={{ padding:"16px 14px 12px",borderBottom:"2px solid #FFE8DC",fontFamily:"'Baloo 2',cursive",fontWeight:800,fontSize:"15px",color:"#3D2C2C",display:"flex",alignItems:"center",gap:"7px" }}>
+    <div style={{ flex: 1, display: "flex", minWidth: 0, height: "100%", marginTop: "100px", position: "relative" }}>
+
+      {/* ── Mobile overlay backdrop ── */}
+      {/* {showList && (
+        <div
+          onClick={() => setShowList(false)}
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.3)", zIndex: 40 }}
+        />
+      )} */}
+
+      {/* ── Friends Sidebar ── */}
+      {/* <div style={{
+        width: "270px", minWidth: "270px",
+        background: "white", borderRight: "2px solid #FFE8DC",
+        display: "flex", flexDirection: "column",
+       
+        position: window.innerWidth < 640 ? "fixed" : "relative",
+        top: window.innerWidth < 640 ? 0 : "auto",
+        left: window.innerWidth < 640 ? (showList ? 0 : "-270px") : "auto",
+        height: window.innerWidth < 640 ? "100%" : "auto",
+        zIndex: window.innerWidth < 640 ? 50 : "auto",
+        transition: "left 0.3s ease",
+        marginTop: window.innerWidth < 640 ? 0 : 0,
+        marginTop:'75px'
+      }}>
+        <div style={{ padding: "16px 14px 12px", borderBottom: "2px solid #FFE8DC", fontFamily: "'Baloo 2',cursive", fontWeight: 800, fontSize: "15px", color: "#3D2C2C", display: "flex", alignItems: "center", gap: "7px" }}>
           💬 <span>Friends</span>
+          
+          <button
+            onClick={() => setShowList(false)}
+            style={{ marginLeft: "auto", background: "none", border: "none", fontSize: "18px", cursor: "pointer", display: window.innerWidth < 640 ? "block" : "none" }}
+          >✕</button>
         </div>
 
-        <button
-  onClick={goHome}
-  style={{
-    position: "fixed",
-    bottom: "90px",
-    right: "20px",
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    padding: "10px 16px",
-    borderRadius: "50px",
-    background: "linear-gradient(135deg,#FF6B6B,#FF8E53)",
-    color: "white",  
-    border: "none",
-    fontWeight: "700",
-    cursor: "pointer",
-    boxShadow: "0 6px 20px rgba(255,107,107,.4)",
-    zIndex: 1000
-  }}
->
-  <FcHome size={19}/> Home
-</button>
-        <div style={{ flex:1,overflowY:"auto",padding:"6px" }}>
-          {FRIENDS.map((f,i)=>(
-            <div key={f.id} className="fi" onClick={()=>setSel(f)}
+        <div style={{ flex: 1, overflowY: "auto", padding: "6px" }}>
+          {FRIENDS.map((f, i) => (
+            <div key={f.id} className="fi" onClick={() => { setSel(f); setShowList(false); }}
               style={{
-                padding:"10px 11px",borderRadius:"14px",margin:"2px 0",
-                display:"flex",alignItems:"center",gap:"10px",
-                background:sel.id===f.id?"rgba(255,107,107,.12)":"transparent",
-                borderLeft:sel.id===f.id?`4px solid ${f.color}`:"4px solid transparent",
-                animation:`slideIn .4s ease ${i*.07}s both`,
+                padding: "10px 11px", borderRadius: "14px", margin: "2px 0",
+                display: "flex", alignItems: "center", gap: "10px",
+                background: sel.id === f.id ? "rgba(255,107,107,.12)" : "transparent",
+                borderLeft: sel.id === f.id ? `4px solid ${f.color}` : "4px solid transparent",
+                animation: `slideIn .4s ease ${i * .07}s both`,
+                cursor: "pointer",
               }}>
-              <div style={{ width:"42px",height:"42px",borderRadius:"50%",background:`${f.color}22`,border:`2.5px solid ${f.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"21px",flexShrink:0 }}>{f.emoji}</div>
-              <div style={{ flex:1,minWidth:0 }}>
-                <div style={{ display:"flex",justifyContent:"space-between" }}>
-                  <span style={{ fontFamily:"'Nunito',sans-serif",fontWeight:800,color:"#3D2C2C",fontSize:"13px" }}>{f.name}</span>
-                  <span style={{ fontSize:"10px",color:"#B09090" }}>{f.time}</span>
+              <div style={{ width: "42px", height: "42px", borderRadius: "50%", background: `${f.color}22`, border: `2.5px solid ${f.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "21px", flexShrink: 0 }}>{f.emoji}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ fontFamily: "'Nunito',sans-serif", fontWeight: 800, color: "#3D2C2C", fontSize: "13px" }}>{f.name}</span>
+                  <span style={{ fontSize: "10px", color: "#B09090" }}>{f.time}</span>
                 </div>
-                <div style={{ fontSize:"11px",color:"#B09090",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{f.lastMsg}</div>
+                <div style={{ fontSize: "11px", color: "#B09090", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.lastMsg}</div>
               </div>
-              {f.unread>0&&<div style={{ background:"#FF6B6B",color:"white",borderRadius:"50%",width:"19px",height:"19px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px",fontWeight:800,flexShrink:0 }}>{f.unread}</div>}
+              {f.unread > 0 && <div style={{ background: "#FF6B6B", color: "white", borderRadius: "50%", width: "19px", height: "19px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", fontWeight: 800, flexShrink: 0 }}>{f.unread}</div>}
             </div>
           ))}
         </div>
-      </div>
- 
-      {/* Messages pane */}
-      <div style={{ flex:1,display:"flex",flexDirection:"column",minWidth:0 }}>
+      </div> */}
+
+      {/* ── Messages Pane ── */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 , marginTop:'75px'}}>
+
         {/* Header */}
-        <div style={{ padding:"13px 18px",background:"white",borderBottom:"2px solid #FFE8DC",display:"flex",alignItems:"center",gap:"11px",boxShadow:"0 3px 12px rgba(255,107,107,.06)" }}>
-          <div style={{ width:"42px",height:"42px",borderRadius:"50%",background:`${sel.color}22`,border:`2.5px solid ${sel.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"22px" }}>{sel.emoji}</div>
-          <div style={{ flex:1 }}>
-            <div style={{ fontFamily:"'Baloo 2',cursive",fontWeight:800,color:"#1A2E1A",fontSize:"16px" }}>{sel.name}</div>
-            <div style={{ fontSize:"12px",color:"#6BCB77",fontWeight:700 }}>{typing?"✍️ typing…":"● Online & Happy!"}</div>
+        <div style={{ padding: "13px 12px", background: "white", borderBottom: "2px solid #FFE8DC", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 3px 12px rgba(255,107,107,.06)", flexWrap: "nowrap" }}>
+
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setShowList(true)}
+            className="ab"
+            style={{ width: "38px", height: "38px", borderRadius: "11px", background: "#FFF5F0", border: "2px solid #FFD0B0", fontSize: "18px", cursor: "pointer", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
+          >☰</button>
+
+          <div style={{ width: "42px", height: "42px", borderRadius: "50%", background: `${sel.color}22`, border: `2.5px solid ${sel.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0 }}>{sel.emoji}</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: "'Baloo 2',cursive", fontWeight: 800, color: "#1A2E1A", fontSize: "15px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{sel.name}</div>
+            <div style={{ fontSize: "11px", color: "#6BCB77", fontWeight: 700 }}>{typing ? "✍️ typing…" : "● Online & Happy!"}</div>
           </div>
+
+          {/* Voice toggle */}
           <button className="ab"
-            onClick={()=>{ setVoiceOn(v=>!v); window.speechSynthesis?.cancel(); setSpeaking(null); }}
-            style={{
-              background: voiceOn?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFF5F0",
-              border:`2px solid ${voiceOn?"#FF6B6B":"#FFE0D0"}`,
-              borderRadius:"11px",width:"42px",height:"36px",cursor:"pointer",
-              fontSize:"17px",display:"flex",alignItems:"center",justifyContent:"center",
-              transition:"all .25s",flexShrink:0,
-              boxShadow: voiceOn?"0 3px 12px rgba(255,107,107,.35)":"none",
-            }}
-          >{voiceOn?"🔊":"🔇"}</button>
-          {["🎮","🎵","😊"].map((e,i)=>(
-            <button key={i} className="ab" style={{ background:"#FFF5F0",border:"2px solid #FFE0D0",borderRadius:"11px",width:"36px",height:"36px",cursor:"pointer",fontSize:"17px",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .2s" }}>{e}</button>
+            onClick={() => { setVoiceOn(v => !v); window.speechSynthesis?.cancel(); setSpeaking(null); }}
+            style={{ background: voiceOn ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFF5F0", border: `2px solid ${voiceOn ? "#FF6B6B" : "#FFE0D0"}`, borderRadius: "11px", width: "40px", height: "36px", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", transition: "all .25s", flexShrink: 0, boxShadow: voiceOn ? "0 3px 12px rgba(255,107,107,.35)" : "none" }}
+          >{voiceOn ? "🔊" : "🔇"}</button>
+
+          {/* Extra buttons — hidden on very small screens */}
+          {["🎮", "🎵", "😊"].map((e, i) => (
+            <button key={i} className="ab"
+              style={{ background: "#FFF5F0", border: "2px solid #FFE0D0", borderRadius: "11px", width: "36px", height: "36px", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", transition: "all .2s", flexShrink: 0 }}
+            >{e}</button>
           ))}
         </div>
- 
+
         {/* Bubbles */}
-        <div style={{ flex:1,overflowY:"auto",padding:"18px",display:"flex",flexDirection:"column",gap:"9px",background:"linear-gradient(180deg,#FFF8F2,#FFF3E8)" }}>
-          <div style={{ textAlign:"center",marginBottom:"6px" }}>
-            <span style={{ background:"rgba(255,150,150,.13)",borderRadius:"20px",padding:"4px 14px",fontSize:"11px",color:"#B09090",fontWeight:700,fontFamily:"'Nunito',sans-serif" }}>Today 🌞</span>
+        <div style={{ flex: 1, overflowY: "auto", padding: "12px", display: "flex", flexDirection: "column", gap: "9px", background: "linear-gradient(180deg,#FFF8F2,#FFF3E8)" }}>
+          <div style={{ textAlign: "center", marginBottom: "6px" }}>
+            <span style={{ background: "rgba(255,150,150,.13)", borderRadius: "20px", padding: "4px 14px", fontSize: "11px", color: "#B09090", fontWeight: 700, fontFamily: "'Nunito',sans-serif" }}>Today 🌞</span>
           </div>
-          {curMsgs.map((m,i)=>{
-            const me   = m.from==="me";
-            const isSpk = speaking===m.id;
-            return(
-              <div key={m.id} style={{ display:"flex",justifyContent:me?"flex-end":"flex-start",alignItems:"flex-end",gap:"7px",animation:"msgPop .35s cubic-bezier(.34,1.56,.64,1) both",animationDelay:`${i*.03}s` }}>
-                {!me&&<div style={{ width:"32px",height:"32px",borderRadius:"50%",background:`${sel.color}22`,border:`2px solid ${sel.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",flexShrink:0 }}>{sel.emoji}</div>}
- 
-                <div style={{ maxWidth:"62%",display:"flex",flexDirection:"column",gap:"4px",alignItems:me?"flex-end":"flex-start" }}>
-                  <div style={{ padding:"10px 14px",borderRadius:me?"20px 20px 5px 20px":"20px 20px 20px 5px",background:me?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"white",color:me?"white":"#3D2C2C",fontSize:"14px",fontWeight:600,fontFamily:"'Nunito',sans-serif",boxShadow:me?"0 4px 14px rgba(255,107,107,.28)":"0 3px 10px rgba(0,0,0,.07)",border:me?"none":"2px solid #FFE8DC",lineHeight:1.55 }}>
+
+          {curMsgs.map((m, i) => {
+            const me = m.from === "me";
+            const isSpk = speaking === m.id;
+            return (
+              <div key={m.id} style={{ display: "flex", justifyContent: me ? "flex-end" : "flex-start", alignItems: "flex-end", gap: "6px", animation: "msgPop .35s cubic-bezier(.34,1.56,.64,1) both", animationDelay: `${i * .03}s` }}>
+                {!me && <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: `${sel.color}22`, border: `2px solid ${sel.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", flexShrink: 0 }}>{sel.emoji}</div>}
+
+                <div style={{ maxWidth: "75%", display: "flex", flexDirection: "column", gap: "4px", alignItems: me ? "flex-end" : "flex-start" }}>
+                  <div style={{ padding: "9px 13px", borderRadius: me ? "20px 20px 5px 20px" : "20px 20px 20px 5px", background: me ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "white", color: me ? "white" : "#3D2C2C", fontSize: "13px", fontWeight: 600, fontFamily: "'Nunito',sans-serif", boxShadow: me ? "0 4px 14px rgba(255,107,107,.28)" : "0 3px 10px rgba(0,0,0,.07)", border: me ? "none" : "2px solid #FFE8DC", lineHeight: 1.55, wordBreak: "break-word" }}>
                     <div>{m.text}</div>
-                    <div style={{ fontSize:"10px",opacity:.6,marginTop:"3px",textAlign:"right" }}>{m.time}{me?" ✓✓":""}</div>
+                    <div style={{ fontSize: "10px", opacity: .6, marginTop: "3px", textAlign: "right" }}>{m.time}{me ? " ✓✓" : ""}</div>
                   </div>
- 
-                  {/* Voice replay button — only on friend messages */}
-                  {!me&&(
+
+                  {!me && (
                     <button
-                      onClick={()=>speakMsg(m.text, m.id)}
-                      style={{
-                        display:"flex",alignItems:"center",gap:"5px",
-                        background: isSpk?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFF5F0",
-                        border:`1.5px solid ${isSpk?"#FF6B6B":"#FFD0C0"}`,
-                        borderRadius:"50px",padding:"3px 10px 3px 7px",
-                        cursor:"pointer",transition:"all .22s",
-                        boxShadow: isSpk?"0 2px 10px rgba(255,107,107,.35)":"none",
-                      }}
+                      onClick={() => speakMsg(m.text, m.id)}
+                      style={{ display: "flex", alignItems: "center", gap: "5px", background: isSpk ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFF5F0", border: `1.5px solid ${isSpk ? "#FF6B6B" : "#FFD0C0"}`, borderRadius: "50px", padding: "3px 10px 3px 7px", cursor: "pointer", transition: "all .22s", boxShadow: isSpk ? "0 2px 10px rgba(255,107,107,.35)" : "none" }}
                     >
-                      {/* Animated sound bars when speaking */}
                       {isSpk ? (
-                        <span style={{ display:"flex",alignItems:"flex-end",gap:"2px",height:"14px" }}>
-                          {[1,1.6,1,1.4,1].map((h,j)=>(
-                            <span key={j} style={{
-                              width:"3px",borderRadius:"3px",background:"white",
-                              height:`${h*6}px`,
-                              animation:`bounce .6s ease-in-out ${j*.1}s infinite`,
-                              display:"inline-block",
-                            }}/>
+                        <span style={{ display: "flex", alignItems: "flex-end", gap: "2px", height: "14px" }}>
+                          {[1, 1.6, 1, 1.4, 1].map((h, j) => (
+                            <span key={j} style={{ width: "3px", borderRadius: "3px", background: "white", height: `${h * 6}px`, animation: `bounce .6s ease-in-out ${j * .1}s infinite`, display: "inline-block" }} />
                           ))}
                         </span>
                       ) : (
-                        <span style={{ fontSize:"12px" }}>🔊</span>
+                        <span style={{ fontSize: "12px" }}>🔊</span>
                       )}
-                      <span style={{ fontSize:"11px",fontFamily:"'Nunito',sans-serif",fontWeight:700,color:isSpk?"white":"#8A7070" }}>
-                        {isSpk?"Speaking…":"Hear it"}
+                      <span style={{ fontSize: "11px", fontFamily: "'Nunito',sans-serif", fontWeight: 700, color: isSpk ? "white" : "#8A7070" }}>
+                        {isSpk ? "Speaking…" : "Hear it"}
                       </span>
                     </button>
                   )}
                 </div>
- 
-                {me&&<div style={{ width:"32px",height:"32px",borderRadius:"50%",background:"linear-gradient(135deg,#FF6B6B,#FFD93D)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",flexShrink:0 }}>{userEmoji}</div>}
+
+                {me && <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "linear-gradient(135deg,#FF6B6B,#FFD93D)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", flexShrink: 0 }}>{userEmoji}</div>}
               </div>
             );
           })}
-          {typing&&(
-            <div style={{ display:"flex",alignItems:"flex-end",gap:"7px" }}>
-              <div style={{ width:"32px",height:"32px",borderRadius:"50%",background:`${sel.color}22`,border:`2px solid ${sel.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px" }}>{sel.emoji}</div>
-              <div style={{ padding:"11px 16px",background:"white",borderRadius:"20px 20px 20px 5px",border:"2px solid #FFE8DC",boxShadow:"0 3px 10px rgba(0,0,0,.06)",display:"flex",gap:"5px",alignItems:"center" }}>
-                {[0,1,2].map(j=><div key={j} style={{ width:"7px",height:"7px",background:"#FF6B6B",borderRadius:"50%",animation:`bounce 1s ease-in-out ${j*.2}s infinite` }}/>)}
+
+          {typing && (
+            <div style={{ display: "flex", alignItems: "flex-end", gap: "7px" }}>
+              <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: `${sel.color}22`, border: `2px solid ${sel.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>{sel.emoji}</div>
+              <div style={{ padding: "11px 16px", background: "white", borderRadius: "20px 20px 20px 5px", border: "2px solid #FFE8DC", boxShadow: "0 3px 10px rgba(0,0,0,.06)", display: "flex", gap: "5px", alignItems: "center" }}>
+                {[0, 1, 2].map(j => <div key={j} style={{ width: "7px", height: "7px", background: "#FF6B6B", borderRadius: "50%", animation: `bounce 1s ease-in-out ${j * .2}s infinite` }} />)}
               </div>
             </div>
           )}
-          <div ref={endRef}/>
+          <div ref={endRef} />
         </div>
- 
+
         {/* Input bar */}
-        <div style={{ padding:"11px 16px",background:"white",borderTop:"2px solid #FFE8DC",display:"flex",alignItems:"flex-end",gap:"9px",boxShadow:"0 -3px 12px rgba(255,107,107,.05)" }}>
-          <button className="ab" style={{ width:"42px",height:"42px",borderRadius:"12px",background:"#FFF5F0",border:"2px solid #FFD0B0",fontSize:"19px",cursor:"pointer",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",transition:"all .2s" }}>😊</button>
-          <button className="ab" onClick={()=>setRec(r=>!r)} style={{ width:"42px",height:"42px",borderRadius:"12px",background:rec?"linear-gradient(135deg,#FF6B6B,#FF4444)":"#FFF5F0",border:`2px solid ${rec?"#FF6B6B":"#FFD0B0"}`,fontSize:"19px",cursor:"pointer",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",transition:"all .25s",animation:rec?"pulse 1s ease-in-out infinite":"none" }}>{rec?"⏹️":"🎤"}</button>
-          <textarea value={input} onChange={e=>setInput(e.target.value)} placeholder={`Message ${sel.name}… 💬`} rows={1}
-            onKeyDown={e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();} }}
-            style={{ flex:1,padding:"10px 14px",borderRadius:"15px",border:"2px solid #FFD0B0",fontSize:"14px",fontFamily:"'Nunito',sans-serif",fontWeight:600,color:"#3D2C2C",background:"#FFF8F0",outline:"none",resize:"none",lineHeight:1.5,transition:"border-color .2s" }}
-            onFocus={e=>e.target.style.borderColor="#FF6B6B"} onBlur={e=>e.target.style.borderColor="#FFD0B0"}
+        <div style={{ padding: "10px 10px", background: "white", borderTop: "2px solid #FFE8DC", display: "flex", alignItems: "flex-end", gap: "7px", boxShadow: "0 -3px 12px rgba(255,107,107,.05)" }}>
+          <button className="ab" style={{ width: "38px", height: "38px", borderRadius: "11px", background: "#FFF5F0", border: "2px solid #FFD0B0", fontSize: "17px", cursor: "pointer", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>😊</button>
+          <button className="ab" onClick={() => setRec(r => !r)} style={{ width: "38px", height: "38px", borderRadius: "11px", background: rec ? "linear-gradient(135deg,#FF6B6B,#FF4444)" : "#FFF5F0", border: `2px solid ${rec ? "#FF6B6B" : "#FFD0B0"}`, fontSize: "17px", cursor: "pointer", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", animation: rec ? "pulse 1s ease-in-out infinite" : "none" }}>{rec ? "⏹️" : "🎤"}</button>
+          <textarea
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder={`Message ${sel.name}… 💬`}
+            rows={1}
+            onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+            style={{ flex: 1, padding: "9px 12px", borderRadius: "14px", border: "2px solid #FFD0B0", fontSize: "13px", fontFamily: "'Nunito',sans-serif", fontWeight: 600, color: "#3D2C2C", background: "#FFF8F0", outline: "none", resize: "none", lineHeight: 1.5 }}
+            onFocus={e => e.target.style.borderColor = "#FF6B6B"}
+            onBlur={e => e.target.style.borderColor = "#FFD0B0"}
           />
-          <button className="sbtn" onClick={send} style={{ width:"42px",height:"42px",borderRadius:"12px",background:input.trim()?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFD0B0",border:"none",cursor:input.trim()?"pointer":"default",fontSize:"19px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all .25s",boxShadow:input.trim()?"0 4px 14px rgba(255,107,107,.35)":"none" }}>🚀</button>
+          <button className="sbtn" onClick={send} style={{ width: "38px", height: "38px", borderRadius: "11px", background: input.trim() ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFD0B0", border: "none", cursor: input.trim() ? "pointer" : "default", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: input.trim() ? "0 4px 14px rgba(255,107,107,.35)" : "none" }}>🚀</button>
         </div>
       </div>
+
+      {/* Home button */}
+      <button
+        onClick={goHome}
+        style={{ position: "fixed", bottom: "90px", right: "16px", display: "flex", alignItems: "center", gap: "8px", padding: "10px 16px", borderRadius: "50px", background: "linear-gradient(135deg,#FF6B6B,#FF8E53)", color: "white", border: "none", fontWeight: "700", cursor: "pointer", boxShadow: "0 6px 20px rgba(255,107,107,.4)", zIndex: 1000 }}
+      >
+        <FcHome size={19} /> Home
+      </button>
     </div>
   );
 }
