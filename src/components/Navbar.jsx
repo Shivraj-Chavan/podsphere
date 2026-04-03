@@ -353,9 +353,23 @@ const Navbar = () => {
 
   const signupRef = useRef(null);
 
+  // useEffect(() => {
+  //   const close = (e) =>
+  //     !signupRef.current?.contains(e.target) && setOpenSignup(false);
+  //   document.addEventListener("mousedown", close);
+  //   return () => document.removeEventListener("mousedown", close);
+  // }, []);
+
   useEffect(() => {
-    const close = (e) =>
-      !signupRef.current?.contains(e.target) && setOpenSignup(false);
+    const close = (e) => {
+      if (!signupRef.current) return;
+  
+      // Only close dropdown, NOT modal
+      if (!signupRef.current.contains(e.target)) {
+        setOpenSignup(false);
+      }
+    };
+  
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
   }, []);
@@ -479,15 +493,14 @@ const Navbar = () => {
                 ].map(({ emoji, label, sub, color }) => (
                   <div
                     key={label}
-                    onClick={(e) => {
+                    onMouseDown={(e) => {
                       e.stopPropagation(); 
-                    
+                      e.preventDefault();                      
                       setRole(label);
-                      setShowSignIn(true);
-                    
+                      setOpenSignup(false);                   
                       setTimeout(() => {
-                        setOpenSignup(false);
-                      }, 50); 
+                        setShowSignIn(true);
+                      }, 0);
                     }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.background = "#fafafa")
@@ -695,13 +708,13 @@ const Navbar = () => {
       )}
 
       <SignInModal
-  isOpen={showSignIn}
-  onClose={() => setShowSignIn(false)}
-  role={role}
-  onSignIn={(data) => {
-    console.log("Login data:", data);
-    setShowSignIn(false);
-  }}
+      isOpen={showSignIn}
+      onClose={() => setShowSignIn(false)}
+      role={role}
+      onSignIn={(data) => {
+        console.log("Login data:", data);
+        setShowSignIn(false);
+       }}
 />
     </>
   );
