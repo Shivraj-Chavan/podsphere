@@ -145,7 +145,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 pt-16 ">
+    <footer className="bg-gray-100 pt-16 pb-16 md:pb-0">
 
       <div className="max-w-7xl mx-auto px-6 relative">
 
@@ -153,7 +153,7 @@ export default function Footer() {
         <img
           src="./cubebottom.png"
           alt="ABC Blocks"
-          className="absolute w-32 lg:w-44 bottom-10 right-0 drop-shadow-xl"
+          className="absolute w-32 lg:w-44 bottom-18 right-0 drop-shadow-xl"
         />
 
         {/* GRID */}
@@ -161,7 +161,7 @@ export default function Footer() {
 
           {/* LOGO */}
           <div>
-            <img src="/logo2.png" alt="Podsphere" className=" mb-3" />
+            <img src="/logo2.png" alt="Podsphere" className="mb-3" />
           </div>
 
           {/* CONTACT US */}
@@ -173,7 +173,7 @@ export default function Footer() {
             <div className="flex items-start gap-2">
             <Phone size={16} className="mt-1" />
 
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <a href="tel:+919892409029" className="hover:text-purple-600">
                 +91 9892409029
               </a>

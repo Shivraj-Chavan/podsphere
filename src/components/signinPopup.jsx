@@ -113,25 +113,36 @@ const SignInModal = ({ isOpen, onClose, onSignIn, role  }) => {
               PASSWORD
             </label>
             <div
-              className="flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5"
+              className="flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 w-full"
               style={{ background: "#f9fafb", border: "1.5px solid #e5e7eb" }}
             >
-              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              <svg
+                className="w-4 h-4 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#d1d5db"
+                strokeWidth={1.8}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                />
               </svg>
+
               <input
                 type={showPassword ? "text" : "password"}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-300 outline-none border-none"
+                className="flex-1 min-w-0 bg-transparent text-sm text-gray-800 placeholder-gray-300 outline-none border-none"
               />
+
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-[10px] font-bold tracking-wider cursor-pointer shrink-0"
+                className="text-xs font-semibold shrink-0 whitespace-nowrap"
                 style={{ color: "#f472b6" }}
               >
                 {showPassword ? "HIDE" : "SHOW"}

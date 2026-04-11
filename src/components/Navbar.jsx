@@ -309,8 +309,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
-import { LogIn, User, UserCircle } from "lucide-react";
+import { ArrowRight, Calendar, LogIn, Phone, PlayCircle, Sparkles, Star, User, UserCircle, Video, Zap } from "lucide-react";
 import SignInModal from "./signinPopup";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -670,14 +671,157 @@ const Navbar = () => {
       )}
 
       {/* ── MOBILE: Fixed Bottom "Book a Free Demo" Bar ── */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F5C518] py-4 flex items-center justify-center shadow-[0_-2px_12px_rgba(0,0,0,0.15)]">
-        <button
-          onClick={() => setOpen(true)}
-          className="font-bold text-black text-base tracking-wide uppercase cursor-pointer"
-        >
-          Book a Free Demo
-        </button>
+      {/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-md bg-[#F5C518] py-4 flex items-center justify-center shadow-[0_-2px_12px_rgba(0,0,0,0.15)]"> */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 
+        backdrop-blur-2xl bg-yellow-300/20 
+        py-4 flex items-center justify-center 
+        shadow-[0_-4px_20px_rgba(245,197,24,0.25)] 
+        border-t border-yellow-200/20">
+
+          {/* WhatsApp Icon */}
+          <a
+            href="https://wa.me/919892409029"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-10 right-5 z-[999] 
+            bg-green-500 p-2 rounded-full 
+            shadow-[0_8px_25px_rgba(0,0,0,0.3)] 
+            hover:scale-110 active:scale-95 
+            transition-all duration-300 animate-[bounce_1s_infinite]"
+          >
+            <FaWhatsapp className="text-white text-2xl" />
+          </a>
+
+          <button
+            onClick={() => setOpen(true)}
+            className="font-bold text-black text-base tracking-wide uppercase cursor-pointer"
+          >
+            Book a Free Demo
+          </button>
+        </div>
+
+
+        {/* ── MOBILE: Fixed Bottom Bar ── */}
+
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0f0f1a] border-t border-white/5 py-2.5 px-5 flex items-center gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"> */}
+
+{/* OPTION 1 */}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 
+bg-[#0f0f1a]/70 backdrop-blur-md 
+border-t border-white/10 
+py-2.5 px-5 flex items-center gap-3 
+shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"> */}
+
+
+ {/* WhatsApp button */}
+  {/* <a
+    href="https://wa.me/919892409029"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-11 h-11 rounded-full bg-[#25D366] flex items-center justify-center flex-shrink-0"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.116 1.528 5.843L.057 23.5l5.797-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.846 0-3.574-.49-5.065-1.345L2.5 21.8l1.17-4.32A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+  </a>
+
+  <button
+    onClick={() => setOpen(true)}
+    className="flex-1 bg-[#f5c518] text-[#0f0f1a] font-bold text-sm rounded-full py-3 tracking-wide uppercase cursor-pointer"
+  >
+    Book a Free Demo
+  </button>
+</div> */}
+
+{/* OPTION 2 */}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 
+bg-white bg-gradient-to-r from-[#ff6b6b] to-[#ee5a24]
+border-t bg-white/20 border border-white/30 
+py-2.5 px-5 flex items-center gap-3 
+shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"> */}
+
+
+
+{/* OPTION 3*/}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-900 to-slate-800 py-3.5 px-4 flex items-center justify-between shadow-[0_-4px_16px_rgba(0,0,0,0.3)] border-t border-slate-700">
+  <div className="flex items-center gap-2">
+    <FaWhatsapp className="w-5 h-5 text-white" />
+    <span className="text-white text-sm font-medium">Chat with Us !</span>
+  </div>
+  <button
+    onClick={() => setOpen(true)}
+    className="bg-white text-slate-900 px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide hover:bg-slate-100 transition-all shadow-lg"
+  >
+    Book Now
+  </button>
+</div> */}
+
+{/* OPTION 3 */}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/80 py-3.5 px-4 flex items-center justify-between shadow-[0_-4px_24px_rgba(0,0,0,0.1)] border-t border-white/20">
+  <div className="flex items-center gap-2">
+    <FaWhatsapp className="w-6 h-6 text-green-700" />
+    <span className="text-slate-800 text-sm font-semibold">Chat with US </span>
+  </div>
+  <button
+    onClick={() => setOpen(true)}
+    className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-xl transition-shadow"
+  >
+    Book Now
+  </button>
+</div> */}
+
+
+{/* OPTION 4 */}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 flex shadow-[0_-4px_24px_rgba(0,0,0,0.15)]">
+  <div className="flex-1 bg-gray-900 py-4 px-4 flex items-center gap-2.5">
+    <FaWhatsapp className="w-5 h-5 text-white" />
+    <span className="text-white text-sm font-medium">Chat with Us !</span>
+  </div>
+  <button
+    onClick={() => setOpen(true)}
+    className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-8 py-4 font-bold text-sm hover:from-pink-700 hover:to-rose-700 transition-colors"
+  >
+    Book Live
+  </button>
+</div> */}
+
+{/* OPTION 5*/}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.15)] border-t border-gray-200">
+  <div className="px-4 py-3 flex items-center justify-between">
+    <div className="flex-1">
+      <div className="flex items-center gap-2 mb-1">
+        <FaWhatsapp className="w-5 h-5 text-indigo-600" />
+        <span className="text-gray-900 text-sm font-bold">Chat with Us !</span>
       </div>
+      <p className="text-gray-500 text-xs ms-6">24/7 customer support available</p>
+    </div>
+    <button
+      onClick={() => setOpen(true)}
+      className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center gap-1.5 hover:bg-indigo-700 transition-colors shadow-lg"
+    >
+      <span>Book</span>
+      <ArrowRight className="w-4 h-4" />
+    </button>
+  </div>
+</div> */}
+
+{/* OPTION 6 */}
+{/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 py-4 px-5 flex items-center justify-between shadow-[0_-6px_24px_rgba(0,0,0,0.5)] border-t border-gray-700">
+  <div className="flex items-center gap-2.5">
+    <FaWhatsapp className="w-5 h-5 text-yellow-400" />
+    <span className="text-gray-100 text-sm font-medium">24/7 Support</span>
+  </div>
+  <button
+    onClick={() => setOpen(true)}
+    className="bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-900 px-7 py-2.5 rounded-lg font-bold text-sm hover:shadow-[0_0_20px_rgba(251,191,36,0.6)] transition-all"
+  >
+    Book Now
+  </button>
+</div> */}
+
+
+
 
       {/* ── SHARED: Demo Popup Form ── */}
       {open && (

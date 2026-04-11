@@ -219,7 +219,7 @@ const Contact = () => {
     <section className="relative w-full bg-white">
 
       {/* ───────── HERO IMAGE ───────── */}
-      <div className="relative w-full h-[260px] sm:h-[360px] md:h-[700px] overflow-hidden rounded-b-[32px]">
+      <div className="relative w-full h-[340px] sm:h-[360px] md:h-[700px] overflow-hidden rounded-b-[15%]">
         <img
           src="/contactusimg.png"
           alt="contact"
@@ -231,10 +231,10 @@ const Contact = () => {
         {/* Text on image */}
         <div className="absolute bottom-6 left-5 sm:left-10 md:left-16 text-white z-10 md:bottom-25 md:max-w-md">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">Contact Us</h2>
-          <p className="text-xs sm:text-sm leading-relaxed text-white/80 max-w-[260px] sm:max-w-sm">
+          {/* <p className="text-xs sm:text-sm leading-relaxed text-white/80 max-w-[260px] sm:max-w-sm">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt.
-          </p>
+          </p> */}
         </div>
 
         {/* Desktop floating form */}

@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode , Mousewheel, Navigation  } from "swiper/modules";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Leaf,
   Sprout,
@@ -19,14 +19,15 @@ import {
 import "swiper/css";
 import "swiper/css/free-mode";
 
-import {  MessageCircle, Mic, BookOpenCheck } from "lucide-react";;
+import {  MessageCircle, Mic, BookOpenCheck } from "lucide-react";import SignInModal from "../components/signinPopup";
+;
 
 const pods = [
   {
     name: "Seed Pod",
     image: "/pods/SeedPod.png",
     level: "Level 1",
-    age: "3 – 4 yrs",
+    age: "3 – 3.5 yrs",
     sessions: "30 Sessions",
     classes: "3 classes a week",
     duration: "30 min (1:1) / 35–40 min (Group 1:4)",
@@ -151,10 +152,10 @@ const points = [
       icon: MessageCircle,
       text: "Answers parent queries instantly",
     },
-    {
-      icon: BookOpenCheck,
-      text: "Shares word-of-the-day & phonics tips",
-    },
+    // {
+    //   icon: BookOpenCheck,
+    //   text: "Shares word-of-the-day & phonics tips",
+    // },
     {
       icon: Mic,
       text: "Encourages kids with phonics sound voice notes",
@@ -167,7 +168,15 @@ const points = [
 
 export default function PhonicsPods() {
   const prevRef = useRef(null);
-const nextRef = useRef(null)
+const nextRef = useRef(null);
+const [openModal, setOpenModal] = useState(false);
+const [role, setRole] = useState("Signup");
+
+const handleSignIn = async (data) => {
+  console.log("Login data:", data);
+  setOpenModal(false);
+};
+
   return (
     <>
     <section className="relative bg-white py-24">
@@ -301,7 +310,11 @@ const nextRef = useRef(null)
             
               {/* BUTTON */}
               <div className="bg-white rounded-full py-2 px-6 shadow-sm w-50 mx-auto">
-                <p className="text-lg font-bold text-center text-black cursor-pointer">
+                <p onClick={() => {
+    setRole("Signup"); 
+    setOpenModal(true);
+  }} 
+  className="text-lg font-bold text-center text-black cursor-pointer">
                   JOIN NOW
                 </p>
               </div>
@@ -312,6 +325,12 @@ const nextRef = useRef(null)
         </div>
 
       </div>
+      <SignInModal
+  isOpen={openModal}
+  onClose={() => setOpenModal(false)}
+  onSignIn={handleSignIn}
+  role={role}
+/>
     </section>
 
 

@@ -980,6 +980,7 @@
 
 
 'use client';
+import {motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 import { BiGroup } from "react-icons/bi";
@@ -1215,12 +1216,24 @@ export default function Aboutus () {
         engaging, effective, and accessible for children everywhere.
       </p>
 
-      <button
+      {/* <button
         onClick={() => navigate("/phonicsPods")}
         className="font-bold text-black border-b-2 border-black hover:opacity-70 transition text-sm sm:text-base"
       >
         Explore our Pods
-      </button>
+      </button> */}
+
+<button
+  onClick={() => navigate("/phonicsPods")}
+  className="px-5 py-2.5 rounded-full 
+  bg-white text-yellow-400 
+  font-semibold text-sm sm:text-base 
+  shadow-lg hover:shadow-lg 
+  hover:scale-105 active:scale-95 
+  transition-all duration-300 cursor-pointer"
+>
+  Explore our Pods
+</button>
     </div>
 
     {/* Right Image */}
@@ -1265,54 +1278,49 @@ export default function Aboutus () {
               className="rounded-3xl w-[420px] h-[420px] object-cover"
             />
           </div>
-
-          {/* Accordion */}
           <div className="border border-white/20 rounded-3xl overflow-hidden">
+          {data.map((item, index) => {
+            const isOpen = active === index;
 
-            {data.map((item, index) => (
-              <div key={index} className="border-b border-white/20 last:border-none">
-
+            return (
+              <div
+                key={index}
+                className="border-b border-white/20 last:border-none"
+              >
                 <button
-                  onClick={() =>
-                    setActive(active === index ? null : index)
-                  }
+                  onClick={() => setActive(isOpen ? null : index)}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
-
                   <div className="flex items-center gap-4">
-
-                    {/* Icon circle */}
-                    {/* <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-red-900">
-                      {item.image}
-                    </div> */}
                     <img
                       src={item.image}
                       alt={item.title}
                       className="w-12 h-12 object-contain"
                     />
 
-                    <span className="font-medium">
-                      {item.title}
-                    </span>
+                    <span className="font-medium">{item.title}</span>
                   </div>
 
                   <ChevronDown
-                    className={`transition-transform ${
-                      active === index ? "rotate-180" : ""
+                    className={`transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
-                {active === index && (
-                  <div className="px-16 pb-5 text-sm opacity-90">
-                    {item.content}
-                  </div>
-                )}
-
+                {/* Smooth Content */}
+                <div
+                  className={`px-5 text-sm opacity-90 overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-40 pb-5" : "max-h-0"
+                  }`}
+                  style={{ willChange: "max-height" }}
+                >
+                  {item.content}
+                </div>
               </div>
-            ))}
-
-          </div>
+            );
+          })}
+        </div>
         </div>
       </div>
     </section>
