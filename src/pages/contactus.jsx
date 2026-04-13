@@ -661,7 +661,7 @@ const Contact = () => {
     <section className="relative w-full bg-white">
 
       {/* ───────── HERO IMAGE ───────── */}
-      <div className="relative w-full h-[340px] sm:h-[420px] md:h-[560px] lg:h-[700px] overflow-hidden rounded-b-[15%]">
+      <div className="relative w-full h-[340px] sm:h-[420px] md:h-[560px] lg:h-[700px] overflow-hidden rounded-b-[10%]">
         <img
           src="/contactusimg.png"
           alt="contact"
@@ -700,7 +700,7 @@ const Contact = () => {
       </div>
 
       {/* ───────── BOTTOM CTA — Desktop (lg+) ───────── */}
-      <div className="hidden lg:flex relative justify-center mt-16 mb-15 px-4">
+      <div className="hidden lg:flex relative justify-center mt-25 mb-15 px-4 ">
         <div className="w-full max-w-[1100px] h-[310px] bg-red-900 rounded-2xl" />
         <div className="absolute -top-10 w-[calc(100%-4rem)] max-w-[1000px] h-[250px] bg-yellow-400 rounded-2xl shadow-lg p-12 flex items-center justify-between">
           <CtaContent />
@@ -879,18 +879,48 @@ const FormCard = () => {
 
 /* ───────── CTA CONTENT (desktop) ───────── */
 const CtaContent = () => (
-  <>
+  <div className="py-20 flex items-center justify-between gap-6 flex-wrap">
+    
     <div className="text-gray-900 max-w-xl">
-      <h2 className="text-3xl font-bold mb-3">Let's Begin Your Child's Reading Journey Together</h2>
-      <p className="text-sm mb-4">Discover upcoming Podsphere programs, get the latest updates, and enjoy exclusive learning opportunities.</p>
+      <h2 className="text-3xl font-bold mb-3">
+        Let's Begin Your Child's Reading Journey Together
+      </h2>
+      <p className="text-sm mb-4">
+        Discover upcoming Podsphere programs, get the latest updates, and enjoy exclusive learning opportunities.
+      </p>
+
       <div className="space-y-2 text-sm">
-        <p>📞 <a href="tel:+919892409029" className="underline hover:text-gray-600">+91 9892409029</a> / <a href="tel:+919892099029" className="underline hover:text-gray-600">+91 9892099029</a></p>
-        <p>✉️ <a href="mailto:hello@pod-sphere.com" className="underline hover:text-gray-600">hello@pod-sphere.com</a></p>
-        <p>📍 <a href="https://www.google.com/maps?q=Mumbai,India" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">Mumbai, India</a></p>
+        <p>
+          📞 
+          <a href="tel:+919892409029" className="underline hover:text-gray-600">
+            +91 9892409029
+          </a> / 
+          <a href="tel:+919892099029" className="underline hover:text-gray-600">
+            +91 9892099029
+          </a>
+        </p>
+        <p>
+          ✉️ 
+          <a href="mailto:hello@pod-sphere.com" className="underline hover:text-gray-600">
+            hello@pod-sphere.com
+          </a>
+        </p>
+        <p>
+          📍 
+          <a href="https://www.google.com/maps?q=Mumbai,India" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">
+            Mumbai, India
+          </a>
+        </p>
       </div>
     </div>
-    <img src="/friends.jpg" alt="kids" className="w-[240px] h-[240px] rounded-full object-cover" />
-  </>
+
+    <img
+      src="/friends.jpg"
+      alt="kids"
+      className="w-[240px] h-[240px] rounded-full object-cover"
+    />
+    
+  </div>
 );
 
 export default Contact;
