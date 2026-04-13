@@ -96,7 +96,7 @@ image:"/profile/female3.png"
       </p>
 
       {/* Swiper */}
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto ">
 
         {/* Left Arrow */}
         {/* <div className="swiper-button-prev-custom hidden md:flex items-center justify-center absolute -left-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
@@ -104,17 +104,16 @@ image:"/profile/female3.png"
         </div> */}
 
 <div className="
-  swiper-button-prev-custom
-  flex md:flex
-  items-center justify-center 
-  absolute left-2 md:-left-14 
-  top-1/2 -translate-y-1/2 z-10 
-  bg-white p-2 md:p-3 
-  rounded-full shadow-lg 
-  cursor-pointer hover:bg-pink-100
-">
-  <FaChevronLeft className="text-sm md:text-base" />
-</div>
+    swiper-button-prev-custom
+    flex items-center justify-center
+    absolute left-0 md:-left-2 lg:-left-14
+    top-1/2 -translate-y-1/2 z-10
+    bg-white p-2 md:p-3
+    rounded-full shadow-lg
+    cursor-pointer hover:bg-pink-100
+  ">
+    <FaChevronLeft className="text-sm md:text-base" />
+  </div>
 
         {/* Right Arrow */}
         {/* <div className="swiper-button-next-custom hidden md:flex items-center justify-center absolute -right-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
@@ -122,17 +121,16 @@ image:"/profile/female3.png"
         </div> */}
 
 <div className="
-  swiper-button-next-custom
-  flex md:flex
-  items-center justify-center 
-  absolute right-2 md:-right-14 
-  top-1/2 -translate-y-1/2 z-10 
-  bg-white p-2 md:p-3 
-  rounded-full shadow-lg 
-  cursor-pointer hover:bg-pink-100
-">
-  <FaChevronRight className="text-sm md:text-base" />
-</div>
+    swiper-button-next-custom
+    flex items-center justify-center
+    absolute right-0 md:-right-2 lg:-right-14
+    top-1/2 -translate-y-1/2 z-10
+    bg-white p-2 md:p-3
+    rounded-full shadow-lg
+    cursor-pointer hover:bg-pink-100
+  ">
+    <FaChevronRight className="text-sm md:text-base" />
+  </div>
 
         <Swiper
           modules={[Navigation]}
@@ -156,13 +154,12 @@ image:"/profile/female3.png"
                 {/* Avatar */}
                 <div className="absolute -top-14 left-1/2 -translate-x-1/2 w-28 h-28 flex items-center justify-center ovden">
 
-<img
-  src={item.image}
-  alt="parent"
-  className="w-28 h-32 mt-5"
-/>
-
-</div>
+                  <img
+                    src={item.image}
+                    alt="parent"
+                    className="w-28 h-32 mt-5"
+                  />
+                  </div>
 
                 {/* Quote */}
                 <div className="relative">

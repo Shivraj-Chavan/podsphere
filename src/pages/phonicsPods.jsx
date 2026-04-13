@@ -209,12 +209,10 @@ const handleSignIn = async (data) => {
   playsInline
   className="
     absolute pointer-events-none opacity-100 z-0
-    
-    /* Mobile */
-    bottom-[-50px] right-[-120px] w-[950px]
-    
-    /* Desktop */
-    sm:top-[700px] sm:left-[1050px] sm:w-[700px]
+    w-[600px] bottom-[-30px] right-[-120px]
+    sm:w-[650px] sm:bottom-[-40px] sm:right-[-150px]
+    md:w-[700px] md:bottom-[-50px] md:right-[-180px]
+    lg:w-[700px] lg:top-[700px] lg:left-[1050px] lg:bottom-auto lg:right-auto
   "
 />
 
@@ -229,7 +227,7 @@ const handleSignIn = async (data) => {
       style={{
         position: "absolute",
         top: "20px",     
-        left: "-150px",    
+        left: "-170px",    
         width: "700px",  
         height: "auto",
         transform: "scale(1.6)",
@@ -244,18 +242,19 @@ const handleSignIn = async (data) => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-20 relative z-15"
         >
-          <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3">
+          <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3 ">
             PHONICS PODS
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 z-5 relative">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 ">
             Learning Paths That Grow With Your Child
           </h2>
         </motion.div>
 
         {/* POD CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4"> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {pods.map((pod, i) => {
             const Icon = pod.icon;
             return (

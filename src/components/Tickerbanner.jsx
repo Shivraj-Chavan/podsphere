@@ -60,6 +60,81 @@
 
 
 
+// "use client";
+
+// function Repeat({ text }) {
+//   return (
+//     <div className="flex whitespace-nowrap">
+//       {[...Array(20)].map((_, i) => (
+//         <span
+//           key={i}
+//           className="mx-4 sm:mx-6 md:mx-10 lg:mx-12 whitespace-nowrap
+//                      text-[10px] sm:text-sm md:text-lg lg:text-3xl
+//                      font-semibold py-2 sm:py-3 md:py-4"
+//         >
+//           {text}
+//         </span>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default function TickerBanner() {
+//   return (
+//     <div
+//       className="relative w-full overflow-hidden bg-[#e6ded4]
+//                  h-[180px]
+//                  sm:h-[260px]
+//                  md:h-[380px]"
+//     >
+
+//       {/* ── BLUE ── */}
+//       <div className="absolute bottom-[-30px] left-[-60%] w-[600%] rotate-[4deg] z-0
+//                       sm:bottom-[15px] sm:left-[-50%]
+//                       md:bottom-[-250px] md:left-[-40%] md:pb-10">
+//         <div
+//           className="flex items-center bg-[#009dda] text-white animate-leftSlow
+//                      py-2 sm:py-4 md:py-6"
+//           style={{ clipPath: "polygon(0 0,100% 0,95% 100%,0% 100%)" }}
+//         >
+//           <Repeat text="Nurturing Language, One Pod at a Time" />
+//         </div>
+//       </div>
+
+//       {/* ── GREEN ── */}
+//       <div className="absolute top-[48px] left-0 w-full rotate-[-9deg] z-20
+//                       sm:top-[55px]
+//                       md:top-[90px] md:pt-10">
+//         <div
+//           className="flex items-center bg-[#93ca3c] text-white animate-right backdrop-blur-sm w-[600%]
+//                      py-2 sm:py-4 md:py-6"
+//           style={{ clipPath: "polygon(0 0,100% 0,96% 100%,0% 100%)" }}
+//         >
+//           <Repeat text="Decode Sounds. Discover Reading." />
+//         </div>
+//       </div>
+
+//       {/* ── PINK ── */}
+//       <div className="absolute top-[60px] left-[-60%] w-[600%] rotate-[4deg] z-20
+//                       sm:top-[145px] sm:left-[-50%]
+//                       md:top-48 md:left-[-40%] md:pt-10">
+//         <div
+//           className="flex items-center bg-[#c2388b] text-white animate-left
+//                      py-2 sm:py-4 md:py-6"
+//           style={{ clipPath: "polygon(0 0,100% 0,95% 100%,0% 100%)" }}
+//         >
+//           <Repeat text="Little Learners, Big Possibilities." />
+//         </div>
+//       </div>
+
+//     </div>
+//   );
+// }
+
+
+
+
+
 "use client";
 
 function Repeat({ text }) {
@@ -68,8 +143,8 @@ function Repeat({ text }) {
       {[...Array(20)].map((_, i) => (
         <span
           key={i}
-          className="mx-4 sm:mx-6 md:mx-10 lg:mx-12 whitespace-nowrap
-                     text-[10px] sm:text-sm md:text-lg lg:text-3xl
+          className="mx-4 sm:mx-6 md:mx-8 lg:mx-12 whitespace-nowrap
+                     text-[10px] sm:text-sm md:text-base lg:text-3xl
                      font-semibold py-2 sm:py-3 md:py-4"
         >
           {text}
@@ -85,16 +160,18 @@ export default function TickerBanner() {
       className="relative w-full overflow-hidden bg-[#e6ded4]
                  h-[180px]
                  sm:h-[260px]
-                 md:h-[380px]"
+                 md:h-[300px]
+                 lg:h-[380px]"
     >
 
       {/* ── BLUE ── */}
       <div className="absolute bottom-[-30px] left-[-60%] w-[600%] rotate-[4deg] z-0
                       sm:bottom-[15px] sm:left-[-50%]
-                      md:bottom-[-250px] md:left-[-40%] md:pb-10">
+                      md:bottom-[-80px] md:left-[-45%]
+                      lg:bottom-[-250px] lg:left-[-40%] lg:pb-10">
         <div
           className="flex items-center bg-[#009dda] text-white animate-leftSlow
-                     py-2 sm:py-4 md:py-6"
+                     py-2 sm:py-4 md:py-5 lg:py-6"
           style={{ clipPath: "polygon(0 0,100% 0,95% 100%,0% 100%)" }}
         >
           <Repeat text="Nurturing Language, One Pod at a Time" />
@@ -104,10 +181,11 @@ export default function TickerBanner() {
       {/* ── GREEN ── */}
       <div className="absolute top-[48px] left-0 w-full rotate-[-9deg] z-20
                       sm:top-[55px]
-                      md:top-[90px] md:pt-10">
+                      md:top-[70px]
+                      lg:top-[90px] lg:pt-10">
         <div
           className="flex items-center bg-[#93ca3c] text-white animate-right backdrop-blur-sm w-[600%]
-                     py-2 sm:py-4 md:py-6"
+                     py-2 sm:py-4 md:py-5 lg:py-6"
           style={{ clipPath: "polygon(0 0,100% 0,96% 100%,0% 100%)" }}
         >
           <Repeat text="Decode Sounds. Discover Reading." />
@@ -117,10 +195,11 @@ export default function TickerBanner() {
       {/* ── PINK ── */}
       <div className="absolute top-[60px] left-[-60%] w-[600%] rotate-[4deg] z-20
                       sm:top-[145px] sm:left-[-50%]
-                      md:top-48 md:left-[-40%] md:pt-10">
+                      md:top-[165px] md:left-[-45%]
+                      lg:top-48 lg:left-[-40%] lg:pt-10">
         <div
           className="flex items-center bg-[#c2388b] text-white animate-left
-                     py-2 sm:py-4 md:py-6"
+                     py-2 sm:py-4 md:py-5 lg:py-6"
           style={{ clipPath: "polygon(0 0,100% 0,95% 100%,0% 100%)" }}
         >
           <Repeat text="Little Learners, Big Possibilities." />

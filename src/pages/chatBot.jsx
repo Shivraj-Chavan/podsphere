@@ -120,7 +120,7 @@ function HomePage({ onStart, userEmoji }) {
             display:"flex",alignItems:"center",gap:"7px",
             background:"white",borderRadius:"50px",padding:"8px 18px",
             fontSize:"13px",fontWeight:700,color:"#3D2C2C",
-            fontFamily:"'Nunito',sans-serif",
+            fontFamily:"Poppins",
             boxShadow:"0 2px 12px rgba(0,0,0,.07)",border:"1.5px solid #FFE0D0",
             animation:`fadeUp .6s ${i*.1}s ease both`,
           }}><span>{ic}</span>{tx}</div>
@@ -130,7 +130,7 @@ function HomePage({ onStart, userEmoji }) {
       {/* Headline */}
       <div style={{ textAlign:"center", marginBottom:"38px", animation:"fadeUp .7s .1s ease both" }}>
         <h1 style={{
-          fontFamily:"'Baloo 2',cursive",fontWeight:800,
+          fontFamily:"Poppins",fontWeight:800,
           fontSize:"clamp(28px,3.6vw,50px)",lineHeight:1.2,
           color:"#1A2E1A",marginBottom:"12px",
         }}>
@@ -143,7 +143,7 @@ function HomePage({ onStart, userEmoji }) {
           </span>
           {" "}<br/>where imagination comes alive 🌈
         </h1>
-        <p style={{ fontFamily:"'Nunito',sans-serif",fontSize:"16px",color:"#8A7070",fontWeight:600 }}>
+        <p style={{ fontFamily:"Poppins",fontSize:"16px",color:"#8A7070",fontWeight:600 }}>
         Chat, play, and create in a world built just for curious minds !
         </p>
       </div>
@@ -164,7 +164,7 @@ function HomePage({ onStart, userEmoji }) {
           rows={4}
           style={{
             width:"100%",padding:"22px 24px 10px",border:"none",outline:"none",
-            resize:"none",fontFamily:"'Nunito',sans-serif",fontSize:"16px",
+            resize:"none",fontFamily:"Poppins",fontSize:"16px",
             fontWeight:600,color:"#3D2C2C",background:"transparent",lineHeight:1.6,
           }}
           onKeyDown={e=>{ if(e.key==="Enter"&&!e.shiftKey&&input.trim()){ e.preventDefault(); onStart(input.trim()); } }}
@@ -190,7 +190,7 @@ function HomePage({ onStart, userEmoji }) {
               style={{
                 display:"flex",alignItems:"center",gap:"7px",padding:"9px 18px",
                 borderRadius:"50px",background:"#FFF5F0",border:"2px solid #FFD0C0",
-                fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:"14px",
+                fontFamily:"Poppins",fontWeight:700,fontSize:"14px",
                 color:"#3D2C2C",boxShadow:"0 2px 8px rgba(255,107,107,.1)",
               }}><span>{a.icon}</span>{a.label}</button>
           ))}
@@ -198,7 +198,7 @@ function HomePage({ onStart, userEmoji }) {
       </div>
 
       {/* Suggestions label */}
-      <div style={{ textAlign:"center",fontSize:"14px",color:"#B09090",fontFamily:"'Nunito',sans-serif",fontWeight:700,marginBottom:"18px",animation:"fadeUp .9s .3s ease both" }}>
+      <div style={{ textAlign:"center",fontSize:"14px",color:"#B09090",fontFamily:"Poppins",fontWeight:700,marginBottom:"18px",animation:"fadeUp .9s .3s ease both" }}>
         ✨ Need an idea? Try one of these adventures…
       </div>
 
@@ -791,7 +791,7 @@ function ChatView({ userName, userEmoji, goHome }) {
 
           <div style={{ width: "42px", height: "42px", borderRadius: "50%", background: `${sel.color}22`, border: `2.5px solid ${sel.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", flexShrink: 0 }}>{sel.emoji}</div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontFamily: "'Baloo 2',cursive", fontWeight: 800, color: "#1A2E1A", fontSize: "15px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{sel.name}</div>
+            <div style={{ fontFamily: "Poppins", fontWeight: 800, color: "#1A2E1A", fontSize: "15px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{sel.name}</div>
             <div style={{ fontSize: "11px", color: "#6BCB77", fontWeight: 700 }}>{typing ? "✍️ typing…" : "● Online & Happy!"}</div>
           </div>
 
@@ -812,7 +812,7 @@ function ChatView({ userName, userEmoji, goHome }) {
         {/* Bubbles */}
         <div style={{ flex: 1, overflowY: "auto", padding: "12px", display: "flex", flexDirection: "column", gap: "9px", background: "linear-gradient(180deg,#FFF8F2,#FFF3E8)" }}>
           <div style={{ textAlign: "center", marginBottom: "6px" }}>
-            <span style={{ background: "rgba(255,150,150,.13)", borderRadius: "20px", padding: "4px 14px", fontSize: "11px", color: "#B09090", fontWeight: 700, fontFamily: "'Nunito',sans-serif" }}>Today 🌞</span>
+            <span style={{ background: "rgba(255,150,150,.13)", borderRadius: "20px", padding: "4px 14px", fontSize: "11px", color: "#B09090", fontWeight: 700, fontFamily: "Poppins" }}>Today 🌞</span>
           </div>
 
           {curMsgs.map((m, i) => {
@@ -823,7 +823,7 @@ function ChatView({ userName, userEmoji, goHome }) {
                 {!me && <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: `${sel.color}22`, border: `2px solid ${sel.color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", flexShrink: 0 }}>{sel.emoji}</div>}
 
                 <div style={{ maxWidth: "75%", display: "flex", flexDirection: "column", gap: "4px", alignItems: me ? "flex-end" : "flex-start" }}>
-                  <div style={{ padding: "9px 13px", borderRadius: me ? "20px 20px 5px 20px" : "20px 20px 20px 5px", background: me ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "white", color: me ? "white" : "#3D2C2C", fontSize: "13px", fontWeight: 600, fontFamily: "'Nunito',sans-serif", boxShadow: me ? "0 4px 14px rgba(255,107,107,.28)" : "0 3px 10px rgba(0,0,0,.07)", border: me ? "none" : "2px solid #FFE8DC", lineHeight: 1.55, wordBreak: "break-word" }}>
+                  <div style={{ padding: "9px 13px", borderRadius: me ? "20px 20px 5px 20px" : "20px 20px 20px 5px", background: me ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "white", color: me ? "white" : "#3D2C2C", fontSize: "13px", fontWeight: 600, fontFamily: "Poppins", boxShadow: me ? "0 4px 14px rgba(255,107,107,.28)" : "0 3px 10px rgba(0,0,0,.07)", border: me ? "none" : "2px solid #FFE8DC", lineHeight: 1.55, wordBreak: "break-word" }}>
                     <div>{m.text}</div>
                     <div style={{ fontSize: "10px", opacity: .6, marginTop: "3px", textAlign: "right" }}>{m.time}{me ? " ✓✓" : ""}</div>
                   </div>
@@ -842,7 +842,7 @@ function ChatView({ userName, userEmoji, goHome }) {
                       ) : (
                         <span style={{ fontSize: "12px" }}>🔊</span>
                       )}
-                      <span style={{ fontSize: "11px", fontFamily: "'Nunito',sans-serif", fontWeight: 700, color: isSpk ? "white" : "#8A7070" }}>
+                      <span style={{ fontSize: "11px", fontFamily: "Poppins", fontWeight: 700, color: isSpk ? "white" : "#8A7070" }}>
                         {isSpk ? "Speaking…" : "Hear it"}
                       </span>
                     </button>
@@ -875,7 +875,7 @@ function ChatView({ userName, userEmoji, goHome }) {
             placeholder={`Message ${sel.name}… 💬`}
             rows={1}
             onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
-            style={{ flex: 1, padding: "9px 12px", borderRadius: "14px", border: "2px solid #FFD0B0", fontSize: "13px", fontFamily: "'Nunito',sans-serif", fontWeight: 600, color: "#3D2C2C", background: "#FFF8F0", outline: "none", resize: "none", lineHeight: 1.5 }}
+            style={{ flex: 1, padding: "9px 12px", borderRadius: "14px", border: "2px solid #FFD0B0", fontSize: "13px", fontFamily: "Poppins", fontWeight: 600, color: "#3D2C2C", background: "#FFF8F0", outline: "none", resize: "none", lineHeight: 1.5 }}
             onFocus={e => e.target.style.borderColor = "#FF6B6B"}
             onBlur={e => e.target.style.borderColor = "#FFD0B0"}
           />
@@ -923,7 +923,7 @@ function ChatBot({setHideLayout}) {
     display: "flex",
     width: "100%",        // ✅ ADD THIS
     minHeight: "calc(100vh - 64px)",
-    fontFamily: "'Nunito', sans-serif",
+    fontFamily: "Poppins",
     background: "#FAFDF8",
   }}
   className="chatbot"

@@ -1171,79 +1171,72 @@ export default function Aboutus () {
   </section>
 
 {/* (2) sound to stories section */}
-<section className="relative bg-white py-12 md:py-20 overflow-hidden">
-      
+<section className="relative bg-white py-12 md:py-16 lg:py-20 overflow-hidden">
+
   {/* Background Curve */}
   <img
-  src="/curvelines/Loop-08.png"
-  alt="curve"
-  className="
-    absolute 
-    right-[-90px] sm:right-[-150px] md:-right-50 
-    top-[92%] sm:top-[55%] md:top-1 
-    -translate-y-1/2 md:translate-y-0
-    w-[600px] sm:w-[500px] md:w-[800px] 
-    opacity-90 md:opacity-100 z-0
-    pointer-events-none
-  "
-/>
+    src="/curvelines/Loop-08.png"
+    alt="curve"
+    className="
+      absolute 
+      right-[-90px] sm:right-[-120px] lg:-right-50
+      top-[95%] sm:top-[75%] md:top-[80%] lg:top-1
+      -translate-y-1/2 lg:translate-y-0
+      w-[500px] sm:w-[550px] md:w-[650px] lg:w-[800px]
+      opacity-80 lg:opacity-100 z-0
+      pointer-events-none"/>
 
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 items-center gap-8 md:gap-12">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
 
     {/* Left Content */}
     <div className="text-left">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 lg:mb-4">
         From Sounds to Stories
       </h2>
 
-      <p className="text-sm sm:text-base text-gray-600 mb-3 md:mb-4 leading-relaxed">
+      <p className="text-sm sm:text-base text-gray-600 mb-3 lg:mb-4 leading-relaxed">
         At PodSphere, we believe that reading is the doorway to a child's
         imagination, confidence, and lifelong learning. Our vision is to
-        inspire children to proudly say “I can read!” by building strong
+        inspire children to proudly say "I can read!" by building strong
         phonics foundations that make language joyful, meaningful, and
         accessible.
       </p>
 
-      <p className="text-sm sm:text-base text-gray-600 mb-3 md:mb-4 leading-relaxed">
+      <p className="text-sm sm:text-base text-gray-600 mb-3 lg:mb-4 leading-relaxed">
         Through thoughtfully designed, story-driven phonics experiences,
         we transform early reading into an adventure. Our programs combine
         playful learning, structured phonics instruction, and interactive
         tools to spark curiosity and nurture confidence.
       </p>
 
-      <p className="text-sm sm:text-base text-gray-600 mb-5 md:mb-6 leading-relaxed">
+      <p className="text-sm sm:text-base text-gray-600 mb-5 lg:mb-6 leading-relaxed">
         PodSphere was founded with a commitment to making early literacy
         engaging, effective, and accessible for children everywhere.
       </p>
 
-      {/* <button
+      <button
         onClick={() => navigate("/phonicsPods")}
-        className="font-bold text-black border-b-2 border-black hover:opacity-70 transition text-sm sm:text-base"
+        className="px-5 py-2 rounded-full 
+        bg-yellow-300 text-black 
+        font-bold text-base sm:text-lg 
+        shadow-lg
+        hover:bg-yellow-400 
+        active:scale-95 
+        transition-all duration-200 
+        cursor-pointer"
       >
-        Explore our Pods
-      </button> */}
-
-<button
-  onClick={() => navigate("/phonicsPods")}
-  className="px-5 py-2.5 rounded-full 
-  bg-white text-yellow-400 
-  font-semibold text-sm sm:text-base 
-  shadow-lg hover:shadow-lg 
-  hover:scale-105 active:scale-95 
-  transition-all duration-300 cursor-pointer"
->
-  Explore our Pods
-</button>
+        Explore Our Pods
+      </button>
     </div>
 
     {/* Right Image */}
-    <div className="relative flex justify-center md:justify-center">
+    <div className="relative flex justify-center">
       <img
         src="/about3.jpeg"
         alt="girl reading"
         className="
-          rounded-3xl shadow-xl relative z-10 
-          w-full max-w-[420px] sm:max-w-[420px] md:w-[520px]
+          rounded-3xl shadow-xl relative z-10
+          w-full max-w-[360px] sm:max-w-[480px] md:max-w-[560px] lg:w-[520px] lg:max-w-none
         "
       />
     </div>

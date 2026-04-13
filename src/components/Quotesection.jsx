@@ -71,8 +71,8 @@ const QuoteSection = () => {
         alt="paint"
         className="
           absolute 
-          right-2 sm:right-10 md:right-20 
-          bottom-2 sm:bottom-6 md:bottom-8 
+          right-2 sm:right-10 md:right-10 
+          bottom-1 sm:bottom-6 md:bottom-2 
           w-14 sm:w-20 md:w-28 
           opacity-80 animate-float 
           pointer-events-none

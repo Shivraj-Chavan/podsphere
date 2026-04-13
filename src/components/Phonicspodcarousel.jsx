@@ -215,6 +215,150 @@
 
 
 
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+
+// const pods = [
+//   {
+//     title: "Seed Pod",
+//     image: "/pods/Girl.png",
+//     descTitle: "Where sounds turn into first words",
+//     desc: "Builds phonics awareness and confidence through sounds, letters, and simple reading.",
+//     color: "from-blue-500 to-blue-700",
+//   },
+//   {
+//     title: "Sprout Pod",
+//     image: "/pods/sproudpodpink.png",
+//     descTitle: "Growing readers, one word at a time",
+//     desc: "Strengthens blending, spelling, and sentence reading through guided practice.",
+//     color: "from-pink-500 to-pink-700",
+//   },
+//   {
+//     title: "Bud Pod",
+//     image: "/pods/girlblue.png",
+//     descTitle: "Decoding words with confidence",
+//     desc: "Introduces phonics rules and patterns to help children read independently.",
+//     color: "from-green-500 to-green-700",
+//   },
+//   {
+//     title: "Bloom Pod",
+//     image: "/pods/bloompodred.png",
+//     descTitle: "Fluency begins to blossom",
+//     desc: "Advances reading skills with complex words, rules, and deeper comprehension.",
+//     color: "from-red-500 to-red-700",
+//   },
+//   {
+//     title: "Fruit Pod",
+//     image: "/pods/fruitpodorange.png",
+//     descTitle: "From reader to master",
+//     desc: "A focused crash course that refines fluency, accuracy, and complete phonics mastery.",
+//     color: "from-orange-400 to-orange-600",
+//   },
+// ];
+
+// export default function Pods() {
+//   const navigate = useNavigate();
+//   return (
+//     <div className="relative overflow-hidden bg-white py-10 px-4 pb-20">
+      
+//       {/* Background Shapes */}
+//       {/* RIGHT  */}
+//       <video
+//   src="/video/loop2.webm"
+//   autoPlay
+//   loop
+//   muted
+//   playsInline
+//   className="
+//     absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
+    
+//     /* Mobile */
+//     w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
+    
+//     /* Desktop (unchanged) */
+//     sm:w-[700px] sm:top-[320px] sm:bottom-auto sm:right-[-220px] sm:scale-100
+//   "
+// />
+
+  
+// {/* LEFT */}
+// <video
+//   src="/video/loop3.webm"
+//   autoPlay
+//   loop
+//   muted
+//   playsInline
+//   className="
+//    hidden sm:block  absolute pointer-events-none opacity-90 rotate-[-5deg]
+    
+//  /* Mobile */
+//  w-[850px] top-[-2px] left-[-120px] scale-[1.3]
+    
+//     /* Desktop */
+//   sm:w-[650px] sm:top-[-50px] sm:left-[-150px] sm:scale-[1.5]
+//   "
+// />
+
+//       {/* Heading */}
+//       <h2 className="text-center text-5xl font-bold mb-15">
+//         Explore Our <span className="text-pink-600">Phonics Pods</span>
+//       </h2>
+
+//       {/* Responsive Grid */}
+//       <div className="max-w-7xl mx-auto grid gap-6
+//       grid-cols-1
+//       sm:grid-cols-2
+//       md:grid-cols-3
+//       lg:grid-cols-5">
+
+//         {pods.map((pod, index) => (
+//           <div
+//             key={index}
+//             className={`rounded-xl text-white p-5 flex flex-col items-center text-center z-2 
+//             bg-gradient-to-b ${pod.color}
+//             transform transition duration-300 hover:scale-105 shadow-lg`}
+//           >
+
+//             {/* Title */}
+//             <h2 className="text-2xl font-bold mb-3">
+//               {pod.title}
+//             </h2>
+
+//             {/* Image */}
+//             <div className="w-full mb-4">
+//               <img
+//                 src={pod.image}
+//                 alt={pod.title}
+//                 className="w-full h-48 sm:h-32 object-cover rounded-lg"
+//               />
+//             </div>
+
+//             {/* Text */}
+//             <h4 className="font-bold text-md mb-2 leading-tight">
+//               {pod.descTitle}
+//             </h4>
+
+//             <p className="text-sm opacity-90 mb-4">
+//               {pod.desc}
+//             </p>
+
+//             {/* Button */}
+//             <button
+//   onClick={() => navigate("/phonicsPods")}
+//   className="bg-white text-black cursor-pointer text-xs font-bold py-2 px-6 rounded-full mt-auto hover:bg-gray-100"
+// >
+//   EXPLORE
+// </button>
+
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -260,99 +404,86 @@ export default function Pods() {
   const navigate = useNavigate();
   return (
     <div className="relative overflow-hidden bg-white py-10 px-4 pb-20">
-      
-      {/* Background Shapes */}
-      {/* RIGHT  */}
-      <video
-  src="/video/loop2.webm"
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="
-    absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
-    
-    /* Mobile */
-    w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
-    
-    /* Desktop (unchanged) */
-    sm:w-[700px] sm:top-[320px] sm:bottom-auto sm:right-[-220px] sm:scale-100
-  "
-/>
 
-  
-{/* LEFT */}
-<video
-  src="/video/loop3.webm"
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="
-   hidden sm:block  absolute pointer-events-none opacity-90 rotate-[-5deg]
-    
- /* Mobile */
- w-[850px] top-[-2px] left-[-120px] scale-[1.3]
-    
-    /* Desktop */
-  sm:w-[650px] sm:top-[-50px] sm:left-[-150px] sm:scale-[1.5]
-  "
-/>
+      {/* Background Shapes — RIGHT */}
+      <video
+        src="/video/loop2.webm"
+        autoPlay loop muted playsInline
+        className="absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
+          w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
+          sm:w-[750px] sm:top-[320px] sm:bottom-auto sm:right-[-220px] sm:scale-100 "
+      />
+
+      {/* Background Shapes — LEFT */}
+      <video
+        src="/video/loop3.webm"
+        autoPlay loop muted playsInline
+        className="hidden sm:block absolute pointer-events-none opacity-90  rotate-[-5deg]
+          w-[850px] top-[-2px] left-[-120px] scale-[1.3]
+          sm:w-[650px] sm:top-[-50px] sm:left-[-150px] sm:scale-[1.5] md:bottom-[10px]"
+      />
 
       {/* Heading */}
-      <h2 className="text-center text-5xl font-bold mb-15">
+      <h2 className="text-center text-5xl font-bold mb-15 ">
         Explore Our <span className="text-pink-600">Phonics Pods</span>
       </h2>
 
-      {/* Responsive Grid */}
+      {/* First 4 cards */}
       <div className="max-w-7xl mx-auto grid gap-6
-      grid-cols-1
-      sm:grid-cols-2
-      md:grid-cols-3
-      lg:grid-cols-5">
-
-        {pods.map((pod, index) => (
-          <div
-            key={index}
-            className={`rounded-xl text-white p-5 flex flex-col items-center text-center z-2 
-            bg-gradient-to-b ${pod.color}
-            transform transition duration-300 hover:scale-105 shadow-lg`}
-          >
-
-            {/* Title */}
-            <h2 className="text-2xl font-bold mb-3">
-              {pod.title}
-            </h2>
-
-            {/* Image */}
-            <div className="w-full mb-4">
-              <img
-                src={pod.image}
-                alt={pod.title}
-                className="w-full h-48 sm:h-32 object-cover rounded-lg"
-              />
-            </div>
-
-            {/* Text */}
-            <h4 className="font-bold text-md mb-2 leading-tight">
-              {pod.descTitle}
-            </h4>
-
-            <p className="text-sm opacity-90 mb-4">
-              {pod.desc}
-            </p>
-
-            {/* Button */}
-            <button
-  onClick={() => navigate("/phonicsPods")}
-  className="bg-white text-black cursor-pointer text-xs font-bold py-2 px-6 rounded-full mt-auto hover:bg-gray-100"
->
-  EXPLORE
-</button>
-
-          </div>
+        grid-cols-1
+        sm:grid-cols-2
+        lg:grid-cols-5
+        mb-6">
+        {pods.slice(0, 5).map((pod, index) => (
+          <PodCard key={index} pod={pod} navigate={navigate} />
         ))}
       </div>
+
+      {/* Last card centered on tablet, fits into 5-col on desktop */}
+      <div className="max-w-7xl mx-auto grid gap-6
+        grid-cols-1
+        sm:grid-cols-1
+        lg:grid-cols-5
+        lg:hidden z-10">
+        <div className="sm:w-1/2 sm:mx-auto w-full">
+          <PodCard pod={pods[4]} navigate={navigate} />
+        </div>
+      </div>
+
+      {/* Full 5-col row for desktop only */}
+      {/* <div className="hidden lg:grid max-w-7xl mx-auto gap-6 lg:grid-cols-5 mt-[-theme(spacing.6)]">
+        {pods.map((pod, index) => (
+          <PodCard key={index} pod={pod} navigate={navigate} />
+        ))}
+      </div> */}
+
+    </div>
+  );
+}
+
+function PodCard({ pod, navigate }) {
+  return (
+    <div
+      className={`relative z-10 rounded-xl text-white p-5 flex flex-col items-center text-center 
+        bg-gradient-to-b ${pod.color}
+        transform transition duration-300 hover:scale-105 shadow-lg`}
+    >
+      <h2 className="text-2xl font-bold mb-3">{pod.title}</h2>
+      <div className="w-full mb-4">
+        <img
+          src={pod.image}
+          alt={pod.title}
+          className="w-full h-48 sm:h-32 object-cover rounded-lg"
+        />
+      </div>
+      <h4 className="font-bold text-md mb-2 leading-tight">{pod.descTitle}</h4>
+      <p className="text-sm opacity-90 mb-4">{pod.desc}</p>
+      <button
+        onClick={() => navigate("/phonicsPods")}
+        className="bg-white text-black cursor-pointer text-xs font-bold py-2 px-6 rounded-full mt-auto hover:bg-gray-100"
+      >
+        EXPLORE
+      </button>
     </div>
   );
 }
