@@ -407,12 +407,15 @@ export default function Pods() {
 
       {/* Background Shapes — RIGHT */}
       <video
-        src="/video/loop2.webm"
-        autoPlay loop muted playsInline
-        className="absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
-          w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
-          sm:w-[750px] sm:top-[320px] sm:bottom-auto sm:right-[-220px] sm:scale-100 "
-      />
+  src="/video/loop2.webm"
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
+    w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
+    sm:w-[750px] sm:bottom-[-80px] sm:top-auto sm:right-[-180px] sm:scale-100"
+/>
 
       {/* Background Shapes — LEFT */}
       <video
@@ -424,17 +427,17 @@ export default function Pods() {
       />
 
       {/* Heading */}
-      <h2 className="text-center text-5xl font-bold mb-15 ">
+      <h2 className="relative z-10 text-center text-5xl font-bold mb-15 ">
         Explore Our <span className="text-pink-600">Phonics Pods</span>
       </h2>
 
       {/* First 4 cards */}
-      <div className="max-w-7xl mx-auto grid gap-6
+      <div className="lg:hidden max-w-7xl mx-auto grid gap-6
         grid-cols-1
         sm:grid-cols-2
-        lg:grid-cols-5
+        lg:grid-cols-4
         mb-6">
-        {pods.slice(0, 5).map((pod, index) => (
+        {pods.slice(0, 4).map((pod, index) => (
           <PodCard key={index} pod={pod} navigate={navigate} />
         ))}
       </div>
@@ -443,7 +446,7 @@ export default function Pods() {
       <div className="max-w-7xl mx-auto grid gap-6
         grid-cols-1
         sm:grid-cols-1
-        lg:grid-cols-5
+        lg:grid-cols-4
         lg:hidden z-10">
         <div className="sm:w-1/2 sm:mx-auto w-full">
           <PodCard pod={pods[4]} navigate={navigate} />
@@ -451,11 +454,11 @@ export default function Pods() {
       </div>
 
       {/* Full 5-col row for desktop only */}
-      {/* <div className="hidden lg:grid max-w-7xl mx-auto gap-6 lg:grid-cols-5 mt-[-theme(spacing.6)]">
+      <div className="hidden lg:grid max-w-7xl mx-auto gap-6 lg:grid-cols-5 mt-[-theme(spacing.6)]">
         {pods.map((pod, index) => (
           <PodCard key={index} pod={pod} navigate={navigate} />
         ))}
-      </div> */}
+      </div>
 
     </div>
   );
