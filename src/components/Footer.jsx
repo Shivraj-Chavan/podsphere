@@ -421,7 +421,7 @@ export default function Footer() {
         {/* BOTTOM BAR */}
         <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 py-6 gap-2 text-center sm:text-left">
           <p>© Podsphere. All Rights Reserved 2026</p>
-          <p className="cursor-pointer hover:text-gray-700 transition-colors">Terms & Conditions</p>
+          <p className="cursor-pointer hover:text-gray-700 transition-colors">Designed By Linkdoor </p>
         </div>
 
       </div>
