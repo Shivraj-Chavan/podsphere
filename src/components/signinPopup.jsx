@@ -384,7 +384,7 @@ const SignInModal = ({ isOpen, onClose, onSignIn, role }) => {
                 </svg>
                 SIGNING IN...
               </span>
-            ) : role === "Signup" ? "CREATE ACCOUNT" : "SIGN IN"}
+            ) : role === "Signup" ? "CREATE ACCOUNT" : "Sign-in for Free"}
           </button>
 
           <div className="flex items-center gap-3 py-0.5">

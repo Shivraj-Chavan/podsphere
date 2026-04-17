@@ -847,10 +847,48 @@ const FormCard = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          <div>
+          {/* <div>
             <label className="text-[10px] font-bold text-gray-400 tracking-wider">PHONE NUMBER*</label>
             <input type="tel" name="phone" autoComplete="tel" value={formData.phone} onChange={handleChange} placeholder="9876543210" maxLength={10} className="w-full border border-gray-200 rounded-full px-4 py-2.5 mt-1 text-sm outline-none focus:border-pink-400 transition" />
-          </div>
+          </div> */}
+          <div>
+  <label className="text-[10px] font-bold text-gray-400 tracking-wider">
+    PHONE NUMBER*
+  </label>
+
+  <div className="flex mt-1">
+    {/* Country Code */}
+    <select
+      name="countryCode"
+      value={formData.countryCode}
+      onChange={handleChange}
+      className="border border-gray-200 rounded-l-full px-1.5 py-2.5 text-sm outline-none focus:border-pink-400 bg-white"
+    >
+      <option value="+91">🇮🇳 +91</option>
+      <option value="+1">🇺🇸 +1</option>
+      <option value="+44">🇬🇧 +44</option>
+      <option value="+61">🇦🇺 +61</option>
+      <option value="+971">🇦🇪 +971</option>
+
+    </select>
+
+    <input
+  type="tel"
+  name="phone"
+  autoComplete="tel"
+  value={formData.phone}
+  onChange={(e) => {
+    let value = e.target.value;
+    value = value.replace(/\D/g, "");
+    if (value.length <= 10) {
+      setFormData({ ...formData, phone: value });
+    }
+  }}
+  placeholder="9876543210"
+  className="w-full border-t border-b border-r border-gray-200 rounded-r-full px-3 py-2.5 text-sm outline-none focus:border-pink-400 transition"
+/>
+  </div>
+</div>
           <div>
             <label className="text-[10px] font-bold text-gray-400 tracking-wider">PREFERRED CONTACT</label>
             <input type="text" name="preferredContact" autoComplete="off" value={formData.preferredContact} onChange={handleChange} placeholder="Phone / Email" className="w-full border border-gray-200 rounded-full px-4 py-2.5 mt-1 text-sm outline-none focus:border-pink-400 transition" />

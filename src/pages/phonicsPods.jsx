@@ -182,33 +182,18 @@ const handleSignIn = async (data) => {
     <section className="relative bg-white py-24">
 
        {/* Background Shapes */}
-      {/* RIGHT  */}
- 
-      {/* <video
-        src="/video/loop2.webm"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-[60%] left-[80%] w-[400px] opacity-100 pointer-events-none"
-        style={{
-          position: "absolute",
-          top: "700px",
-          left: "1050px",
-          width: "700px",
-          height: "auto",
-          zIndex: "1",
-        }}
-      /> */}
 
-<video
+       <video
   src="/video/loop2.webm"
   autoPlay
   loop
   muted
   playsInline
   className="
-    absolute pointer-events-none opacity-100 z-0
+    absolute pointer-events-none opacity-100 z-0 bg-white
+    mt-10   /* ✅ only mobile shift */
+
+    sm:mt-0
     w-[600px] bottom-[-30px] right-[-120px]
     sm:w-[650px] sm:bottom-[-40px] sm:right-[-150px]
     md:w-[700px] md:bottom-[-50px] md:right-[-180px]
@@ -218,22 +203,21 @@ const handleSignIn = async (data) => {
 
     {/* LEFT */}
     <video
-      src="/video/loop3.webm"
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="absolute pointer-events-none opacity-100"
-      style={{
-        position: "absolute",
-        top: "20px",     
-        left: "-170px",    
-        width: "700px",  
-        height: "auto",
-        transform: "scale(1.6)",
-        transformOrigin: "center"
-      }}
-    />
+  src="/video/loop3.webm"
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="absolute pointer-events-none opacity-100 mt-10 sm:mt-0 bg-white"
+  style={{
+    top: "20px",
+    left: "-170px",
+    width: "700px",
+    height: "auto",
+    transform: "scale(1.6)",   
+    transformOrigin: "center"
+  }}
+/>
 
       <div className="max-w-8xl mx-auto px-6">
 
@@ -296,26 +280,27 @@ const handleSignIn = async (data) => {
                   <li className="flex gap-2"><BookOpen size={25}/> {pod.curriculum}</li>
                 </ul>
             
-                <p className="text-sm font-medium text-white mb-5">
+              
+              {/* BUTTON */}
+              <div className="bg-white rounded-full py-2 px-6 shadow-sm w-50 mx-auto">
+                <p onClick={() => {
+                  setRole("Signup"); 
+                  setOpenModal(true);
+                }} 
+                className="text-lg font-bold text-center text-black cursor-pointer">
+                  JOIN NOW
+                </p>
+
+              </div>
+              <p className="text-sm font-medium text-white mt-5">
                   🎯 Outcome: {pod.goal}
                 </p>
             
                 {pod.highlight && (
-                  <p className="text-xs text-white font-semibold mb-4">
+                  <p className="text-xs text-white font-semibold mt-2">
                     ⭐ Phonics crash course · Covers all levels
                   </p>
                 )}
-              </div>
-            
-              {/* BUTTON */}
-              <div className="bg-white rounded-full py-2 px-6 shadow-sm w-50 mx-auto">
-                <p onClick={() => {
-    setRole("Signup"); 
-    setOpenModal(true);
-  }} 
-  className="text-lg font-bold text-center text-black cursor-pointer">
-                  JOIN NOW
-                </p>
               </div>
             
             </motion.div>

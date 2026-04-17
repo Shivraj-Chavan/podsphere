@@ -157,7 +157,8 @@ function Repeat({ text }) {
 export default function TickerBanner() {
   return (
     <div
-      className="relative w-full overflow-hidden bg-[#e6ded4]
+      className="relative w-full overflow-hidden bg-[#e6ded4] 
+       pt-8 sm:pt-6 md:pt-8 lg:pt-10
                  h-[180px]
                  sm:h-[260px]
                  md:h-[300px]

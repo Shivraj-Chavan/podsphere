@@ -306,9 +306,10 @@
 
 
 import { Mail, Phone, Globe, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
   return (
     <footer className="bg-gray-100 pt-12 pb-20 md:pb-12 lg:pb-0">
       <div className="max-w-7xl mx-auto px-6 relative">
@@ -325,7 +326,15 @@ export default function Footer() {
 
           {/* LOGO — full width on mobile, spans on tablet */}
           <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1">
-            <img src="/logo2.png" alt="Podsphere" className="mb-3 w-32 sm:w-36" />
+          <img
+  src="/logo2.png"
+  alt="Podsphere"
+  onClick={() => {
+    navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+  className="mb-3 w-32 sm:w-36 cursor-pointer"
+/>
             <p className="text-xs text-gray-500 leading-relaxed max-w-[260px]">
               Building strong phonics foundations that make language joyful, meaningful, and accessible.
             </p>

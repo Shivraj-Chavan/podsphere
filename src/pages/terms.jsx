@@ -339,11 +339,29 @@ export default function TermsPrivacy() {
 
             <Section title="Contact Information">
                 <p>For privacy concerns or data requests:  </p>
-              <ul className="list-disc pl-5 space-y-2">
-                <li><span className="font-bold">Email:</span> [Insert Podsphere Email]    </li>
-                <li><span className="font-bold">Phone:</span> [Insert Number] </li>
-                <li><span className="font-bold">Address:</span> [Insert Business Address]   </li>
-              </ul>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>
+                    <span className="font-bold">Email:</span>{" "}
+                    <a href="mailto:hello@pod-sphere.com" className="text-blue-600 hover:underline">
+                      hello@pod-sphere.com
+                    </a>
+                  </li>
+
+                  <li>
+                    <span className="font-bold">Phone:</span>{" "}
+                    <a href="tel:+919892409029" className="text-blue-600 hover:underline">
+                      +91 9892409029
+                    </a>{" "}
+                    /{" "}
+                    <a href="tel:+919892099029" className="text-blue-600 hover:underline">
+                      +91 9892099029
+                    </a>
+                  </li>
+
+                  <li>
+                    <span className="font-bold">Address:</span> Mumbai, India
+                  </li>
+                </ul>
             </Section>
           </div>
 
