@@ -925,9 +925,9 @@ const Navbar = () => {
   }, []);
 
   const loginOptions = [
-    { emoji: "🎓", label: "Signup", sub: "", color: "#f97316" },
-    { emoji: "🏡", label: "Parent Login", sub: "Track & support", color: "#8b5cf6" },
-    { emoji: "🏡", label: "Teacher Login", sub: "Track & support", color: "#8b5cf6" },
+    { emoji: "🎓", label: "Signup", sub: "", color: "#f97316" ,url:"https://secure.tutorcruncher.com/podsphere/login/ " },
+    { emoji: "🏡", label: "Parent Login", sub: "Track & support", color: "#8b5cf6" ,url:"https://secure.tutorcruncher.com/podsphere/signup/tutor/ " },
+    { emoji: "🏡", label: "Teacher Login", sub: "Track & support", color: "#8b5cf6" ,url:" https://secure.tutorcruncher.com/podsphere/signup/client/" },
   ];
 
   const LoginDropdown = ({ isMobile }) =>
@@ -951,15 +951,14 @@ const Navbar = () => {
         <div style={{ padding: "7px 12px 5px", fontSize: 10, color: "#94a3b8", letterSpacing: "0.07em", textTransform: "uppercase", borderBottom: "1px solid #f5f5f5" }}>
           I'm signing up as…
         </div>
-        {loginOptions.map(({ emoji, label, sub, color }) => (
+        {loginOptions.map(({ emoji, label, sub, color, url  }) => (
           <div
             key={label}
             onMouseDown={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              setRole(label);
               setOpenSignup(false);
-              setTimeout(() => setShowSignIn(true), 0);
+              window.open(url.trim(), "_blank"); 
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "#fafafa")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
