@@ -12,11 +12,54 @@ import axios from "../lib/axios";
 
 
 
+// export default function Page() {
+//   const [hideLayout, setHideLayout] = useState(false);
+//   const [searchParams] = useSearchParams();
+//   const navigate = useNavigate();
+
+
+//   useEffect(() => {
+//     setHideLayout(true);
+
+//     const token = searchParams.get("token");
+
+//     if (!token) {
+//       navigate("/");
+//       return;
+//     }
+// (async()=>{
+  
+//   const {data}=await axios(`sso/tutorcruncher?token=${token}`)
+//   console.log({data})
+//  if (data.success) {
+//         localStorage.setItem("user", JSON.stringify(data.user));
+
+//         // setLoading(false);
+//       } else {
+//         navigate("/");
+//       }
+     
+// })()
+
+//   }, []);
+
+
+
+//   return (
+//     <>
+//       {!hideLayout && <Navbar />}
+
+//       <ChatBot setHideLayout={setHideLayout} />
+
+//       {/* {!hideLayout && <Footer />} */}
+//     </>
+//   );
+// }
+
 export default function Page() {
   const [hideLayout, setHideLayout] = useState(false);
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-
+  const [isValidUser, setIsValidUser] = useState(true);
 
   useEffect(() => {
     setHideLayout(true);
@@ -24,34 +67,55 @@ export default function Page() {
     const token = searchParams.get("token");
 
     if (!token) {
-      navigate("/");
+      setIsValidUser(false);
       return;
     }
-(async()=>{
-  
-  const {data}=await axios(`sso/tutorcruncher?token=${token}`)
-  console.log({data})
- if (data.success) {
-        localStorage.setItem("user", JSON.stringify(data.user));
 
-        // setLoading(false);
-      } else {
-        navigate("/");
+    (async () => {
+      try {
+        const { data } = await axios(`sso/tutorcruncher?token=${token}`);
+
+        if (data.success) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          setIsValidUser(true);
+        } else {
+          setIsValidUser(false);
+        }
+      } catch (err) {
+        console.error(err);
+        setIsValidUser(false);
       }
-     
-})()
-
+    })();
   }, []);
 
+  if (!isValidUser) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen text-center px-4">
+        <h1 className="text-2xl font-semibold mb-4">
+          Access Restricted 🚫
+        </h1>
 
+        <p className="text-gray-600 mb-6 max-w-md">
+          You need to log in through TutorCruncher to access this chatbot.
+          Head over there, open the chatbot section, and come back through the proper flow.
+        </p>
+
+        <a href="https://secure.tutorcruncher.com/podsphere/login/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-6 py-3 bg-black text-white rounded-lg hover:opacity-90 transition"
+        >
+          Go to TutorCruncher Login
+        </a>
+      </div>
+    );
+  }
 
   return (
     <>
       {!hideLayout && <Navbar />}
 
       <ChatBot setHideLayout={setHideLayout} />
-
-      {/* {!hideLayout && <Footer />} */}
     </>
   );
 }
@@ -90,14 +154,11 @@ const G = () => (
 );
 
 
-
-
 /* ── HOME ─────────────────────────────────────────────────── */
 function HomePage({ onStart, userEmoji }) {
   const [input,   setInput]   = useState("");
   const [focused, setFocused] = useState(false);
   const [screen, setScreen] = useState("home");
-
 
   return (
     <div style={{ flex:1, overflowY:"visible", padding:"36px 40px 60px", background:"#FAFDF8" , marginTop:"20px"}}>
@@ -178,11 +239,9 @@ function HomePage({ onStart, userEmoji }) {
       <div style={{ textAlign:"center",fontSize:"14px",color:"#B09090",fontFamily:"Poppins",fontWeight:700,marginBottom:"18px",animation:"fadeUp .9s .3s ease both" }}>
         ✨ Need an idea? Try one of these adventures…
       </div>
-\
     </div>
   );
 }
-
 
 /* ── VOICE HELPER ─────────────────────────────────────────── */
 function speakText(text, friendName) {
@@ -298,7 +357,7 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
       setMsgs((prev) => [...prev, botMsg]);
       setTyping(false);
   
-      // ✅ AUTO PLAY AUDIO
+      // AUTO PLAY AUDIO
       if (voiceOn && audioUrl) {
         new Audio(audioUrl).play();
       } else if (voiceOn) {
@@ -313,13 +372,11 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
   return (
     <div style={{ flex: 1, display: "flex", minWidth: 0, height: "100%", marginTop: "100px", position: "relative" }}>
 
-    
       {/* ── Messages Pane ── */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 , marginTop:'75px'}}>
 
         {/* Header */}
         <div style={{ padding: "13px 12px", background: "white", borderBottom: "2px solid #FFE8DC", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 3px 12px rgba(255,107,107,.06)", flexWrap: "nowrap" }}>
-
 
           {/* Voice toggle */}
           <button className="ab"
@@ -331,8 +388,6 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
 
         {/* Bubbles */}
         <div style={{ flex: 1, overflowY: "auto", padding: "12px", display: "flex", flexDirection: "column", gap: "9px", background: "linear-gradient(180deg,#FFF8F2,#FFF3E8)" }}>
-      
-
           {curMsgs.map((m, i) => {
             const me = m.from === "me";
             const isSpk = speaking === m.id;
@@ -354,7 +409,7 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
                         speakMsg(m.text, m.id);
                       }
                     }}
-                                          style={{ display: "flex", alignItems: "center", gap: "5px", background: isSpk ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFF5F0", border: `1.5px solid ${isSpk ? "#FF6B6B" : "#FFD0C0"}`, borderRadius: "50px", padding: "3px 10px 3px 7px", cursor: "pointer", transition: "all .22s", boxShadow: isSpk ? "0 2px 10px rgba(255,107,107,.35)" : "none" }}
+                    style={{ display: "flex", alignItems: "center", gap: "5px", background: isSpk ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFF5F0", border: `1.5px solid ${isSpk ? "#FF6B6B" : "#FFD0C0"}`, borderRadius: "50px", padding: "3px 10px 3px 7px", cursor: "pointer", transition: "all .22s", boxShadow: isSpk ? "0 2px 10px rgba(255,107,107,.35)" : "none" }}
                     >
                       {isSpk ? (
                         <span style={{ display: "flex", alignItems: "flex-end", gap: "2px", height: "14px" }}>
@@ -443,7 +498,7 @@ function ChatBot({setHideLayout}) {
 <div
   style={{
     display: "flex",
-    width: "100%",        // ✅ ADD THIS
+    width: "100%",        // ADD THIS
     minHeight: "calc(100vh - 64px)",
     fontFamily: "Poppins",
     background: "#FAFDF8",
@@ -452,12 +507,8 @@ function ChatBot({setHideLayout}) {
 >
       <G/>
 
-
-
       {/* ── Main content ── */}
       <div style={{ flex:1,display:"flex",flexDirection:"column",minWidth:0 }}>
-
-
 
         {/* View */}
         <div style={{ flex:1,display:"flex",overflow:"hidden" }}>
