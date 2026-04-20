@@ -189,9 +189,9 @@ const handleSignIn = async (data) => {
   loop
   muted
   playsInline
-  className="
+  className="  hidden sm:block
     absolute pointer-events-none opacity-100 z-0 bg-white
-    mt-10   /* ✅ only mobile shift */
+    mt-10   /*  only mobile shift */
 
     sm:mt-0
     w-[600px] bottom-[-30px] right-[-120px]
@@ -208,7 +208,7 @@ const handleSignIn = async (data) => {
   loop
   muted
   playsInline
-  className="absolute pointer-events-none opacity-100 mt-10 sm:mt-0 bg-white"
+  className="hidden sm:block not-last:absolute pointer-events-none opacity-100 mt-10 sm:mt-0 bg-white"
   style={{
     top: "20px",
     left: "-170px",
