@@ -412,7 +412,7 @@ export default function Pods() {
   loop
   muted
   playsInline
-  className="absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
+  className="hidden sm:block  absolute pointer-events-none z-0 rotate-[-15deg] opacity-95
     w-[650px] bottom-[-60px] right-[-80px] scale-[1.2]
     sm:w-[750px] sm:bottom-[-80px] sm:top-auto sm:right-[-180px] sm:scale-100"
 />
