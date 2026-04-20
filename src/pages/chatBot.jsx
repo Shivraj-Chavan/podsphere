@@ -90,7 +90,7 @@ export default function Page() {
     return (
       <div className="flex flex-col items-center justify-center h-screen text-center px-4">
         <h1 className="text-2xl font-semibold mb-4">
-          Access Restricted 🚫
+          Oops !
         </h1>
 
         {/* <p className="text-gray-600 mb-6 max-w-md">
@@ -98,10 +98,14 @@ export default function Page() {
           Head over there, open the chatbot section, and come back through the proper flow.
         </p> */}
 
-        <p className="text-gray-600 mb-6 max-w-md">
-          Oops! This little corner is for our PodSphere learners 😊  
-          Log in through TutorCruncher to hop back into your learning journey !
-        </p>
+        <div className="flex flex-col gap-1 mb-5">
+          <p className="text-gray-600 max-w-md">
+            This little corner is for our PodSphere learners 😊
+          </p>
+          <p className="text-gray-600 max-w-md">
+            Log in through TutorCruncher to hop back into your learning journey !
+          </p>
+        </div>
 
         <a href="https://secure.tutorcruncher.com/podsphere/login/"
           target="_blank"
