@@ -10,8 +10,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "../lib/axios";
 
 
-
-
 // export default function Page() {
 //   const [hideLayout, setHideLayout] = useState(false);
 //   const [searchParams] = useSearchParams();
@@ -95,9 +93,14 @@ export default function Page() {
           Access Restricted 🚫
         </h1>
 
-        <p className="text-gray-600 mb-6 max-w-md">
+        {/* <p className="text-gray-600 mb-6 max-w-md">
           You need to log in through TutorCruncher to access this chatbot.
           Head over there, open the chatbot section, and come back through the proper flow.
+        </p> */}
+
+        <p className="text-gray-600 mb-6 max-w-md">
+          Oops! This little corner is for our PodSphere learners 😊  
+          Log in through TutorCruncher to hop back into your learning journey !
         </p>
 
         <a href="https://secure.tutorcruncher.com/podsphere/login/"
@@ -272,12 +275,14 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
   const [rec,      setRec]      = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [voiceOn,  setVoiceOn]  = useState(true);
-  const [showList, setShowList] = useState(false); // mobile sidebar toggle
+  const [showList, setShowList] = useState(false); 
   const endRef                  = useRef(null);
 
-  useEffect(()=>{
-    send(firstMsg)
-  },[firstMsg])
+  useEffect(() => {
+    if (firstMsg) {
+      send(firstMsg);
+    }
+  }, [firstMsg]);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("chat_msgs");
@@ -315,15 +320,18 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utt);
   };
-  const send = async (firstMsg) => {
-    if (!input.trim() &&  !firstMsg) return;
+
+  const send = async (message = null) => {
+    const userWord = typeof message === "string" 
+      ? message 
+      : input.trim();
+  
+    if (!userWord) return;
   
     const time = new Date().toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
     });
-  
-    const userWord = input.trim() || firstMsg;
   
     const userMsg = {
       id: Date.now(),
@@ -332,19 +340,17 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
       time,
     };
   
-    setMsgs((prev) => [...prev, userMsg]);
-    setInput("");
+    setMsgs(prev => [...prev, userMsg]);
+    setInput(""); 
     setTyping(true);
   
     try {
       const data = await apiPost(ENDPOINT.getPhonics(), {
         word: userWord,
       });
-
-      console.log({data})
   
-      let replyText = data?.phonics || "Text not readable" ;
-      let audioUrl = data?.audio || null;
+      const replyText = data?.phonics || "Text not readable";
+      const audioUrl = data?.audio || null;
   
       const botMsg = {
         id: Date.now() + 1,
@@ -354,15 +360,15 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
         audio: audioUrl,
       };
   
-      setMsgs((prev) => [...prev, botMsg]);
+      setMsgs(prev => [...prev, botMsg]);
       setTyping(false);
   
-      // AUTO PLAY AUDIO
       if (voiceOn && audioUrl) {
         new Audio(audioUrl).play();
       } else if (voiceOn) {
         setTimeout(() => speakMsg(replyText, botMsg.id), 150);
       }
+  
     } catch (err) {
       console.error("API Error:", err);
       setTyping(false);
@@ -450,12 +456,20 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
             onChange={e => setInput(e.target.value)}
             placeholder={`Message… 💬`}
             rows={1}
-            onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault();  } }}
+            // onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault();  }  send(); }}
+            onKeyDown={e => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                send();
+              }
+            }}
             style={{ flex: 1, padding: "9px 12px", borderRadius: "14px", border: "2px solid #FFD0B0", fontSize: "13px", fontFamily: "Poppins", fontWeight: 600, color: "#3D2C2C", background: "#FFF8F0", outline: "none", resize: "none", lineHeight: 1.5 }}
             onFocus={e => e.target.style.borderColor = "#FF6B6B"}
             onBlur={e => e.target.style.borderColor = "#FFD0B0"}
           />
-          <button className="sbtn" onClick={send} style={{ width: "38px", height: "38px", borderRadius: "11px", background: input.trim() ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFD0B0", border: "none", cursor: input.trim() ? "pointer" : "default", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: input.trim() ? "0 4px 14px rgba(255,107,107,.35)" : "none" }}>🚀</button>
+          <button className="btn" onClick={() => {
+    input.trim() && onStart(input.trim());
+  }} style={{ width: "38px", height: "38px", borderRadius: "11px", background: input.trim() ? "linear-gradient(135deg,#FF6B6B,#FF8E53)" : "#FFD0B0", border: "none", cursor: input.trim() ? "pointer" : "default", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: input.trim() ? "0 4px 14px rgba(255,107,107,.35)" : "none" }}>🚀</button>
         </div>
       </div>
 
