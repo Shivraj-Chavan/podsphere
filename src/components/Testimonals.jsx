@@ -5,8 +5,9 @@ import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { FaStar, FaHeart, FaBookOpen, FaPenNib } from "react-icons/fa";
+import { FaStar, FaHeart, FaBookOpen, FaPenNib, FaEnvelope } from "react-icons/fa";
 import { FaBookmark, FaEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Testimonials() {
 
@@ -103,34 +104,34 @@ image:"/profile/female3.png"
           <FaChevronLeft />
         </div> */}
 
-<div className="
-    swiper-button-prev-custom
-    flex items-center justify-center
-    absolute left-0 md:-left-2 lg:-left-14
-    top-1/2 -translate-y-1/2 z-10
-    bg-white p-2 md:p-3
-    rounded-full shadow-lg
-    cursor-pointer hover:bg-pink-100
-  ">
-    <FaChevronLeft className="text-sm md:text-base" />
-  </div>
+      <div className="
+          swiper-button-prev-custom
+          flex items-center justify-center
+          absolute left-0 md:-left-2 lg:-left-14
+          top-1/2 -translate-y-1/2 z-10
+          bg-white p-2 md:p-3
+          rounded-full shadow-lg
+          cursor-pointer hover:bg-pink-100
+        ">
+          <FaChevronLeft className="text-sm md:text-base" />
+        </div>
 
         {/* Right Arrow */}
         {/* <div className="swiper-button-next-custom hidden md:flex items-center justify-center absolute -right-14 top-1/2 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-pink-100">
           <FaChevronRight />
         </div> */}
 
-<div className="
-    swiper-button-next-custom
-    flex items-center justify-center
-    absolute right-0 md:-right-2 lg:-right-14
-    top-1/2 -translate-y-1/2 z-10
-    bg-white p-2 md:p-3
-    rounded-full shadow-lg
-    cursor-pointer hover:bg-pink-100
-  ">
-    <FaChevronRight className="text-sm md:text-base" />
-  </div>
+    <div className="
+      swiper-button-next-custom
+      flex items-center justify-center
+      absolute right-0 md:-right-2 lg:-right-14
+      top-1/2 -translate-y-1/2 z-10
+      bg-white p-2 md:p-3
+      rounded-full shadow-lg
+      cursor-pointer hover:bg-pink-100
+    ">
+      <FaChevronRight className="text-sm md:text-base" />
+    </div>
 
         <Swiper
           modules={[Navigation]}
@@ -230,7 +231,7 @@ image:"/profile/female3.png"
 
       </div> */}
 
-      <div className="flex justify-center gap-3 sm:gap-6 mt-12">
+      {/* <div className="flex justify-center gap-3 sm:gap-6 mt-12">
 
       <button className="
         flex items-center justify-center gap-2 
@@ -256,6 +257,23 @@ image:"/profile/female3.png"
         <FaEdit /> Write a Review
       </button>
 
+      </div> */}
+
+      <div className="flex justify-center mt-12">
+        <Link
+          to="/contactus"
+          className=" 
+            flex items-center justify-center gap-2 
+            bg-indigo-500 text-white 
+            px-6 py-3 
+            rounded-full font-medium 
+            text-sm sm:text-base
+            hover:bg-indigo-400
+            cursor-pointer
+          "
+        >
+          <FaEnvelope /> Contact Us
+        </Link>
       </div>
 
     </section>

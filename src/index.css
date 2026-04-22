@@ -397,3 +397,13 @@ div:hover > .counter-rotate {
     -4px -4px 8px rgba(255,255,255,0.9),
     4px 4px 10px rgba(0,0,0,0.12);
 }
+
+/* Phonics pod page poppi animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

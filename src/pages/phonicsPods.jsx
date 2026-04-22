@@ -20,6 +20,8 @@ import "swiper/css";
 import "swiper/css/free-mode";
 
 import {  MessageCircle, Mic, BookOpenCheck } from "lucide-react";import SignInModal from "../components/signinPopup";
+import CONFIG from "../constance";
+import axios from "axios";
 ;
 
 const pods = [
@@ -172,6 +174,67 @@ const nextRef = useRef(null);
 const [openModal, setOpenModal] = useState(false);
 const [role, setRole] = useState("Signup");
 
+const [open, setOpen] = useState(false);
+const [demoData, setDemoData] = useState({
+  name: "",
+  childName: "",
+  age: "",
+  phone: "",
+  email: "",
+  country: ""
+});
+
+const [demoLoading, setDemoLoading] = useState(false);
+const [demoSuccess, setDemoSuccess] = useState(false);
+const [demoError, setDemoError] = useState(false);
+
+const handleDemoSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!demoData.name || !demoData.phone || !demoData.email) {
+    setDemoError(true);
+    return;
+  }
+
+  try {
+    setDemoLoading(true);
+    setDemoError(false);
+
+    const res = await axios.post(
+      `${CONFIG.API_BASE_URL}/contact/demo`,
+      demoData
+    );
+
+    if (res.data?.success) {
+      setDemoSuccess(true);
+      setDemoData({
+        name: "",
+        childName: "",
+        age: "",
+        phone: "",
+        email: "",
+        country: ""
+      });
+    } else {
+      throw new Error("Failed");
+    }
+
+  } catch (err) {
+    console.error(err);
+    setDemoError(true);
+  } finally {
+    setDemoLoading(false);
+}
+};
+
+const handleDemoChange = (e) => {
+const { name, value } = e.target;
+setDemoData((prev) => ({
+  ...prev,
+  [name]: value
+}));
+};
+
 const handleSignIn = async (data) => {
   console.log("Login data:", data);
   setOpenModal(false);
@@ -183,7 +246,7 @@ const handleSignIn = async (data) => {
 
        {/* Background Shapes */}
 
-       <video
+       {/* <video
   src="/video/loop2.webm"
   autoPlay
   loop
@@ -191,13 +254,26 @@ const handleSignIn = async (data) => {
   playsInline
   className="  hidden sm:block
     absolute pointer-events-none opacity-100 z-0 bg-white
-    mt-10   /*  only mobile shift */
-
-    sm:mt-0
+    mt-10  sm:mt-0
     w-[600px] bottom-[-30px] right-[-120px]
     sm:w-[650px] sm:bottom-[-40px] sm:right-[-150px]
     md:w-[700px] md:bottom-[-50px] md:right-[-180px]
     lg:w-[700px] lg:top-[700px] lg:left-[1050px] lg:bottom-auto lg:right-auto
+  "
+/> */}
+
+<video
+  src="/video/loop2.webm"
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="
+    hidden sm:block
+    absolute pointer-events-none z-0
+    w-[500px] md:w-[600px] lg:w-[650px]
+    right-[-120px] bottom-[-40px]
+    xl:right-[-160px] xl:bottom-[-60px]
   "
 />
 
@@ -219,7 +295,7 @@ const handleSignIn = async (data) => {
   }}
 />
 
-      <div className="max-w-8xl mx-auto px-6">
+      <div className="w-full max-w-[1400px] xl:max-w-[1600px] mx-auto px-6">
 
         {/* HEADER */}
         <motion.div
@@ -283,11 +359,22 @@ const handleSignIn = async (data) => {
               
               {/* BUTTON */}
               <div className="bg-white rounded-full py-2 px-6 shadow-sm w-50 mx-auto">
-                <p onClick={() => {
+                {/* <p onClick={() => {
                   setRole("Signup"); 
                   setOpenModal(true);
                 }} 
                 className="text-lg font-bold text-center text-black cursor-pointer">
+                  JOIN NOW
+                </p> */}
+
+                <p
+                  onClick={() => {
+                    setOpen(true);   
+                    setDemoSuccess(false); 
+                    setDemoError(false);
+                  }}
+                  className="text-lg font-bold text-center text-black cursor-pointer"
+                >
                   JOIN NOW
                 </p>
 
@@ -309,20 +396,128 @@ const handleSignIn = async (data) => {
         </div>
 
       </div>
-      <SignInModal
+      {/* <SignInModal
   isOpen={openModal}
   onClose={() => setOpenModal(false)}
   onSignIn={handleSignIn}
   role={role}
-/>
+/> */}
+
+       {/* Popup */}
+       {open && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 px-4">
+
+    {/* Modal */}
+    <div className="
+      w-full max-w-md
+      max-h-[90vh] overflow-y-auto
+      bg-white/70 backdrop-blur-xl
+      border border-white/40
+      rounded-2xl shadow-xl
+      p-5 sm:p-6 md:p-8
+      relative
+    ">
+
+      {/* Close Button */}
+      <button
+        onClick={() => setOpen(false)}
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-700 text-lg sm:text-xl cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">
+        Book a Free Demo
+      </h2>
+
+      <form onSubmit={handleDemoSubmit} className="space-y-3 sm:space-y-4">
+
+        <input
+          type="text"
+          name="name"
+          value={demoData.name}
+          onChange={handleDemoChange}
+          placeholder="Your Name"
+          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
+        />
+
+        <input
+          type="text"
+          name="childName"
+          value={demoData.childName}
+          onChange={handleDemoChange}
+          placeholder="Child Name"
+          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
+        />
+
+        <input
+          type="number"
+          name="age"
+          value={demoData.age}
+          onChange={handleDemoChange}
+          placeholder="Age of the Child (Years)"
+          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
+        />
+
+        <input
+          type="tel"
+          name="phone"
+          value={demoData.phone}
+          onChange={handleDemoChange}
+          placeholder="Phone / WhatsApp Number"
+          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
+        />
+
+        <input
+          type="email"
+          name="email"
+          value={demoData.email}
+          onChange={handleDemoChange}
+          placeholder="Email ID"
+          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
+        />
+
+        <input
+          type="text"
+          name="country"
+          value={demoData.country}
+          onChange={handleDemoChange}
+          placeholder="Country"
+          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
+        />
+
+        {demoError && (
+          <p className="text-red-500 text-xs sm:text-sm text-center">
+            Please fill required fields
+          </p>
+        )}
+
+        {demoSuccess && (
+          <p className="text-green-600 text-xs sm:text-sm text-center">
+            Demo booked successfully 🎉
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={demoLoading}
+          className="w-full mt-3 sm:mt-4 bg-black text-white py-2.5 sm:py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer text-sm sm:text-base"
+        >
+          {demoLoading ? "Submitting..." : "Submit"}
+        </button>
+
+      </form>
+    </div>
+  </div>
+)}
     </section>
 
 
 <section className="relative z-2 bg-[#F7F8FE] py-0 pb-10 ">
-  <div className="max-w-8xl mx-auto px-6 ">
+  <div className="max-w-[1400px] xl:max-w-[1950px] mx-auto px-6 ">
 
     {/* Header */}
-    <div className="text-center mb-16">
+    <div className="text-center mb-10">
       <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3 pt-7">
         WHY PODSPHERE
       </p>
@@ -405,40 +600,64 @@ const handleSignIn = async (data) => {
   </div>
 </section>
 
-
+{/* Poppi section */}
 <section className="bg-white py-10 md:py-14">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+  <div className="max-w-[1400px] xl:max-w-[1600px] mx-auto px-4 sm:px-6">
 
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-[#FFF0F4] rounded-[24px] md:rounded-[36px] p-6 sm:p-8 md:p-14 flex flex-col md:flex-row items-center gap-8 md:gap-10"
+      className="
+        rounded-[24px] md:rounded-[36px]
+        p-6 sm:p-8 md:p-14
+        flex flex-col md:flex-row items-center
+        gap-8 md:gap-12
+        overflow-hidden
+        relative text-white
+      "
+      style={{
+        background: `
+          linear-gradient(
+            to bottom,
+            #140f8f 0%,
+            #140f8f 72%,
+            rgba(20,15,143,0.95) 82%,
+            rgba(20,15,143,0.75) 90%,
+            rgba(20,15,143,0.4) 100%
+          ),
+          linear-gradient(
+            to right,
+            rgba(56,189,248,0.35) 0%,
+            rgba(59,130,246,0.45) 25%,
+            rgba(124,58,237,0.5) 60%,
+            rgba(236,72,153,0.45) 100%
+          )
+        `,
+      }}
     >
-      {/* Robot Avatar — shown on top for mobile */}
-      <div className="flex md:hidden w-20 h-20 rounded-full bg-pink-500 text-white items-center justify-center text-3xl shadow-lg shrink-0">
-        🤖
-      </div>
 
-      {/* Left — Text Content */}
-      <div className="flex-1 text-center md:text-left">
-        <p className="text-xs font-semibold tracking-widest text-pink-500 mb-3">
+      {/* TEXT */}
+      <div className="flex-1 text-center md:text-left z-10">
+        <p className="text-xs font-semibold tracking-widest text-cyan-400 mb-3">
           SMART LEARNING BUDDY
         </p>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900">
-          Introducing <span className="text-pink-500">Poppi 🤖</span>
+
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">
+          Introducing <span className="text-cyan-400">Poppi</span>
         </h2>
-        <p className="mt-3 md:mt-4 text-sm sm:text-base text-gray-600 max-w-lg mx-auto md:mx-0">
+
+        <p className="mt-3 md:mt-4 text-sm sm:text-base text-gray-300 max-w-lg mx-auto md:mx-0">
           Poppi is Podsphere's friendly AI companion that supports parents,
-          encourages kids, and assists educators all focused on phonics learning.
+          encourages kids, and assists educators — all focused on phonics learning.
         </p>
 
         <ul className="mt-5 md:mt-6 space-y-3 inline-flex flex-col items-start text-left">
           {features.map((item, i) => {
             const Icon = item.icon;
             return (
-              <li key={i} className="flex items-center gap-3 text-sm sm:text-base text-gray-700">
-                <Icon className="text-pink-500 shrink-0" size={18} />
+              <li key={i} className="flex items-center gap-3 text-sm sm:text-base text-gray-200">
+                <Icon className="text-cyan-400 shrink-0" size={18} />
                 {item.text}
               </li>
             );
@@ -446,12 +665,21 @@ const handleSignIn = async (data) => {
         </ul>
       </div>
 
-      {/* Right — shown on desktop only */}
-      <div className="hidden md:flex w-32 h-32 rounded-full bg-pink-500 text-white items-center justify-center text-4xl shadow-lg shrink-0">
-        🤖
+      {/* ROBOT */}
+      <div className="flex-1 flex justify-center md:justify-end relative z-10">
+        <img
+          src="/public/Poppi.png"
+          alt="Poppi Robot"
+          className="
+            w-[220px] sm:w-[260px] md:w-[320px]
+            object-contain
+            drop-shadow-[0_0_40px_rgba(56,189,248,0.5)]
+            animate-float rounded-4xl
+          "
+        />
       </div>
-    </motion.div>
 
+    </motion.div>
   </div>
 </section>
 </>

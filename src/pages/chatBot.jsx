@@ -58,7 +58,8 @@ export default function Page() {
   const [hideLayout, setHideLayout] = useState(false);
   const [searchParams] = useSearchParams();
   const [isValidUser, setIsValidUser] = useState(true);
-
+  const [attempted, setAttempted] = useState(false);
+  const navigate = useNavigate(); 
   useEffect(() => {
     setHideLayout(true);
 
@@ -86,17 +87,12 @@ export default function Page() {
     })();
   }, []);
 
-  if (!isValidUser) {
+  if (!isValidUser && attempted) {
     return (
       <div className="flex flex-col items-center justify-center h-screen text-center px-4">
         <h1 className="text-2xl font-semibold mb-4">
           Oops !
         </h1>
-
-        {/* <p className="text-gray-600 mb-6 max-w-md">
-          You need to log in through TutorCruncher to access this chatbot.
-          Head over there, open the chatbot section, and come back through the proper flow.
-        </p> */}
 
         <div className="flex flex-col gap-1 mb-5">
           <p className="text-gray-600 max-w-md">
@@ -112,8 +108,9 @@ export default function Page() {
           rel="noopener noreferrer"
           className="px-6 py-3 bg-black text-white rounded-lg hover:opacity-90 transition"
         >
-          Go to TutorCruncher Login
+         Sign Up
         </a>
+
       </div>
     );
   }
@@ -122,7 +119,8 @@ export default function Page() {
     <>
       {!hideLayout && <Navbar />}
 
-      <ChatBot setHideLayout={setHideLayout} />
+      <ChatBot setHideLayout={setHideLayout}   isValidUser={isValidUser}
+  setAttempted={setAttempted} />
     </>
   );
 }
@@ -162,91 +160,215 @@ const G = () => (
 
 
 /* ── HOME ─────────────────────────────────────────────────── */
-function HomePage({ onStart, userEmoji }) {
+function HomePage({ onStart, userEmoji ,setAttempted,isValidUser  }) {
   const [input,   setInput]   = useState("");
   const [focused, setFocused] = useState(false);
   const [screen, setScreen] = useState("home");
 
   return (
-    <div style={{ flex:1, overflowY:"visible", padding:"36px 40px 60px", background:"#FAFDF8" , marginTop:"20px"}}>
+  //   <div style={{ flex:1, overflowY:"visible",  background:"#FAFDF8" , marginTop:"0px"}}>
 
-      {/* Badge bar */}
-      <div style={{ display:"flex", justifyContent:"center", gap:"20px", marginBottom:"40px",marginTop:"40px", animation:"fadeUp .6s ease both", flexWrap:"wrap" }}>
-        {[["🏆","Kids' Favourite App"],["⭐","4.9 Rating"],["👦","2M+ Happy Kids"]].map(([ic,tx],i)=>(
-          <div key={i} style={{
-            display:"flex",alignItems:"center",gap:"7px",
-            background:"white",borderRadius:"50px",padding:"8px 18px",
-            fontSize:"13px",fontWeight:700,color:"#3D2C2C",
-            fontFamily:"Poppins",
-            boxShadow:"0 2px 12px rgba(0,0,0,.07)",border:"1.5px solid #FFE0D0",
-            animation:`fadeUp .6s ${i*.1}s ease both`,
-          }}><span>{ic}</span>{tx}</div>
-        ))}
-      </div>
+  //       {/* VIDEO */}
+  //   <video muted autoPlay loop  className="rounded-b-4xl mb-10">
+  //     <source src='/public/video/POPPI.mp4' />
+  //   </video>
 
-      {/* Headline */}
-      <div style={{ textAlign:"center", marginBottom:"38px", animation:"fadeUp .7s .1s ease both" }}>
-        <h1 style={{
-          fontFamily:"Poppins",fontWeight:800,
-          fontSize:"clamp(28px,3.6vw,50px)",lineHeight:1.2,
-          color:"#1A2E1A",marginBottom:"12px",
-        }}>
-          Step into{" "}
-          <span style={{ color:"#FF6B6B",position:"relative",display:"inline-block" }}>
-            PodSphere
-            <svg viewBox="0 0 220 14" style={{ position:"absolute",bottom:"-5px",left:0,width:"100%",height:"13px" }}>
-              <path d="M4 10 Q55 2 110 8 Q165 14 216 5" stroke="#FF6B6B" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
-            </svg>
-          </span>
-          {" "}<br/>where imagination comes alive 🌈
-        </h1>
-        <p style={{ fontFamily:"Poppins",fontSize:"16px",color:"#8A7070",fontWeight:600 }}>
-        Chat, play, and create in a world built just for curious minds !
-        </p>
-      </div>
 
-      {/* Big input card */}
-      <div style={{
-        maxWidth:"760px",margin:"0 auto 16px",background:"white",borderRadius:"24px",
-        border:`2.5px solid ${focused?"#FF6B6B":"#FFE0D0"}`,
-        boxShadow:focused?"0 0 0 6px rgba(255,107,107,.09),0 8px 32px rgba(255,107,107,.12)":"0 4px 24px rgba(0,0,0,.07)",
-        transition:"all .3s ease",overflow:"hidden",animation:"fadeUp .8s .2s ease both",
-      }}>
-        <textarea
-          value={input}
-          onChange={e=>setInput(e.target.value)}
-          onFocus={()=>setFocused(true)}
-          onBlur={()=>setFocused(false)}
-          placeholder="Write, paste, or start with an action below… ✏️"
-          rows={4}
-          style={{
-            width:"100%",padding:"22px 24px 10px",border:"none",outline:"none",
-            resize:"none",fontFamily:"Poppins",fontSize:"16px",
-            fontWeight:600,color:"#3D2C2C",background:"transparent",lineHeight:1.6,
-          }}
-          onKeyDown={e=>{ if(e.key==="Enter"&&!e.shiftKey&&input.trim()){ e.preventDefault(); onStart(input.trim()); } }}
-        />
-        <div style={{ display:"flex",alignItems:"center",justifyContent:"end",padding:"8px 20px 14px" }}>
-          {/* <button style={{ background:"none",border:"none",cursor:"pointer",fontSize:"20px",opacity:.5,padding:"4px 8px",borderRadius:"10px",transition:"opacity .2s" }}
-            onMouseOver={e=>e.currentTarget.style.opacity="1"} onMouseOut={e=>e.currentTarget.style.opacity=".5"}>➕</button> */}
-          <button className="sbtn" onClick={()=>{send();input.trim()&&onStart(input.trim())}}
-            style={{
-              width:"42px",height:"42px",borderRadius:"14px",
-              background:input.trim()?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFD0C0",
-              border:"none",cursor:input.trim()?"pointer":"default",fontSize:"20px",
-              display:"flex",alignItems:"center",justifyContent:"center",transition:"all .25s",
-              boxShadow:input.trim()?"0 4px 16px rgba(255,107,107,.35)":"none",
-              animation:input.trim()?"pulse 2s ease-in-out infinite":"none",
-            }}>➜</button>
-        </div>
+  //   <div style={{ textAlign:"center", marginBottom:"38px", animation:"fadeUp .7s .1s ease both" }}>
+  //       <h1 style={{
+  //         fontFamily:"Poppins",fontWeight:800,
+  //         fontSize:"clamp(28px,3.6vw,50px)",lineHeight:1.2,
+  //         color:"#1A2E1A",marginBottom:"12px",
+  //       }}>
+  //         Got a phonics question ? Poppi is here to help !{" "}
+  //       </h1>
+  //       <p style={{ fontFamily:"Poppins",fontSize:"16px",color:"#8A7070",fontWeight:600 }}>
+  //      Ask about sounds, spelling rules, or tricky words and get simple explanations you can use right away with your child.
+  //       </p>
+  //     </div>
+
+  //     {/* Big input card */}
+  //     <div style={{
+  //       maxWidth:"760px",margin:"0 auto 16px",background:"white",borderRadius:"24px",
+  //       border:`2.5px solid ${focused?"#FF6B6B":"#FFE0D0"}`,
+  //       boxShadow:focused?"0 0 0 6px rgba(255,107,107,.09),0 8px 32px rgba(255,107,107,.12)":"0 4px 24px rgba(0,0,0,.07)",
+  //       transition:"all .3s ease",overflow:"hidden",animation:"fadeUp .8s .2s ease both",
+  //     }}>
+  //       <textarea
+  //         value={input}
+  //         onChange={e=>{
+            
+  // setAttempted(true);
+  // if (!isValidUser) return;
+
+  //           setInput(e.target.value)}}
+          
+  //         onFocus={()=>setFocused(true)}
+  //         onBlur={()=>setFocused(false)}
+  //         placeholder="Write a Message… ✏️"
+  //         rows={4}
+  //         style={{
+  //           width:"100%",padding:"22px 24px 10px",border:"none",outline:"none",
+  //           resize:"none",fontFamily:"Poppins",fontSize:"16px",
+  //           fontWeight:600,color:"#3D2C2C",background:"transparent",lineHeight:1.6,
+  //         }}
+  //         onKeyDown={e=>{ if(e.key==="Enter"&&!e.shiftKey&&input.trim()){ e.preventDefault(); onStart(input.trim()); } }}
+  //       />
+  //       <div style={{ display:"flex",alignItems:"center",justifyContent:"end",padding:"8px 20px 14px" }}>
+  //         {/* <button style={{ background:"none",border:"none",cursor:"pointer",fontSize:"20px",opacity:.5,padding:"4px 8px",borderRadius:"10px",transition:"opacity .2s" }}
+  //           onMouseOver={e=>e.currentTarget.style.opacity="1"} onMouseOut={e=>e.currentTarget.style.opacity=".5"}>➕</button> */}
+  //         <button className="sbtn" onClick={()=>{send();input.trim()&&onStart(input.trim())}}
+  //           style={{
+  //             width:"42px",height:"42px",borderRadius:"14px",
+  //             background:input.trim()?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFD0C0",
+  //             border:"none",cursor:input.trim()?"pointer":"default",fontSize:"20px",
+  //             display:"flex",alignItems:"center",justifyContent:"center",transition:"all .25s",
+  //             boxShadow:input.trim()?"0 4px 16px rgba(255,107,107,.35)":"none",
+  //             animation:input.trim()?"pulse 2s ease-in-out infinite":"none",
+  //           }}>➜</button>
+  //       </div>
      
-      </div>
+  //     </div>
+  //   </div>
+  <div
+  style={{
+    flex: 1,
+    overflowY: "visible",
+    marginTop: "0px",
+    paddingBottom: "60px",
+    background: `
+      linear-gradient(
+        90deg,
+        #c7f0ff 0%,
+        #ffd6e7 50%,
+        #e6d6ff 100%
+      )
+    `,
+  }}
+>
+  {/* VIDEO */}
+  <video muted autoPlay loop className="rounded-b-4xl mb-25 w-full">
+    <source src="/video/POPPI.mp4" />
+  </video>
 
-      {/* Suggestions label */}
-      <div style={{ textAlign:"center",fontSize:"14px",color:"#B09090",fontFamily:"Poppins",fontWeight:700,marginBottom:"18px",animation:"fadeUp .9s .3s ease both" }}>
-        ✨ Need an idea? Try one of these adventures…
-      </div>
-    </div>
+  {/* TEXT */}
+  <div
+    style={{
+      textAlign: "center",
+      marginBottom: "30px",
+      animation: "fadeUp .7s .1s ease both",
+      padding: "0 26px",
+    }}
+  >
+    <h1
+      style={{
+        fontFamily: "Poppins",
+        fontWeight: 700,
+        fontSize: "clamp(26px,3.5vw,42px)",
+        lineHeight: 1.3,
+        color: "#1f1f1f",
+        marginBottom: "10px",
+      }}
+    >
+      Got a phonics question? Poppi is here to help!
+    </h1>
+
+    <p
+      style={{
+        fontFamily: "Poppins",
+        fontSize: "18px",
+        color: "#5f5f5f",
+        fontWeight: 500,
+        maxWidth: "650px",
+        margin: "0 auto",
+        lineHeight: 1.6,
+      }}
+    >
+      Ask about sounds, spelling rules, or tricky words and get simple explanations you can use right away with your child.
+    </p>
+  </div>
+
+  {/* INPUT BOX */}
+  <div
+    style={{
+      maxWidth: "920px",
+      margin: " auto",
+      position: "relative",
+      backdropFilter: "blur(14px)",
+      WebkitBackdropFilter: "blur(14px)",
+      background: "rgba(255,255,255,0.55)",
+      borderRadius: "50px",
+      border: "1px solid rgba(255,255,255,0.6)",
+      boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+      padding: "2px",
+      transition: "all .3s ease",
+      animation: "fadeUp .8s .2s ease both",
+      marginBottom: "45px",
+    }}
+  >
+    <textarea
+      value={input}
+      onChange={(e) => {
+        setAttempted(true);
+        if (!isValidUser) return; 
+        setInput(e.target.value);
+      }}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      placeholder="Write A Message..."
+      rows={2}
+      style={{
+        width: "100%",
+        padding: "4px 2px 0px 2px",
+        textIndent: "8px",
+        paddingTop: "2px",
+        border: "none",
+        outline: "none",
+        resize: "none",
+        fontFamily: "Poppins",
+        fontSize: "14px",
+        fontWeight: 500,
+        color: "#333",
+        background: "transparent",
+        lineHeight: 1.3,
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && !e.shiftKey && input.trim()) {
+          e.preventDefault();
+          onStart(input.trim()); 
+        }
+      }}
+    />
+
+    {/* SEND BUTTON (LIKE IMAGE) */}
+    <button
+      onClick={() => {
+        send(); 
+        input.trim() && onStart(input.trim());
+      }}
+      style={{
+        position: "absolute",
+        right: "10px",
+        bottom: "10px",
+        width: "36px",
+        height: "36px",
+        borderRadius: "50%",
+        border: "1px solid rgba(0,0,0,0.1)",
+        background: "#ffffff",
+        cursor: input.trim() ? "pointer" : "default",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "14px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        opacity: input.trim() ? 1 : 0.5,
+        transition: "all .2s ease",
+      }}
+    >
+      ➤
+    </button>
+  </div>
+</div>
   );
 }
 
@@ -489,13 +611,14 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
 }
 
 /* ── ROOT ─────────────────────────────────────────────────── */
-function ChatBot({setHideLayout}) {
-  const [screen,  setScreen]  = useState("home");
+function ChatBot({ setHideLayout, isValidUser, setAttempted }) {
+    const [screen,  setScreen]  = useState("home");
   const [user,    setUser]    = useState(null);
   const [active,  setActive]  = useState("chat");
   const [emoji]               = useState();
   const [firstMsg,setFirstMsg]=useState("")
   const handleStart = (text) => {
+    setAttempted(true);
     setFirstMsg(text)
     if (!user) setUser({ name: text.length > 24 ? "Friend" : text, emoji });
   
@@ -512,7 +635,6 @@ function ChatBot({setHideLayout}) {
  
 
   return (
-    // <div style={{ display:"flex",height:"100vh",overflow:"hidden",fontFamily:"'Nunito',sans-serif",background:"#FAFDF8", marginTop:"50px"}}>
 <div
   style={{
     display: "flex",
@@ -531,7 +653,7 @@ function ChatBot({setHideLayout}) {
         {/* View */}
         <div style={{ flex:1,display:"flex",overflow:"hidden" }}>
           {screen==="home"
-            ? <HomePage onStart={handleStart} userEmoji={emoji}/>
+            ? <HomePage onStart={handleStart} userEmoji={emoji} isValidUser ={isValidUser } setAttempted ={setAttempted }/>
             : <ChatView firstMsg={firstMsg} userName={user?.name||"Friend"} userEmoji={user?.emoji||"😊"}  goHome={goHome}/>}
         </div>
       </div>

@@ -22,6 +22,7 @@ import Testimonials from "./components/Testimonals";
 import Foundation from "./components/foundation";
 import Careers from "./pages/careers";
 import ChatBot from "./pages/chatBot";
+import WhatsAppFloat from "./components/watsappFloaticon";
 
 
 
@@ -71,6 +72,7 @@ function App() {
         <Route path="/chatBot" element={<ChatBot/>} />
 
       </Routes>
+      <WhatsAppFloat/>
       <Footer/>
     </div>
   );

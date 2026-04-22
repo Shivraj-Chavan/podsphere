@@ -654,9 +654,13 @@
 
 
 
+import axios from "axios";
 import React, { useState } from "react";
+import CONFIG from "../constance";
 
+ 
 const Contact = () => {
+
   return (
     <section className="relative w-full bg-white">
 
@@ -701,14 +705,14 @@ const Contact = () => {
 
       {/* ───────── BOTTOM CTA — Desktop (lg+) ───────── */}
       <div className="hidden lg:flex relative justify-center mt-25 mb-15 px-4 ">
-        <div className="w-full max-w-[1100px] h-[310px] bg-red-900 rounded-2xl" />
-        <div className="absolute -top-10 w-[calc(100%-4rem)] max-w-[1000px] h-[250px] bg-yellow-400 rounded-2xl shadow-lg p-12 flex items-center justify-between">
+        <div className="w-full max-w-[1100px] h-[340px] bg-red-900 rounded-2xl" />
+         <div className="absolute -top-10 w-[calc(100%-6rem)] max-w-[1000px] h-[300px] bg-yellow-400 rounded-2xl shadow-lg px-12 py-10 flex items-center justify-between">
           <CtaContent />
         </div>
       </div>
 
       {/* ───────── BOTTOM CTA — Tablet (md only) ───────── */}
-      <div className="hidden md:block lg:hidden mx-6 mb-10">
+      {/* <div className="hidden md:block lg:hidden mx-6 mb-10">
         <div className="bg-red-900 rounded-2xl p-1">
           <div className="bg-yellow-400 rounded-xl p-8 flex flex-col sm:flex-row items-center gap-6">
             <img
@@ -741,41 +745,87 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* ───────── BOTTOM CTA — Mobile ───────── */}
-      <div className="block md:hidden mx-4 mb-10 rounded-[24px] bg-red-900 text-white overflow-hidden shadow-xl">
-        <div className="p-6 flex flex-col items-center text-center gap-5">
-          <img
-            src="/friends.jpg"
-            alt="kids"
-            className="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-md"
-          />
-          <div className="text-white w-full">
-            <h2 className="text-lg font-extrabold mb-2 leading-snug">
-              Let's Begin Your Child's<br />Reading Journey Together
-            </h2>
-            <p className="text-xs text-white/80 mb-4 leading-relaxed max-w-md mx-auto">
-              Discover upcoming Podsphere programs, get the latest updates,
-              and enjoy exclusive learning opportunities.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-medium max-w-lg mx-auto">
-              <a href="tel:+919892409029" className="flex items-center justify-center gap-2 bg-white/20 rounded-full px-4 py-2.5 hover:bg-white/30 transition">
-                📞 +91 9892409029
-              </a>
-              <a href="tel:+919892099029" className="flex items-center justify-center gap-2 bg-white/20 rounded-full px-4 py-2.5 hover:bg-white/30 transition">
-                📞 +91 9892099029
-              </a>
-              <a href="mailto:hello@pod-sphere.com" className="flex items-center justify-center gap-2 bg-white/20 rounded-full px-4 py-2.5 hover:bg-white/30 transition">
-                ✉️ hello@pod-sphere.com
-              </a>
-              <a href="https://www.google.com/maps?q=Mumbai,India" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white/20 rounded-full px-4 py-2.5 hover:bg-white/30 transition">
-                📍 Mumbai, India
-              </a>
-            </div>
-          </div>
+<div className="hidden md:block lg:hidden mx-6 mb-12">
+  <div className="bg-red-900 rounded-2xl p-[3px]">
+    <div className="bg-yellow-400 rounded-2xl px-8 py-10 flex flex-col sm:flex-row items-center gap-6">
+
+      <img
+        src="/friends.jpg"
+        alt="kids"
+        className="w-32 h-32 rounded-full object-cover shadow-lg ring-4 ring-white/80"
+      />
+
+      <div className="text-gray-900 text-center sm:text-left max-w-md">
+        <h2 className="text-xl font-extrabold mb-3 leading-snug">
+          Let's Begin Your Child's Reading Journey Together
+        </h2>
+
+        <p className="text-sm text-gray-800 mb-5 leading-relaxed">
+          Discover upcoming Podsphere programs, get the latest updates,
+          and enjoy exclusive learning opportunities.
+        </p>
+
+        <div className="grid grid-cols-2 gap-3 text-sm font-medium">
+          <a href="tel:+919892409029" className="cta-btn">
+            📞 +91 9892409029
+          </a>
+          <a href="tel:+919892099029" className="cta-btn">
+            📞 +91 9892099029
+          </a>
+          <a href="mailto:hello@pod-sphere.com" className="cta-btn">
+            ✉️ hello@pod-sphere.com
+          </a>
+          <a href="https://www.google.com/maps?q=Mumbai,India" target="_blank" rel="noopener noreferrer" className="cta-btn">
+            📍 Mumbai, India
+          </a>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+      {/* ───────── BOTTOM CTA — Mobile ───────── */}
+
+<div className="block md:hidden mx-4 mb-12">
+  <div className="bg-red-900 rounded-[26px] p-[3px]">
+    <div className="bg-yellow-400 rounded-[24px] px-6 py-8 flex flex-col items-center text-center gap-5">
+
+      <img
+        src="/friends.jpg"
+        alt="kids"
+        className="w-24 h-24 rounded-full object-cover shadow-lg ring-4 ring-white/80"
+      />
+
+      <div className="text-gray-900 w-full">
+        <h2 className="text-lg font-extrabold mb-2 leading-snug">
+          Let's Begin Your Child's Reading Journey Together
+        </h2>
+
+        <p className="text-xs text-gray-800 mb-4 leading-relaxed">
+          Discover upcoming Podsphere programs, get the latest updates,
+          and enjoy exclusive learning opportunities.
+        </p>
+
+        <div className="grid grid-cols-1 gap-2 text-sm font-medium">
+          <a href="tel:+919892409029" className="cta-btn">
+            📞 +91 9892409029
+          </a>
+          <a href="tel:+919892099029" className="cta-btn">
+            📞 +91 9892099029
+          </a>
+          <a href="mailto:hello@pod-sphere.com" className="cta-btn">
+            ✉️ hello@pod-sphere.com
+          </a>
+          <a href="https://www.google.com/maps?q=Mumbai,India" target="_blank" rel="noopener noreferrer" className="cta-btn">
+            📍 Mumbai, India
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     </section>
   );
@@ -783,11 +833,57 @@ const Contact = () => {
 
 /* ───────── FORM CARD ───────── */
 const FormCard = () => {
+
   const [formData, setFormData] = useState({
-    parentName: "", childAge: "", phone: "", preferredContact: "", email: "", school: "", message: "",
+    parentName: "",
+    childAge: "",
+    phone: "",
+    countryCode: "+91", 
+    preferredContact: "",
+    email: "",
+    school: "",
+    message: "",
+    formType: "contact",
   });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!formData.parentName || !formData.phone || !formData.email) {
+      setError(true);
+      return;
+    }
+  
+    try {
+      setLoading(true);
+      setError(false);
+  
+      const res = await axios.post(
+        `${CONFIG.API_BASE_URL}/contact`,
+        {
+          ...formData,
+          formType: "contact", 
+        }
+      );
+      console.log("formdata",res);
+  
+      if (res.data?.success) {
+        setSubmitted(true);
+      } else {
+        throw new Error("API responded but failed");
+      }
+  
+    } catch (err) {
+      console.error("API Error:", err);
+      setError(true);
+      alert("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -799,18 +895,18 @@ const FormCard = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.parentName || !formData.phone || !formData.email) { setError(true); return; }
-    setError(false);
-    const lead = { ...formData, submittedAt: new Date().toISOString() };
-    try {
-      const existing = JSON.parse(localStorage.getItem("formLeads") || "[]");
-      existing.push(lead);
-      localStorage.setItem("formLeads", JSON.stringify(existing));
-    } catch (err) { console.warn("localStorage unavailable", err); }
-    setSubmitted(true);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (!formData.parentName || !formData.phone || !formData.email) { setError(true); return; }
+  //   setError(false);
+  //   const lead = { ...formData, submittedAt: new Date().toISOString() };
+  //   try {
+  //     const existing = JSON.parse(localStorage.getItem("formLeads") || "[]");
+  //     existing.push(lead);
+  //     localStorage.setItem("formLeads", JSON.stringify(existing));
+  //   } catch (err) { console.warn("localStorage unavailable", err); }
+  //   setSubmitted(true);
+  // };
 
   const handleReset = () => {
     setFormData({ parentName: "", childAge: "", phone: "", preferredContact: "", email: "", school: "", message: "" });
@@ -852,43 +948,43 @@ const FormCard = () => {
             <input type="tel" name="phone" autoComplete="tel" value={formData.phone} onChange={handleChange} placeholder="9876543210" maxLength={10} className="w-full border border-gray-200 rounded-full px-4 py-2.5 mt-1 text-sm outline-none focus:border-pink-400 transition" />
           </div> */}
           <div>
-  <label className="text-[10px] font-bold text-gray-400 tracking-wider">
-    PHONE NUMBER*
-  </label>
+          <label className="text-[10px] font-bold text-gray-400 tracking-wider">
+            PHONE NUMBER*
+          </label>
 
-  <div className="flex mt-1">
-    {/* Country Code */}
-    <select
-      name="countryCode"
-      value={formData.countryCode}
-      onChange={handleChange}
-      className="border border-gray-200 rounded-l-full px-1.5 py-2.5 text-sm outline-none focus:border-pink-400 bg-white"
-    >
-      <option value="+91">🇮🇳 +91</option>
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+44">🇬🇧 +44</option>
-      <option value="+61">🇦🇺 +61</option>
-      <option value="+971">🇦🇪 +971</option>
+          <div className="flex mt-1">
+            {/* Country Code */}
+            <select
+              name="countryCode"
+              value={formData.countryCode}
+              onChange={handleChange}
+              className="border border-gray-200 rounded-l-full px-1.5 py-2.5 text-sm outline-none focus:border-pink-400 bg-white"
+            >
+              <option value="+91">🇮🇳 +91</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+971">🇦🇪 +971</option>
 
-    </select>
+            </select>
 
-    <input
-  type="tel"
-  name="phone"
-  autoComplete="tel"
-  value={formData.phone}
-  onChange={(e) => {
-    let value = e.target.value;
-    value = value.replace(/\D/g, "");
-    if (value.length <= 10) {
-      setFormData({ ...formData, phone: value });
-    }
-  }}
-  placeholder="9876543210"
-  className="w-full border-t border-b border-r border-gray-200 rounded-r-full px-3 py-2.5 text-sm outline-none focus:border-pink-400 transition"
-/>
-  </div>
-</div>
+            <input
+            type="tel"
+            name="phone"
+            autoComplete="tel"
+            value={formData.phone}
+            onChange={(e) => {
+              let value = e.target.value;
+              value = value.replace(/\D/g, "");
+              if (value.length <= 10) {
+                setFormData({ ...formData, phone: value });
+              }
+            }}
+          placeholder="9876543210"
+          className="w-full border-t border-b border-r border-gray-200 rounded-r-full px-3 py-2.5 text-sm outline-none focus:border-pink-400 transition"
+        />
+          </div>
+        </div>
           <div>
             <label className="text-[10px] font-bold text-gray-400 tracking-wider">PREFERRED CONTACT</label>
             <input type="text" name="preferredContact" autoComplete="off" value={formData.preferredContact} onChange={handleChange} placeholder="Phone / Email" className="w-full border border-gray-200 rounded-full px-4 py-2.5 mt-1 text-sm outline-none focus:border-pink-400 transition" />
@@ -907,8 +1003,16 @@ const FormCard = () => {
           <textarea rows="3" name="message" value={formData.message} onChange={handleChange} placeholder="Write your message..." className="w-full border border-gray-200 rounded-2xl px-4 py-3 mt-1 text-sm outline-none focus:border-pink-400 transition resize-none" />
         </div>
         {error && <p className="text-xs text-red-400 px-1">Please fill in all required fields (*).</p>}
-        <button type="submit" className="w-full bg-gray-900 text-white py-3 rounded-full font-bold text-sm tracking-widest hover:bg-black active:scale-95 transition-all">
+        {/* <button type="submit" className="w-full bg-gray-900 text-white py-3 rounded-full font-bold text-sm tracking-widest hover:bg-black active:scale-95 transition-all">
           SEND A MESSAGE
+        </button> */}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-gray-900 text-white py-3 rounded-full font-bold text-sm tracking-widest hover:bg-black active:scale-95 transition-all disabled:opacity-50"
+        >
+          {loading ? "SENDING..." : "SEND A MESSAGE"}
         </button>
       </form>
     </div>
@@ -919,7 +1023,7 @@ const FormCard = () => {
 const CtaContent = () => (
   <div className="py-20 flex items-center justify-between gap-6 flex-wrap">
     
-    <div className="text-gray-900 max-w-xl">
+    <div className="text-white max-w-xl">
       <h2 className="text-3xl font-bold mb-3">
         Let's Begin Your Child's Reading Journey Together
       </h2>
@@ -955,7 +1059,7 @@ const CtaContent = () => (
     <img
       src="/friends.jpg"
       alt="kids"
-      className="w-[240px] h-[240px] rounded-full object-cover"
+      className="w-[240px] h-[240px] rounded-3xl object-cover"
     />
     
   </div>

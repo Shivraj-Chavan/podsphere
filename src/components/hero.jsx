@@ -101,9 +101,74 @@
 'use client';
 
 import React, { useState } from "react";
+import CONFIG from "../constance";
+import axios from "axios";
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
+  const [demoData, setDemoData] = useState({
+    name: "",
+    childName: "",
+    age: "",
+    phone: "",
+    email: "",
+    country: ""
+  });
+  
+  const [demoLoading, setDemoLoading] = useState(false);
+  const [demoSuccess, setDemoSuccess] = useState(false);
+  const [demoError, setDemoError] = useState(false);
+
+  const handleDemoSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!demoData.name || !demoData.phone || !demoData.email) {
+      setDemoError(true);
+      return;
+    }
+  
+    try {
+      setDemoLoading(true);
+      setDemoError(false);
+  
+      const res = await axios.post(
+        `${CONFIG.API_BASE_URL}/contact`,
+        {
+          ...demoData,
+          formType: "demo" 
+        }
+      )
+  
+      if (res.data?.success) {
+        setDemoSuccess(true);
+        setDemoData({
+          name: "",
+          childName: "",
+          age: "",
+          phone: "",
+          email: "",
+          country: ""
+        });
+      } else {
+        throw new Error("Failed");
+      }
+  
+    } catch (err) {
+      console.error(err);
+      setDemoError(true);
+    } finally {
+      setDemoLoading(false);
+  }
+};
+
+const handleDemoChange = (e) => {
+  const { name, value } = e.target;
+  setDemoData((prev) => ({
+    ...prev,
+    [name]: value
+  }));
+};
+
   return (
     <div id="hero" className="relative w-full h-screen overflow-hidden">
 
@@ -122,7 +187,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-end h-full text-center px-6 pb-10">
+      <div className="relative z-10 flex flex-col items-center justify-end h-full text-center px-6 sm:pb-10 pb-20">
 
         {/* Logo Text */}
         <h1 className="text-white text-5xl md:text-6xl font-bold">
@@ -149,13 +214,11 @@ export default function Hero() {
         </button>
 
         {/* Popup */}
-      {open && (
+      {/* {open && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 mt-10">
 
-          {/* Modal */}
           <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl w-[420px] p-8 relative">
 
-            {/* Close Button */}
             <button
               onClick={() => setOpen(false)}
               className="absolute top-4 right-4 text-gray-700 text-xl cursor-pointer"
@@ -167,55 +230,223 @@ export default function Hero() {
               Book a Free Demo
             </h2>
 
-            <form className="space-y-4">
+          
 
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
+<form onSubmit={handleDemoSubmit} className="space-y-4">
 
-              <input
-                type="text"
-                placeholder="Child Name"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
+<input
+  type="text"
+  name="name"
+  value={demoData.name}
+  onChange={handleDemoChange}
+  placeholder="Your Name"
+  className="w-full p-3 rounded-xl bg-white/80 outline-none"
+/>
 
-              <input
-                type="number"
-                placeholder="Age of the Child (Years)"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
+<input
+  type="text"
+  name="childName"
+  value={demoData.childName}
+  onChange={handleDemoChange}
+  placeholder="Child Name"
+  className="w-full p-3 rounded-xl bg-white/80 outline-none"
+/>
 
-              <input
-                type="tel"
-                placeholder="Phone / WhatsApp Number"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
+<input
+  type="number"
+  name="age"
+  value={demoData.age}
+  onChange={handleDemoChange}
+  placeholder="Age of the Child (Years)"
+  className="w-full p-3 rounded-xl bg-white/80 outline-none"
+/>
 
-              <input
-                type="email"
-                placeholder="Email ID"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
+<input
+  type="tel"
+  name="phone"
+  value={demoData.phone}
+  onChange={handleDemoChange}
+  placeholder="Phone / WhatsApp Number"
+  className="w-full p-3 rounded-xl bg-white/80 outline-none"
+/>
 
-              <input
-                type="text"
-                placeholder="Country"
-                className="w-full p-3 rounded-xl bg-white/80 outline-none"
-              />
+<input
+  type="email"
+  name="email"
+  value={demoData.email}
+  onChange={handleDemoChange}
+  placeholder="Email ID"
+  className="w-full p-3 rounded-xl bg-white/80 outline-none"
+/>
 
-              <button
-                type="submit"
-                className="w-full mt-4 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer"
-              >
-                Submit
-              </button>
+<input
+  type="text"
+  name="country"
+  value={demoData.country}
+  onChange={handleDemoChange}
+  placeholder="Country"
+  className="w-full p-3 rounded-xl bg-white/80 outline-none"
+/>
 
-            </form>
+{demoError && (
+  <p className="text-red-500 text-sm text-center">
+    Please fill required fields
+  </p>
+)}
+
+{demoSuccess && (
+  <p className="text-green-600 text-sm text-center">
+    Demo booked successfully 🎉
+  </p>
+)}
+
+<button
+  type="submit"
+  disabled={demoLoading}
+  className="w-full mt-4 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer"
+>
+  {demoLoading ? "Submitting..." : "Submit"}
+</button>
+</form>
           </div>
         </div>
+      )} */}
+
+
+
+{open && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 ">
+
+    {/* Modal */}
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl w-[420px] p-8 relative">
+
+      {/* Close Button */}
+      <button
+        onClick={() => { setOpen(false); setDemoSuccess(false); }}
+        className="absolute top-4 right-4 text-gray-700 text-xl cursor-pointer"
+      >
+        ✕
+      </button>
+
+      {demoSuccess ? (
+        /* ── SUCCESS STATE ── */
+        <div className="flex flex-col items-center justify-center py-6 gap-4">
+          {/* Animated checkmark circle */}
+          <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center shadow-md">
+            <svg
+              className="w-10 h-10 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+
+          <h3 className="text-2xl font-bold text-gray-400 text-center">
+            Demo Booked! 
+          </h3>
+
+          <p className="text-gray-600 text-center text-sm leading-relaxed">
+            Your free demo has been successfully booked.<br />
+            We'll reach out to you shortly!
+          </p>
+
+          <button
+            onClick={() => { setOpen(false); setDemoSuccess(false); }}
+            className="mt-2 px-8 py-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition cursor-pointer text-sm font-medium"
+          >
+            Close
+          </button>
+        </div>
+
+      ) : (
+        /* ── FORM STATE ── */
+        <>
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            Book a Free Demo
+          </h2>
+
+          <form onSubmit={handleDemoSubmit} className="space-y-4">
+
+            <input
+              type="text"
+              name="name"
+              value={demoData.name}
+              onChange={handleDemoChange}
+              placeholder="Your Name"
+              className="w-full p-3 rounded-xl bg-white/80 outline-none"
+            />
+
+            <input
+              type="text"
+              name="childName"
+              value={demoData.childName}
+              onChange={handleDemoChange}
+              placeholder="Child Name"
+              className="w-full p-3 rounded-xl bg-white/80 outline-none"
+            />
+
+            <input
+              type="number"
+              name="age"
+              value={demoData.age}
+              onChange={handleDemoChange}
+              placeholder="Age of the Child (Years)"
+              className="w-full p-3 rounded-xl bg-white/80 outline-none"
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              value={demoData.phone}
+              onChange={handleDemoChange}
+              placeholder="Phone / WhatsApp Number"
+              className="w-full p-3 rounded-xl bg-white/80 outline-none"
+            />
+
+            <input
+              type="email"
+              name="email"
+              value={demoData.email}
+              onChange={handleDemoChange}
+              placeholder="Email ID"
+              className="w-full p-3 rounded-xl bg-white/80 outline-none"
+            />
+
+            <input
+              type="text"
+              name="country"
+              value={demoData.country}
+              onChange={handleDemoChange}
+              placeholder="Country"
+              className="w-full p-3 rounded-xl bg-white/80 outline-none"
+            />
+
+            {demoError && (
+              <p className="text-red-500 text-sm text-center">
+                Please fill required fields
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={demoLoading}
+              className="w-full mt-4 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer"
+            >
+              {demoLoading ? "Submitting..." : "Submit"}
+            </button>
+
+          </form>
+        </>
       )}
+
+    </div>
+  </div>
+)}
+
+      
 
       </div>
 

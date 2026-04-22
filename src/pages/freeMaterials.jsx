@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import SignInModal from "../components/signinPopup";
 
 
@@ -96,18 +96,32 @@ export default function FreeMaterials() {
   const [showModal, setShowModal] = useState(false);
 
   const handleDownloadClick = (e) => {
-    e.preventDefault(); // stop direct download
+    e.preventDefault(); 
     setShowModal(true);
   };
 
-  const handleSignIn = () => {
+  const handleClose = useCallback(() => {
+    setShowModal(false);
+  }, []);
+
+  const handleSignIn = useCallback(async (data) => {
     console.log("Redirect to login...");
-  };
+  }, []);
 
   return (
     <>
       <section className="bg-white py-30">
-        <div className="max-w-7xl mx-auto px-6 space-y-15">
+        {/* <div className="max-w-7xl mx-auto px-6 space-y-15"> */}
+        <div className="
+  w-full
+  max-w-screen-lg
+  sm:max-w-screen-xl
+  xl:max-w-[1200px]
+  2xl:max-w-[1400px]
+  mx-auto
+  px-4 sm:px-6 lg:px-8
+  space-y-12 sm:space-y-14 md:space-y-16
+">
 
           {/* ================= PAGE HEADER ================= */}
           <div className="text-center max-w-3xl mx-auto">
@@ -159,11 +173,17 @@ export default function FreeMaterials() {
       </a>
 
       {/* MODAL */}
-      <SignInModal
+      {/* <SignInModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onSignIn={handleSignIn}
-      />
+      /> */}
+
+<SignInModal
+  isOpen={showModal}
+  onClose={handleClose}
+  onSignIn={handleSignIn}
+/>
 
     </div>
   ))}
