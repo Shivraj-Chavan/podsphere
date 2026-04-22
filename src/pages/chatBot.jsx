@@ -247,9 +247,24 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser  }) {
   }}
 >
   {/* VIDEO */}
-  <video muted autoPlay loop className="rounded-b-4xl mb-25 w-full">
-    <source src="/video/POPPI.mp4" />
-  </video>
+  <video
+  muted
+  autoPlay
+  loop
+  playsInline
+  className="
+    w-full 
+    h-[600px] 
+    sm:h-[400px] 
+    md:h-[650px] 
+    lg:h-auto
+    object-cover 
+    rounded-b-4xl 
+    mb-25
+  "
+>
+  <source src="/video/POPPI.mp4" />
+</video>
 
   {/* TEXT */}
   <div
@@ -292,82 +307,80 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser  }) {
   <div
     style={{
       maxWidth: "920px",
-      margin: " auto",
+      width: "100%",
+      margin: "0 auto",
       position: "relative",
       backdropFilter: "blur(14px)",
       WebkitBackdropFilter: "blur(14px)",
       background: "rgba(255,255,255,0.55)",
-      borderRadius: "50px",
+      borderRadius: "40px",
       border: "1px solid rgba(255,255,255,0.6)",
       boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
-      padding: "2px",
-      transition: "all .3s ease",
-      animation: "fadeUp .8s .2s ease both",
-      marginBottom: "45px",
+      padding: "4px",
+      marginBottom: "30px",
+    }} 
+  >
+  <textarea
+    value={input}
+    onChange={(e) => {
+      setAttempted(true);
+      if (!isValidUser) return;
+      setInput(e.target.value);
+    }}
+    onFocus={() => setFocused(true)}
+    onBlur={() => setFocused(false)}
+    placeholder="Write A Message..."
+    rows={1} 
+    style={{
+      width: "100%",
+      padding: "10px 50px 10px 12px",
+      border: "none",
+      outline: "none",
+      resize: "none",
+      fontFamily: "Poppins",
+      fontSize: "14px",
+      fontWeight: 500,
+      color: "#333",
+      background: "transparent",
+      lineHeight: 1.4,
+    }}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" && !e.shiftKey && input.trim()) {
+        e.preventDefault();
+        onStart(input.trim());
+      }
+    }}
+  />
+
+  {/* SEND BUTTON */}
+  <button
+    onClick={() => {
+      send();
+      input.trim() && onStart(input.trim());
+    }}
+    style={{
+      position: "absolute",
+      right: "8px",
+      top: "50%", 
+      transform: "translateY(-50%)",
+      width: "34px",
+      height: "34px",
+      borderRadius: "50%",
+      border: "1px solid rgba(0,0,0,0.1)",
+      background: "#ffffff",
+      cursor: input.trim() ? "pointer" : "default",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "13px",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+      opacity: input.trim() ? 1 : 0.5,
+      transition: "all .2s ease",
     }}
   >
-    <textarea
-      value={input}
-      onChange={(e) => {
-        setAttempted(true);
-        if (!isValidUser) return; 
-        setInput(e.target.value);
-      }}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-      placeholder="Write A Message..."
-      rows={2}
-      style={{
-        width: "100%",
-        padding: "4px 2px 0px 2px",
-        textIndent: "8px",
-        paddingTop: "2px",
-        border: "none",
-        outline: "none",
-        resize: "none",
-        fontFamily: "Poppins",
-        fontSize: "14px",
-        fontWeight: 500,
-        color: "#333",
-        background: "transparent",
-        lineHeight: 1.3,
-      }}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" && !e.shiftKey && input.trim()) {
-          e.preventDefault();
-          onStart(input.trim()); 
-        }
-      }}
-    />
-
-    {/* SEND BUTTON (LIKE IMAGE) */}
-    <button
-      onClick={() => {
-        send(); 
-        input.trim() && onStart(input.trim());
-      }}
-      style={{
-        position: "absolute",
-        right: "10px",
-        bottom: "10px",
-        width: "36px",
-        height: "36px",
-        borderRadius: "50%",
-        border: "1px solid rgba(0,0,0,0.1)",
-        background: "#ffffff",
-        cursor: input.trim() ? "pointer" : "default",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "14px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        opacity: input.trim() ? 1 : 0.5,
-        transition: "all .2s ease",
-      }}
-    >
-      ➤
-    </button>
-  </div>
+    ➤
+  </button>
+</div>
 </div>
   );
 }

@@ -668,7 +668,7 @@ const handleSignIn = async (data) => {
       {/* ROBOT */}
       <div className="flex-1 flex justify-center md:justify-end relative z-10">
         <img
-          src="/public/Poppi.png"
+          src="/Poppi.png"
           alt="Poppi Robot"
           className="
             w-[220px] sm:w-[260px] md:w-[320px]
