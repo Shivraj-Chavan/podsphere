@@ -59,6 +59,7 @@ export default function Page() {
   const [searchParams] = useSearchParams();
   const [isValidUser, setIsValidUser] = useState(true);
   const [attempted, setAttempted] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate(); 
   useEffect(() => {
     setHideLayout(true);
@@ -87,40 +88,78 @@ export default function Page() {
     })();
   }, []);
 
-  if (!isValidUser && attempted) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen text-center px-4">
-        <h1 className="text-2xl font-semibold mb-4">
-          Oops !
-        </h1>
+  // if (!isValidUser && attempted) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center h-screen text-center px-4">
+  //       <h1 className="text-2xl font-semibold mb-4">
+  //         Oops !
+  //       </h1>
 
-        <div className="flex flex-col gap-1 mb-5">
-          <p className="text-gray-600 max-w-md">
-            This little corner is for our PodSphere learners 😊
-          </p>
-          <p className="text-gray-600 max-w-md">
-            Log in through TutorCruncher to hop back into your learning journey !
-          </p>
-        </div>
+  //       <div className="flex flex-col gap-1 mb-5">
+  //         <p className="text-gray-600 max-w-md">
+  //           This little corner is for our PodSphere learners 😊
+  //         </p>
+  //         <p className="text-gray-600 max-w-md">
+  //           Log in through TutorCruncher to hop back into your learning journey !
+  //         </p>
+  //       </div>
 
-        <a href="https://secure.tutorcruncher.com/podsphere/login/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 bg-black text-white rounded-lg hover:opacity-90 transition"
-        >
-         Sign Up
-        </a>
+  //       <a href="https://secure.tutorcruncher.com/podsphere/login/"
+  //         target="_blank"
+  //         rel="noopener noreferrer"
+  //         className="px-6 py-3 bg-black text-white rounded-lg hover:opacity-90 transition"
+  //       >
+  //        Sign Up
+  //       </a>
 
-      </div>
-    );
-  }
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
       {!hideLayout && <Navbar />}
 
-      <ChatBot setHideLayout={setHideLayout}   isValidUser={isValidUser}
-  setAttempted={setAttempted} />
+      <ChatBot setHideLayout={setHideLayout}   isValidUser={isValidUser} setAttempted={setAttempted} setShowPopup={setShowPopup}/>
+
+   {/*POPUP */}
+   {showPopup && (
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center z-50 px-4">
+        <div className="bg-white rounded-2xl p-6 max-w-md w-full text-center shadow-xl">
+          
+          <h2 className="text-xl font-semibold mb-3">
+            Oops!
+          </h2>
+
+          <p className="text-gray-600 mb-2">
+            This little corner is for our PodSphere learners 😊
+          </p>
+
+          <p className="text-gray-600 mb-5">
+            Log in through TutorCruncher to continue your journey.
+          </p>
+
+          <div className="flex gap-3 justify-center">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="px-4 py-2 border rounded-lg"
+            >
+              Cancel
+            </button>
+
+            <a
+              href="https://secure.tutorcruncher.com/podsphere/login/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2 bg-black text-white rounded-lg"
+            >
+              Sign In
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
     </>
   );
 }
@@ -160,11 +199,11 @@ const G = () => (
 
 
 /* ── HOME ─────────────────────────────────────────────────── */
-function HomePage({ onStart, userEmoji ,setAttempted,isValidUser  }) {
+function HomePage({ onStart, userEmoji ,setAttempted,isValidUser ,setShowPopup  }) {
   const [input,   setInput]   = useState("");
   const [focused, setFocused] = useState(false);
   const [screen, setScreen] = useState("home");
-
+  
   return (
   //   <div style={{ flex:1, overflowY:"visible",  background:"#FAFDF8" , marginTop:"0px"}}>
 
@@ -322,12 +361,25 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser  }) {
   >
   <textarea
     value={input}
+    // onChange={(e) => {
+    //   setAttempted(true);
+    //   if (!isValidUser) return;
+    //   setInput(e.target.value);
+    // }}
+
+    onFocus={() => {
+      if (!isValidUser) {
+        setShowPopup(true);
+      } else {
+        setFocused(true);
+      }
+    }}
+    
     onChange={(e) => {
-      setAttempted(true);
       if (!isValidUser) return;
       setInput(e.target.value);
     }}
-    onFocus={() => setFocused(true)}
+    // onFocus={() => setFocused(true)}
     onBlur={() => setFocused(false)}
     placeholder="Write A Message..."
     rows={1} 
@@ -354,8 +406,16 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser  }) {
 
   {/* SEND BUTTON */}
   <button
+    // onClick={() => {
+    //   send();
+    //   input.trim() && onStart(input.trim());
+    // }}
     onClick={() => {
-      send();
+      if (!isValidUser) {
+        setShowPopup(true);
+        return;
+      }
+    
       input.trim() && onStart(input.trim());
     }}
     style={{
@@ -624,7 +684,7 @@ function ChatView({firstMsg, userName, userEmoji, goHome }) {
 }
 
 /* ── ROOT ─────────────────────────────────────────────────── */
-function ChatBot({ setHideLayout, isValidUser, setAttempted }) {
+function ChatBot({ setHideLayout, isValidUser, setAttempted , setShowPopup }) {
     const [screen,  setScreen]  = useState("home");
   const [user,    setUser]    = useState(null);
   const [active,  setActive]  = useState("chat");
@@ -666,7 +726,7 @@ function ChatBot({ setHideLayout, isValidUser, setAttempted }) {
         {/* View */}
         <div style={{ flex:1,display:"flex",overflow:"hidden" }}>
           {screen==="home"
-            ? <HomePage onStart={handleStart} userEmoji={emoji} isValidUser ={isValidUser } setAttempted ={setAttempted }/>
+            ? <HomePage onStart={handleStart} userEmoji={emoji} isValidUser ={isValidUser } setAttempted ={setAttempted }  setShowPopup={setShowPopup}  />
             : <ChatView firstMsg={firstMsg} userName={user?.name||"Friend"} userEmoji={user?.emoji||"😊"}  goHome={goHome}/>}
         </div>
       </div>

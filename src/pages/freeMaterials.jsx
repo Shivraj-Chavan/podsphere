@@ -179,14 +179,18 @@ export default function FreeMaterials() {
         onSignIn={handleSignIn}
       /> */}
 
+
+
+    </div>
+  ))}
+  {
+  showModal &&
 <SignInModal
   isOpen={showModal}
   onClose={handleClose}
   onSignIn={handleSignIn}
 />
-
-    </div>
-  ))}
+}
 </div>
 
           {/* ================= SECTION 2: GAME SHEETS (TURNED OFF) ================= */}
