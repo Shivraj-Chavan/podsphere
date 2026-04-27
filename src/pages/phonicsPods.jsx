@@ -649,7 +649,7 @@ const handleSignIn = async (data) => {
 
         <p className="mt-3 md:mt-4 text-sm sm:text-base text-gray-300 max-w-lg mx-auto md:mx-0">
           Poppi is Podsphere's friendly AI companion that supports parents,
-          encourages kids, and assists educators — all focused on phonics learning.
+          encourages kids, and assists educators - all focused on phonics learning.
         </p>
 
         <ul className="mt-5 md:mt-6 space-y-3 inline-flex flex-col items-start text-left">

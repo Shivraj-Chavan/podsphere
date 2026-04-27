@@ -43,7 +43,7 @@ const jobs = [
     location: "Location: Remote",
   },
   {
-    title: "Content Creator – (Remote)",
+    title: "Content Creator (Remote)",
     type: "Full-time / Part-time (depending on project needs)",
     details: [
       "Mode: Remote",

@@ -23,12 +23,15 @@ export default function Aboutus () {
     age: "",
     phone: "",
     email: "",
-    country: ""
+    country: "",
+    pincode: "",
   });
   
   const [demoLoading, setDemoLoading] = useState(false);
   const [demoSuccess, setDemoSuccess] = useState(false);
   const [demoError, setDemoError] = useState(false);
+
+  const isValidPincode = demoData.pincode.length === 6;
 
   const handleDemoSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +58,8 @@ export default function Aboutus () {
           age: "",
           phone: "",
           email: "",
-          country: ""
+          country: "",
+          pincode: ""
         });
       } else {
         throw new Error("Failed");
@@ -215,7 +219,7 @@ const handleDemoChange = (e) => {
   <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 ">
 
     {/* Modal */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl w-[420px] p-8 relative">
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl w-[420px] p-5 m-5 relative">
 
       {/* Close Button */}
       <button
@@ -318,6 +322,26 @@ const handleDemoChange = (e) => {
               className="w-full p-3 rounded-xl bg-white/80 outline-none"
             />
 
+            <input
+              type="text"
+              name="pincode"
+              value={demoData.pincode}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, ""); 
+                if (value.length <= 6) {
+                  handleDemoChange({
+                    target: { name: "pincode", value }
+                  });
+                }
+              }}
+              placeholder="Pincode"
+              inputMode="numeric"
+              maxLength={6}
+              className={`w-full p-3 rounded-xl bg-white/80 outline-none border transition
+                ${isValidPincode ? "border-green-400" : "border-red-300"}
+                focus:ring-2 focus:ring-purple-100`}
+            />
+
             {demoError && (
               <p className="text-red-500 text-sm text-center">
                 Please fill required fields
@@ -367,7 +391,7 @@ const handleDemoChange = (e) => {
       </h2>
 
       <p className="text-sm sm:text-base text-gray-600 mb-3 lg:mb-4 leading-relaxed">
-      At PodSphere, we believe that reading is the doorway to a child's imagination, confidence, and lifelong learning. Our vision is to inspire children to proudly say "I can read!" by building strong phonics foundations that make language joyful, meaningful, and accessible.
+      At PodSphere, we believe that reading is the doorway to a child's imagination, confidence, and lifelong learning. Our vision is to inspire children to proudly say <br/>"I can read!" by building strong phonics foundations that make language joyful, meaningful, and accessible.
       </p>
 
       <p className="text-sm sm:text-base text-gray-600 mb-3 lg:mb-4 leading-relaxed">

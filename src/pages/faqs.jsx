@@ -326,7 +326,7 @@ const faqs = [
   },
   {
     q: "Do we have to pay the full amount at once?",
-    a: "No. We offer flexible payment options — monthly, quarterly, or per session.",
+    a: "No. We offer flexible payment options - monthly, quarterly, or per session.",
   },
 ];
 

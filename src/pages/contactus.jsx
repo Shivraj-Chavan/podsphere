@@ -665,7 +665,7 @@ const Contact = () => {
     <section className="relative w-full bg-white">
 
       {/* ───────── HERO IMAGE ───────── */}
-      <div className="relative w-full h-[340px] sm:h-[420px] md:h-[560px] lg:h-[700px] overflow-hidden rounded-b-[10%]">
+      <div className="relative w-full h-[340px] sm:h-[420px] md:h-[560px] lg:h-[720px] overflow-hidden rounded-b-[10%]">
         <img
           src="/contactusimg.png"
           alt="contact"
@@ -710,42 +710,6 @@ const Contact = () => {
           <CtaContent />
         </div>
       </div>
-
-      {/* ───────── BOTTOM CTA — Tablet (md only) ───────── */}
-      {/* <div className="hidden md:block lg:hidden mx-6 mb-10">
-        <div className="bg-red-900 rounded-2xl p-1">
-          <div className="bg-yellow-400 rounded-xl p-8 flex flex-col sm:flex-row items-center gap-6">
-            <img
-              src="/friends.jpg"
-              alt="kids"
-              className="w-32 h-32 rounded-full object-cover ring-4 ring-white shadow-md flex-shrink-0"
-            />
-            <div className="text-gray-900 text-center sm:text-left">
-              <h2 className="text-xl font-extrabold mb-2 leading-snug">
-                Let's Begin Your Child's Reading Journey Together
-              </h2>
-              <p className="text-xs text-gray-700 mb-4 leading-relaxed">
-                Discover upcoming Podsphere programs, get the latest updates,
-                and enjoy exclusive learning opportunities.
-              </p>
-              <div className="grid grid-cols-2 gap-2 text-sm font-medium">
-                <a href="tel:+919892409029" className="flex items-center justify-center gap-2 bg-black/10 rounded-full px-3 py-2 hover:bg-black/20 transition text-xs">
-                  📞 +91 9892409029
-                </a>
-                <a href="tel:+919892099029" className="flex items-center justify-center gap-2 bg-black/10 rounded-full px-3 py-2 hover:bg-black/20 transition text-xs">
-                  📞 +91 9892099029
-                </a>
-                <a href="mailto:hello@pod-sphere.com" className="flex items-center justify-center gap-2 bg-black/10 rounded-full px-3 py-2 hover:bg-black/20 transition text-xs">
-                  ✉️ hello@pod-sphere.com
-                </a>
-                <a href="https://www.google.com/maps?q=Mumbai,India" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-black/10 rounded-full px-3 py-2 hover:bg-black/20 transition text-xs">
-                  📍 Mumbai, India
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
 <div className="hidden md:block lg:hidden mx-6 mb-12">
   <div className="bg-red-900 rounded-2xl p-[3px]">
@@ -795,7 +759,7 @@ const Contact = () => {
       <img
         src="/friends.jpg"
         alt="kids"
-        className="w-24 h-24 rounded-full object-cover shadow-lg ring-4 ring-white/80"
+        className="w-24 h-24 rounded-3xl object-cover shadow-lg ring-4 ring-white/80"
       />
 
       <div className="text-gray-900 w-full">
@@ -842,6 +806,8 @@ const FormCard = () => {
     preferredContact: "",
     email: "",
     school: "",
+    country: "",
+    pincode:"",
     message: "",
     formType: "contact",
   });
@@ -853,7 +819,7 @@ const FormCard = () => {
     e.preventDefault();
   
     if (!formData.parentName || !formData.phone || !formData.email) {
-      setError(true);
+      setError("true");
       return;
     }
   
@@ -878,7 +844,7 @@ const FormCard = () => {
   
     } catch (err) {
       console.error("API Error:", err);
-      setError(true);
+      setError(formData.parentName+"-"+formData.phone+formData.email+"API Error:"+err);
       alert("Something went wrong. Try again.");
     } finally {
       setLoading(false);
@@ -887,13 +853,25 @@ const FormCard = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+  
+    // PHONE validation (only 10 digits)
     if (name === "phone") {
       const cleaned = value.replace(/\D/g, "").slice(0, 10);
-      setFormData({ ...formData, phone: cleaned });
+      setFormData((prev) => ({ ...prev, phone: cleaned }));
       return;
     }
-    setFormData({ ...formData, [name]: value });
+  
+    // PINCODE validation (only 6 digits)
+    if (name === "pincode") {
+      const cleaned = value.replace(/\D/g, "").slice(0, 6);
+      setFormData((prev) => ({ ...prev, pincode: cleaned }));
+      return;
+    }
+  
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const isValidPincode = /^[0-9]{6}$/.test(formData.pincode);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -909,7 +887,7 @@ const FormCard = () => {
   // };
 
   const handleReset = () => {
-    setFormData({ parentName: "", childAge: "", phone: "", preferredContact: "", email: "", school: "", message: "" });
+    setFormData({ parentName: "", childAge: "", phone: "", preferredContact: "", email: "", school: "", country: "", pincode:"",  message: "" });
     setSubmitted(false);
     setError(false);
   };
@@ -930,8 +908,8 @@ const FormCard = () => {
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.15)] p-6 sm:p-8 lg:mb-50 w-full md:w-[560px] lg:w-[620px] border border-gray-100">
-      <form className="space-y-3 " onSubmit={handleSubmit}>
+    <div className="bg-white rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.15)] p-6 sm:p-7 lg:mb-60 lg:mt-5 w-full md:w-[560px] lg:w-[620px] border border-gray-100">
+      <form className="space-y-2" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-[10px] font-bold text-gray-400 tracking-wider">PARENTS NAME*</label>
@@ -998,11 +976,57 @@ const FormCard = () => {
           <label className="text-[10px] font-bold text-gray-400 tracking-wider">SCHOOL NAME</label>
           <input type="text" name="school" autoComplete="organization" value={formData.school} onChange={handleChange} placeholder="School Name" className="w-full border border-gray-200 rounded-full px-4 py-2.5 mt-1 text-sm outline-none focus:border-pink-400 transition" />
         </div>
-        <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  
+      <div>
+        <label className="text-[10px] font-bold text-gray-400 tracking-wider">COUNTRY</label>
+        <input
+          type="text"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          placeholder="Country"
+          className="w-full border border-gray-200 rounded-full px-4 py-2.5 mt-0 text-sm outline-none focus:border-pink-400 transition"
+        />
+      </div>
+      <div>
+        <label className="text-[10px] font-bold text-gray-400 tracking-wider">
+          PINCODE
+        </label>
+
+        <input
+          type="text"
+          name="pincode"
+          value={formData.pincode}
+          onChange={handleChange}
+          placeholder="Pincode"
+          inputMode="numeric"
+          maxLength={6}
+          className={`w-full border rounded-full px-4 py-2.5 mt-1 text-sm outline-none transition
+            ${
+              formData.pincode.length === 0
+                ? "border-gray-200"
+                : isValidPincode
+                ? "border-green-400"
+                : "border-red-400"
+            }
+            focus:border-pink-400`}
+        />
+
+            {/* Error message */}
+            {formData.pincode.length > 0 && !isValidPincode && (
+              <p className="text-xs text-red-500 mt-1">
+                Enter a valid 6-digit pincode
+              </p>
+            )}
+          </div>
+
+        </div>
+           <div>
           <label className="text-[10px] font-bold text-gray-400 tracking-wider">YOUR MESSAGE</label>
           <textarea rows="3" name="message" value={formData.message} onChange={handleChange} placeholder="Write your message..." className="w-full border border-gray-200 rounded-2xl px-4 py-3 mt-1 text-sm outline-none focus:border-pink-400 transition resize-none" />
         </div>
-        {error && <p className="text-xs text-red-400 px-1">Please fill in all required fields (*).</p>}
+        {error && <p className="text-xs text-red-400 px-1"> {error} Please fill in all required fields (*).</p>}
         {/* <button type="submit" className="w-full bg-gray-900 text-white py-3 rounded-full font-bold text-sm tracking-widest hover:bg-black active:scale-95 transition-all">
           SEND A MESSAGE
         </button> */}
@@ -1023,7 +1047,7 @@ const FormCard = () => {
 const CtaContent = () => (
   <div className="py-20 flex items-center justify-between gap-6 flex-wrap">
     
-    <div className="text-white max-w-xl">
+    <div className="text-black max-w-xl">
       <h2 className="text-3xl font-bold mb-3">
         Let's Begin Your Child's Reading Journey Together
       </h2>

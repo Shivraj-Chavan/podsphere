@@ -30,7 +30,7 @@ const handleNavigation = (path) => {
         />
 
         {/* GRID */}
-        <div className="grid grid-cols-2 md:grid-cols-3.5 lg:grid-cols-5 gap-8 md:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 ">
 
           {/* LOGO — full width on mobile, spans on tablet */}
           <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1">
@@ -42,7 +42,7 @@ const handleNavigation = (path) => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             className="mb-3 w-32 sm:w-36 cursor-pointer"
-          />
+          /> 
             <p className="text-xs text-gray-500 leading-relaxed max-w-[260px]">
               Building strong phonics foundations that make language joyful, meaningful, and accessible.
             </p>
@@ -87,7 +87,7 @@ const handleNavigation = (path) => {
           </div>
 
           {/* CONTACT US */}
-          <div className="col-span-2 sm:col-span-1 md:col-span-1">
+          {/* <div className="col-span-2 sm:col-span-1 md:col-span-1">
             <h4 className="font-semibold text-gray-900 mb-4 text-sm">Contact Us</h4>
             <div className="space-y-3 text-sm text-gray-600">
 
@@ -119,7 +119,7 @@ const handleNavigation = (path) => {
               </div>
 
             </div>
-          </div>
+          </div> */}
 
           {/* COMPANY */}
           <div>
@@ -139,34 +139,7 @@ const handleNavigation = (path) => {
               <li><Link to="/faqs"   onClick={() => handleNavigation("/faqs")} className="hover:text-gray-900 transition-colors">FAQ's</Link></li>
               <li><Link to="/terms" onClick={() => handleNavigation("/terms")} className="hover:text-gray-900 transition-colors">Privacy Policy</Link></li>
             </ul>
-          </div>
-
-          {/* SOCIAL */}
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-4 text-sm">Social</h4>
-            <ul className="space-y-2.5 text-sm text-gray-600">
-              <li><a href=" https://www.facebook.com/61572092741920/"  target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">Facebook</a></li>
-              <li>
-                <a
-                  href=" https://www.instagram.com/podsphere_co"
-                  target="_blank" rel="noopener noreferrer"
-                  className="hover:text-gray-900 transition-colors"
-                >
-                  Instagram
-                </a>
-              </li>
-              <li><a href=" https://www.youtube.com/@Podsphere-z6r"  target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">Youtube</a></li>
-              <li>
-                <a
-                  href=" https://www.linkedin.com/company/pod-sphere/"
-                  target="_blank" rel="noopener noreferrer"
-                  className="hover:text-gray-900 transition-colors"
-                >
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
-          </div>
+          </div>  
 
         </div>
 

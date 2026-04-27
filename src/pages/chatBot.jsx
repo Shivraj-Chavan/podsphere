@@ -9,51 +9,6 @@ import { apiPost } from "../lib/apiClient";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "../lib/axios";
 
-
-// export default function Page() {
-//   const [hideLayout, setHideLayout] = useState(false);
-//   const [searchParams] = useSearchParams();
-//   const navigate = useNavigate();
-
-
-//   useEffect(() => {
-//     setHideLayout(true);
-
-//     const token = searchParams.get("token");
-
-//     if (!token) {
-//       navigate("/");
-//       return;
-//     }
-// (async()=>{
-  
-//   const {data}=await axios(`sso/tutorcruncher?token=${token}`)
-//   console.log({data})
-//  if (data.success) {
-//         localStorage.setItem("user", JSON.stringify(data.user));
-
-//         // setLoading(false);
-//       } else {
-//         navigate("/");
-//       }
-     
-// })()
-
-//   }, []);
-
-
-
-//   return (
-//     <>
-//       {!hideLayout && <Navbar />}
-
-//       <ChatBot setHideLayout={setHideLayout} />
-
-//       {/* {!hideLayout && <Footer />} */}
-//     </>
-//   );
-// }
-
 export default function Page() {
   const [hideLayout, setHideLayout] = useState(false);
   const [searchParams] = useSearchParams();
@@ -205,70 +160,6 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser ,setShowPopup  
   const [screen, setScreen] = useState("home");
   
   return (
-  //   <div style={{ flex:1, overflowY:"visible",  background:"#FAFDF8" , marginTop:"0px"}}>
-
-  //       {/* VIDEO */}
-  //   <video muted autoPlay loop  className="rounded-b-4xl mb-10">
-  //     <source src='/public/video/POPPI.mp4' />
-  //   </video>
-
-
-  //   <div style={{ textAlign:"center", marginBottom:"38px", animation:"fadeUp .7s .1s ease both" }}>
-  //       <h1 style={{
-  //         fontFamily:"Poppins",fontWeight:800,
-  //         fontSize:"clamp(28px,3.6vw,50px)",lineHeight:1.2,
-  //         color:"#1A2E1A",marginBottom:"12px",
-  //       }}>
-  //         Got a phonics question ? Poppi is here to help !{" "}
-  //       </h1>
-  //       <p style={{ fontFamily:"Poppins",fontSize:"16px",color:"#8A7070",fontWeight:600 }}>
-  //      Ask about sounds, spelling rules, or tricky words and get simple explanations you can use right away with your child.
-  //       </p>
-  //     </div>
-
-  //     {/* Big input card */}
-  //     <div style={{
-  //       maxWidth:"760px",margin:"0 auto 16px",background:"white",borderRadius:"24px",
-  //       border:`2.5px solid ${focused?"#FF6B6B":"#FFE0D0"}`,
-  //       boxShadow:focused?"0 0 0 6px rgba(255,107,107,.09),0 8px 32px rgba(255,107,107,.12)":"0 4px 24px rgba(0,0,0,.07)",
-  //       transition:"all .3s ease",overflow:"hidden",animation:"fadeUp .8s .2s ease both",
-  //     }}>
-  //       <textarea
-  //         value={input}
-  //         onChange={e=>{
-            
-  // setAttempted(true);
-  // if (!isValidUser) return;
-
-  //           setInput(e.target.value)}}
-          
-  //         onFocus={()=>setFocused(true)}
-  //         onBlur={()=>setFocused(false)}
-  //         placeholder="Write a Message… ✏️"
-  //         rows={4}
-  //         style={{
-  //           width:"100%",padding:"22px 24px 10px",border:"none",outline:"none",
-  //           resize:"none",fontFamily:"Poppins",fontSize:"16px",
-  //           fontWeight:600,color:"#3D2C2C",background:"transparent",lineHeight:1.6,
-  //         }}
-  //         onKeyDown={e=>{ if(e.key==="Enter"&&!e.shiftKey&&input.trim()){ e.preventDefault(); onStart(input.trim()); } }}
-  //       />
-  //       <div style={{ display:"flex",alignItems:"center",justifyContent:"end",padding:"8px 20px 14px" }}>
-  //         {/* <button style={{ background:"none",border:"none",cursor:"pointer",fontSize:"20px",opacity:.5,padding:"4px 8px",borderRadius:"10px",transition:"opacity .2s" }}
-  //           onMouseOver={e=>e.currentTarget.style.opacity="1"} onMouseOut={e=>e.currentTarget.style.opacity=".5"}>➕</button> */}
-  //         <button className="sbtn" onClick={()=>{send();input.trim()&&onStart(input.trim())}}
-  //           style={{
-  //             width:"42px",height:"42px",borderRadius:"14px",
-  //             background:input.trim()?"linear-gradient(135deg,#FF6B6B,#FF8E53)":"#FFD0C0",
-  //             border:"none",cursor:input.trim()?"pointer":"default",fontSize:"20px",
-  //             display:"flex",alignItems:"center",justifyContent:"center",transition:"all .25s",
-  //             boxShadow:input.trim()?"0 4px 16px rgba(255,107,107,.35)":"none",
-  //             animation:input.trim()?"pulse 2s ease-in-out infinite":"none",
-  //           }}>➜</button>
-  //       </div>
-     
-  //     </div>
-  //   </div>
   <div
   style={{
     flex: 1,
@@ -346,7 +237,7 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser ,setShowPopup  
   <div
     style={{
       maxWidth: "920px",
-      width: "100%",
+      width: "calc(100% - 24px)",
       margin: "0 auto",
       position: "relative",
       backdropFilter: "blur(14px)",
@@ -357,7 +248,7 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser ,setShowPopup  
       boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
       padding: "4px",
       marginBottom: "30px",
-    }} 
+    }}  
   >
   <textarea
     value={input}
