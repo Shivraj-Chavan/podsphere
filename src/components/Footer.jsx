@@ -30,10 +30,11 @@ const handleNavigation = (path) => {
         />
 
         {/* GRID */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 ">
+        {/* <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 "> */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 items-start pl-5 sm:pl-20 md:pl-5 lg:pl-10 ">
 
           {/* LOGO — full width on mobile, spans on tablet */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1">
+          <div className="col-span-2 sm:col-span-2 md:col-span-1 lg:col-span-1">
           <img
             src="/logo2.png"
             alt="Podsphere"
@@ -86,40 +87,7 @@ const handleNavigation = (path) => {
           </div>
           </div>
 
-          {/* CONTACT US */}
-          {/* <div className="col-span-2 sm:col-span-1 md:col-span-1">
-            <h4 className="font-semibold text-gray-900 mb-4 text-sm">Contact Us</h4>
-            <div className="space-y-3 text-sm text-gray-600">
-
-              <div className="flex items-start gap-2">
-                <Phone size={15} className="mt-0.5 shrink-0" />
-                <div className="flex flex-col gap-1.5">
-                  <a href="tel:+919892409029" className="hover:text-purple-600 transition-colors">+91 9892409029</a>
-                  <a href="tel:+919892099029" className="hover:text-purple-600 transition-colors">+91 9892099029</a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Mail size={15} className="shrink-0" />
-                <a href="mailto:hello@pod-sphere.com" className="hover:text-purple-600 transition-colors break-all">
-                  hello@pod-sphere.com
-                </a>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Globe size={15} className="shrink-0" />
-                <a href="https://pod-sphere.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">
-                www.pod-sphere.com 
-                </a>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <MapPin size={15} className="shrink-0" />
-                <span>Mumbai, India</span>
-              </div>
-
-            </div>
-          </div> */}
+          <div className="flex flex-col md:flex-row md:justify-end gap-8 md:gap-16 sm:pr-25">
 
           {/* COMPANY */}
           <div>
@@ -140,7 +108,7 @@ const handleNavigation = (path) => {
               <li><Link to="/terms" onClick={() => handleNavigation("/terms")} className="hover:text-gray-900 transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>  
-
+        </div>
         </div>
 
         {/* DIVIDER */}
