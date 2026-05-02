@@ -145,7 +145,7 @@ const points = [
       icon: Handshake,
       title: "Meet Poppi Your Friendly Phonics Guide",
       desc: "Got a phonics question? Poppi is here to help! Ask about sounds, spelling rules, or tricky words and get simple explanations you can use right away with your child.",
-      image: "/robot.JPEG"
+      image: "/Poppi1.webp"
     },
   ];
 
@@ -668,7 +668,7 @@ const handleSignIn = async (data) => {
       {/* ROBOT */}
       <div className="flex-1 flex justify-center md:justify-end relative z-10">
         <img
-          src="/Poppi.png"
+          src="/poppi1.webp"
           alt="Poppi Robot"
           className="
             w-[220px] sm:w-[260px] md:w-[320px]

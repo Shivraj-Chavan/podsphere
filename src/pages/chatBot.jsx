@@ -176,6 +176,30 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser ,setShowPopup  
     `,
   }}
 >
+
+    <video
+  muted
+  autoPlay
+  loop
+  playsInline
+  className="
+    w-full 
+    h-[600px] 
+    sm:h-[400px] 
+    md:h-[650px] 
+    lg:h-auto
+    object-cover 
+    rounded-b-4xl 
+    mb-25
+     md:hidden
+
+"
+>
+  {/* desktop */}
+  <source
+    src="/video/POPPI_vertical.mp4"
+  />  </video>
+
   {/* VIDEO */}
   <video
   muted
@@ -191,10 +215,14 @@ function HomePage({ onStart, userEmoji ,setAttempted,isValidUser ,setShowPopup  
     object-cover 
     rounded-b-4xl 
     mb-25
+   hidden
+  md:block
   "
 >
-  <source src="/video/POPPI.mp4" />
-</video>
+
+  {/* desktop */}
+  <source src="/video/POPPI.mp4"/>
+  </video>
 
   {/* TEXT */}
   <div
@@ -602,7 +630,7 @@ function ChatBot({ setHideLayout, isValidUser, setAttempted , setShowPopup }) {
 <div
   style={{
     display: "flex",
-    width: "100%",        // ADD THIS
+    width: "100%",       
     minHeight: "calc(100vh - 64px)",
     fontFamily: "Poppins",
     background: "#FAFDF8",
