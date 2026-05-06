@@ -95,11 +95,18 @@ const worksheets = [
 export default function FreeMaterials() {
   const [showModal, setShowModal] = useState(false);
 
-  const handleDownloadClick = (e) => {
-    e.preventDefault(); 
+  const handleDownloadClick = (e, file) => {
+    const token = localStorage.getItem("token");
+  
+    // if logged in → allow download
+    if (token) {
+      return;
+    }
+  
+    // not logged in → stop download + open modal
+    e.preventDefault();
     setShowModal(true);
   };
-
   const handleClose = useCallback(() => {
     setShowModal(false);
   }, []);
@@ -165,7 +172,7 @@ export default function FreeMaterials() {
       {/* Button pushed to bottom */}
       <a
         href={item.file}
-        onClick={handleDownloadClick}
+        onClick={(e) => handleDownloadClick(e, item.file)}
         download
         className="mt-auto text-sm font-semibold text-pink-600 hover:underline hover:scale-105 hover:text-pink-500"
       >
