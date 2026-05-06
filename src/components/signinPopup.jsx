@@ -204,7 +204,7 @@ import CONFIG from "../constance";
       onSuccess: async (tokenResponse) => {
         try {
           setLoading(true);
-
+          console.log({tokenResponse})
            
                 const res = await axios.post(
                   `${CONFIG.API_BASE_URL}/${ENDPOINT.googleLogin()}`,
