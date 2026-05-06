@@ -131,7 +131,7 @@ const G = () => (
     @keyframes pulse   {0%,100%{box-shadow:0 0 0 0 rgba(255,107,107,.45)}50%{box-shadow:0 0 0 12px rgba(255,107,107,0)}}
     @keyframes msgPop  {0%{opacity:0;transform:scale(.7) translateY(8px)}80%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
     @keyframes slideIn {from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
-    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#FFB5B5;border-radius:10px}
+    
     .sb-item{transition:all .2s ease;cursor:pointer}
     .sb-item:hover{background:rgba(255,107,107,.12)!important;transform:translateX(3px)}
     .chip{transition:all .22s ease;cursor:pointer}

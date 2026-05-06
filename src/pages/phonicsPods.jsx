@@ -22,6 +22,7 @@ import "swiper/css/free-mode";
 import {  MessageCircle, Mic, BookOpenCheck } from "lucide-react";import SignInModal from "../components/signinPopup";
 import CONFIG from "../constance";
 import axios from "axios";
+import DemoModal from "../components/demoModal";
 ;
 
 const pods = [
@@ -145,7 +146,7 @@ const points = [
       icon: Handshake,
       title: "Meet Poppi Your Friendly Phonics Guide",
       desc: "Got a phonics question? Poppi is here to help! Ask about sounds, spelling rules, or tricky words and get simple explanations you can use right away with your child.",
-      image: "/Poppi1.webp"
+      image: "/poppi2.webp"
     },
   ];
 
@@ -404,112 +405,8 @@ const handleSignIn = async (data) => {
 /> */}
 
        {/* Popup */}
-       {open && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 px-4">
+       <DemoModal open={open} onClose={() => setOpen(false)} />
 
-    {/* Modal */}
-    <div className="
-      w-full max-w-md
-      max-h-[90vh] overflow-y-auto
-      bg-white/70 backdrop-blur-xl
-      border border-white/40
-      rounded-2xl shadow-xl
-      p-5 sm:p-6 md:p-8
-      relative
-    ">
-
-      {/* Close Button */}
-      <button
-        onClick={() => setOpen(false)}
-        className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-700 text-lg sm:text-xl cursor-pointer"
-      >
-        ✕
-      </button>
-
-      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">
-        Book a Free Demo
-      </h2>
-
-      <form onSubmit={handleDemoSubmit} className="space-y-3 sm:space-y-4">
-
-        <input
-          type="text"
-          name="name"
-          value={demoData.name}
-          onChange={handleDemoChange}
-          placeholder="Your Name"
-          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
-        />
-
-        <input
-          type="text"
-          name="childName"
-          value={demoData.childName}
-          onChange={handleDemoChange}
-          placeholder="Child Name"
-          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
-        />
-
-        <input
-          type="number"
-          name="age"
-          value={demoData.age}
-          onChange={handleDemoChange}
-          placeholder="Age of the Child (Years)"
-          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
-        />
-
-        <input
-          type="tel"
-          name="phone"
-          value={demoData.phone}
-          onChange={handleDemoChange}
-          placeholder="Phone / WhatsApp Number"
-          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
-        />
-
-        <input
-          type="email"
-          name="email"
-          value={demoData.email}
-          onChange={handleDemoChange}
-          placeholder="Email ID"
-          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
-        />
-
-        <input
-          type="text"
-          name="country"
-          value={demoData.country}
-          onChange={handleDemoChange}
-          placeholder="Country"
-          className="w-full p-2.5 sm:p-3 rounded-xl bg-white/80 outline-none text-sm sm:text-base"
-        />
-
-        {demoError && (
-          <p className="text-red-500 text-xs sm:text-sm text-center">
-            Please fill required fields
-          </p>
-        )}
-
-        {demoSuccess && (
-          <p className="text-green-600 text-xs sm:text-sm text-center">
-            Demo booked successfully 🎉
-          </p>
-        )}
-
-        <button
-          type="submit"
-          disabled={demoLoading}
-          className="w-full mt-3 sm:mt-4 bg-black text-white py-2.5 sm:py-3 rounded-lg hover:bg-gray-800 transition cursor-pointer text-sm sm:text-base"
-        >
-          {demoLoading ? "Submitting..." : "Submit"}
-        </button>
-
-      </form>
-    </div>
-  </div>
-)}
     </section>
 
 
