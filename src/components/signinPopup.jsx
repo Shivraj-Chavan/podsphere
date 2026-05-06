@@ -188,6 +188,8 @@
     import React, { useState } from "react";
 import ENDPOINT from "../lib/endpoints";
 import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import CONFIG from "../constance";
 
   const SignInModal = ({ isOpen, onClose, onSignIn, role  }) => {
     const [loading, setLoading] = useState(false);
@@ -202,14 +204,16 @@ import { useGoogleLogin } from "@react-oauth/google";
       onSuccess: async (tokenResponse) => {
         try {
           setLoading(true);
+
+           
+                const res = await axios.post(
+                  `${CONFIG.API_BASE_URL}/${ENDPOINT.googleLogin()}`,
+                  {
+                    token: tokenResponse.access_token,
+                  }
+                );
   
-          //  ACTUAL API CALL
-          const res = await axios.post(
-            ENDPOINT.googleLogin(),
-            {
-              token: tokenResponse.access_token,
-            }
-          );
+      
   
           //  store token
           localStorage.setItem("token", res.data.token);
