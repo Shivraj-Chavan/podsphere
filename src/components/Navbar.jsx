@@ -81,6 +81,18 @@ const Navbar = () => {
     }));
   };
 
+  const handleOptionClick = (item) => {
+    if (item.action === "signup") {
+      setIsModalOpen(true);
+    } 
+    else if (item.action === "logout") {
+      handleLogout(item.url);
+    } 
+    else if (item.url) {
+      window.location.href = item.url;
+    }
+  };
+
 
   const isValidPincode = demoData.pincode.length === 6;
   const isHome = location.pathname === "/" || location.pathname === "/chatBot";
@@ -94,6 +106,13 @@ const Navbar = () => {
     { label: "Careers", path: "/careers" },
     { label: "Poppi", path: "/chatBot" },
   ];
+
+const handleLogout = (redirectUrl = "/") => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = redirectUrl;
+};
 
   const isActive = (path) => location.pathname === path;
 
@@ -129,6 +148,24 @@ const Navbar = () => {
     { emoji: "🏡", label: "Teacher Login", sub: "Track & support", color: "#8b5cf6" ,url:" https://secure.tutorcruncher.com/podsphere/signup/client/" },
   ];
 
+  const isLoggedIn = !!localStorage.getItem("token");
+
+const updatedLoginOptions = loginOptions.map((item) => {
+  if (item.action === "signup") {
+    return isLoggedIn
+      ? {
+          ...item,
+          emoji: "🚪",
+          label: "Logout",
+          action: "logout",
+          color: "#ef4444",
+          url: "/", // redirect after logout
+        }
+      : item;
+  }
+  return item;
+});
+
   const LoginDropdown = ({ isMobile }) =>
     openSignup && (
       <div
@@ -150,7 +187,7 @@ const Navbar = () => {
         <div style={{ padding: "7px 12px 5px", fontSize: 10, color: "#94a3b8", letterSpacing: "0.07em", textTransform: "uppercase", borderBottom: "1px solid #f5f5f5" }}>
           I'm signing up as…
         </div>
-        {loginOptions.map(({ emoji, label, sub, color, url , action  }) => (
+        {updatedLoginOptions.map(({ emoji, label, sub, color, url , action  }) => (
           <div
             key={label}
             onMouseDown={(e) => {
@@ -159,9 +196,13 @@ const Navbar = () => {
               setOpenSignup(false);
             
               if (action === "signup") {
-                setShowSignIn(true);   
-                setRole("signup");    
-              } else {
+                setShowSignIn(true);
+                setRole("Signup");
+              } 
+              else if (action === "logout") {
+                handleLogout(url);
+              } 
+              else if (url) {
                 window.open(url.trim(), "_blank");
               }
             }}
@@ -336,19 +377,23 @@ const Navbar = () => {
       <DemoModal open={open} onClose={() => setOpen(false)} />
 
       <SignInModal
-        isOpen={showSignIn}
-        onClose={() => setShowSignIn(false)}
-        role={role}
-        onSignIn={(data) => {
-          console.log("Signup success:", data);
-        
-          setShowSignIn(false);
-          window.open(
-            "https://secure.tutorcruncher.com/podsphere/login/",
-            "_blank"
-          );
-        }}
-      />
+  isOpen={showSignIn}
+  onClose={() => setShowSignIn(false)}
+  role={role}
+  onSignIn={async (data) => {
+    console.log("Signup success:", data);
+    localStorage.setItem("token", "dummy_token");
+
+    setShowSignIn(false);
+    window.location.reload();
+
+    // optional redirect
+    window.open(
+      "https://secure.tutorcruncher.com/podsphere/login/",
+      "_blank"
+    );
+  }}
+/>
    </>
   );
 };

@@ -159,6 +159,8 @@ const [selectedJob, setSelectedJob] = useState("");
 
               <button
              onClick={() => {
+              console.log("Clicked job:", job.title);
+              setSelectedJob(job.title);
               setOpen(true);
             }}
                 className="mt-auto w-44 bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800"
